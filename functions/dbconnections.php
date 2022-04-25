@@ -39,7 +39,7 @@ function getConnection(){
     if(mysqli_num_rows($result) ==1 ){
       $data = array();
       
-      $data = mysql_fetch_assoc($result);
+      $data = mysqli_fetch_assoc($result);
       mysqli_free_result($result);
      
 

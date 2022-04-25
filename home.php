@@ -4,7 +4,7 @@ header('Location: index.php');
 exit();
 }
 $user = array();
-
+$data = getAllUsers_();
 // pagina inicial do voluntario ou do instituto,
 // se for voluntario mostra uma lista dos institutos da sua area
 // se for instituto mostra uma lista de voluntarios da sua area
@@ -30,8 +30,27 @@ $user = array();
 <?php if(isLoggedInVoluntario() && isLoggedIn()) : ?>
      
     <h1>Bem Vindo  <?php  echo $_SESSION['user']; ?></h1>
-    <p> Obrigado por se registar como Voluntário</p>
-    <p>Site em construção, mais funcionalidades em breve</p>
+    <table class="table table-striped  table-hover">
+        <tr class="thead-dark">
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Tipo</th>
+            <th>Telefone</th>
+        </tr>
+        <?php foreach($data as $user ): ?>
+            <tr>
+                <td><?= $user[0] ?></td>
+                <td><?= $user[1] ?></td>
+                <td><?= $user[2] ?></td>
+                <td><?= $user[3] ?></td>
+                <td><?= $user[4] ?></td>
+
+
+
+            </tr>
+        <?php endforeach; ?>
+    </table>
     
             </div>
     <div class="col">

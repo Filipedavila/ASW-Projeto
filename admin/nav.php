@@ -33,7 +33,7 @@
         Pesquisa
       </a>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="<?php echo 'pesquisa.php'?>">Todos os Usuários</a>
+        <a class="dropdown-item" href="<?php echo 'index.php?page=pesquisa_all&pesquisa=ALL'?>">Todos os Usuários</a>
         <a class="dropdown-item" href="<?php echo 'search.php?users=all'  ?>">Pesquisa com Critérios </a>
 
       

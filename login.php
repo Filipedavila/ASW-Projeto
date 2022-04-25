@@ -17,9 +17,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             if($login){
 
               echo "<p> LOGIN COM SUCESS</p>";
-              header( "Location: /~asw09/ASW-Projeto/index.php?page=home" );   /// NO FINAL TEMOS QUE ALTERAR
+              header( "Location: index.php?page=home" );
               die();
-          /// redirecionar para outra pagina, temos de arranjar forma de permanecer com login
+
             
             }else{
               // mensagem de erro quando os dados de login forem invalidos
@@ -40,7 +40,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <div class="container py-5 h-100">
         <div class="row d-flex align-items-center justify-content-center h-100">
             <div class="col-md-8 col-lg-7 col-xl-6">
-                <img src="./img/volunteer.png" class="img-fluid" alt="voluntariado">
+                <img src="./img/volunteer.png" class="rounded img-fluid" alt="voluntariado">
             </div>
             <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                 <form action="" id="loginUser" method="POST">

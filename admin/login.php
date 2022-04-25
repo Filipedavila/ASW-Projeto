@@ -3,7 +3,7 @@
 if($_SERVER["REQUEST_METHOD"] == "POST"){
   // e caso a variavel submit esteja assignada
     $missing= array();
-    $loginError;
+
     $loginState =False;
 
     // se foi post e  a var login está posta foi uma tentativa de login
@@ -20,7 +20,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
               if($login){
 
                  echo "<p> LOGIN COM SUCESS</p>";
-                 header( "Location: /~asw09/ASW-Projeto/admin/index.php?page=home" );   /// NO FINAL TEMOS QUE ALTERAR
+                 header( "Location:index.php?page=home" );   /// NO FINAL TEMOS QUE ALTERAR
                  die();
             /// redirecionar para outra pagina, temos de arranjar forma de permanecer com login
                
@@ -68,7 +68,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
        
         </div>
         <button class="w-100 btn btn-lg btn-primary" form="loginAdmin" name="login" id="login" type="submit">Entrar</button>
-        <pre class="mt-5 mb-3 text-muted">Projeto ASW 2022/2023 <br><br> Universidade  de  Lisboa <br> Faculdade de Ciências</p>
+        <pre class="mt-5 mb-3 text-muted">Projeto ASW 2022/2023 <br><br> Universidade  de  Lisboa <br> Faculdade de Ciências</pre>
        
       </form>
     </main>

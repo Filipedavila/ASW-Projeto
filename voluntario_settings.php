@@ -1,6 +1,5 @@
 <?php
 
-use phpDocumentor\Reflection\PseudoTypes\False_;
 
 if(!isLoggedIn() || !isLoggedInVoluntario()){ 
     header('Location: index.php');

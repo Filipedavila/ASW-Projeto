@@ -230,6 +230,40 @@ function updateValuesInstituto($values, $id){
   return $result;
 
 }
+function insertVoluntarioDisponibilidade($dados, $id) {
+  $conn = getConnection();
+  $query = "INSERT INTO Disponibilidade(id_U, tipo,  hora_inicio, hora_fim, dia) VALUES ( \"{$id}\", 'Voluntario' , \"{$dados['hora_inicial']}\", \"{$dados['hora_final']}\" , \"{$dados['dias']}\")";
+  $result = setQuery($query);
+  return $result;
+}
+
+function updateAreaGeografica($dados, $id){
+  $conn = getConnection();
+  $query = "UPDATE Utilizador SET codigo_distrito = \"{$dados['codigo_distrito']}\" , codigo_concelho = \"{$dados['codigo_concelho']}\", codigo_freguesia = \"{$dados['codigo_freguesia']}\" WHERE Utilizador.id = {$id}; " ;
+  $result =setQuery($query);
+  return $result;
+}
+
+//esta funcao nao esta certa nem esta a ser usada
+function updateDisponibilidade($id_U, $hora_inicio, $hora_fim, $dia) {
+  $conn = getConnection();
+  $queryUser = "UPDATE Disponibilidade SET hora_inicio = '{$hora_inicio}', hora_fim = '{$hora_fim}', dia = {$dia}  WHERE id_U = {$id_U};";
+  $result = mysqli_query($conn, $queryUser);
+
+  $sucess =false;
+  if ($result) {
+    echo "Dados alterados com sucesso";
+    mysqli_close($conn);
+    $sucess = True;
+    mysqli_free_result($result);
+
+  } else {
+    echo "Erro: Update failed" . $queryUser . "<br>" . mysqli_error($conn);
+  }
+  mysqli_close($conn);
+  return   $sucess ;
+  // SE OCORREU COM SUCESSO VAMOS TER QUE DEVOLVER UM TRUE OU FALSE
+}
 
     ?>
       

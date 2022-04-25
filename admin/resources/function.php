@@ -1,5 +1,5 @@
 <?php
-include "database.php";
+
 
 
 function loginAdmin($user,$pass){

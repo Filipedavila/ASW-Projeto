@@ -16,7 +16,8 @@ $pageTitle = "Não definido";  // depois teremos de fazer sistema de titulos , p
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Supermercado+One&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href='<?php echo "./". THIS_FOLDER . "/css/ ". "signin.css";?> rel='stylesheet'>
-    <?php if(!isLoggedIn()) echo "<link href='/~asw09/ASW-Projeto/admin/css/signin.css' rel='stylesheet'>";?>
+
+    <link href="./css/signin.css">
+    <?php if(!isLoggedIn()) echo "<link href='./css/signin.css' rel='stylesheet'>";?>
     <title> <php?php echo $pageTitle ?></title> 
 </head>

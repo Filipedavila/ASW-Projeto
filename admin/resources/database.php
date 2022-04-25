@@ -54,28 +54,23 @@ function getFreguesiaById($idConc,$idFreg){   // VERIFICAR se esta correto
   mysqli_close($conn);
   return $data;
 }
-
-function getAllUsers()
-  {
+function getAllUsers_(){
     $conn = getConnection();
-    $query = "SELECT * FROM Utilizador";
+    $query = "SELECT id,nome,email,tipo,telefone FROM Utilizador";
     $result = mysqli_query($conn,$query);
     $data = array();
+
     if (mysqli_num_rows($result) > 0) {
-    
-       $data = array();
-        
-       while($data = mysql_fetch_array($result)){
-        echo $data['nome'];
-
-       } 
-      } else {
-      echo "0 results";
+    $data = mysqli_fetch_all($result);
+        } else {
+        echo "0 results";
     }
-  mysqli_close($conn);
+    mysqli_close($conn);
+    return $data;
 
-    
-  }
+
+}
+
   
 
 function getConcelhoById($id){
