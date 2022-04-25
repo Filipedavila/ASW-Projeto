@@ -7,7 +7,7 @@ $data = array();
 if(isset($_SESSION['id'])){
 
 $data = getDisponibilidades($_SESSION['id']);
-print_r($data);
+
 
 
 }
