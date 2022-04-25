@@ -61,7 +61,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $result2 = updateAreaGeografica($utilizador,$_SESSION['id']);
    
         if($result && $result2){
-            echo "REGISTO completo com sucesso";
+            header("Location: index.php?page=home");
           }else{
           $erros['submit'] = TRUE;
           print_r($erros);
