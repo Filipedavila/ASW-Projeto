@@ -1,7 +1,7 @@
 <?php
 ?>
 <li class="nav-item">
-    <a class="nav-link" href="<?php echo 'logout.php' . '?id=' . $_SESSION['id']  ?>"><span class="navbar-text" Logout</span></a>
+    <a class="nav-link" href="<?php echo 'logout.php' . '?id=' . $_SESSION['id']  ?>"><span class="navbar-text"> Logout</span></a>
 </li>
 <!-- Dropdown -->
 <li class="nav-item dropdown">

@@ -24,7 +24,7 @@
     </a>
     <div class="dropdown-menu">
         <a class="dropdown-item" href="index.php?page=voluntario_settings">Dados Pessoais</a>
-        <a class="dropdown-item" href="#">Disponibilidade</a>
+        <a class="dropdown-item" href="index.php?page=voluntario_disponibilidade">Disponibilidade</a>
 
     </div>
 </li>

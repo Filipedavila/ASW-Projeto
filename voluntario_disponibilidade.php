@@ -1,16 +1,13 @@
 <?php
-
-
-
 if(!isLoggedIn() || !isLoggedInVoluntario()){ 
     header('Location: index.php');
     exit();
     }
-
+$data = array();
 if(isset($_SESSION['id'])){
 
-
-
+$data = getDisponibilidades($_SESSION['id']);
+print_r($data);
 
 
 }
@@ -18,7 +15,7 @@ if(isset($_SESSION['id'])){
 
 $erros = array();
 $missing = array();
-$data = array();
+
 $utilizador = array();
 
 //Caso tenha sido feito um pedido Post
@@ -193,10 +190,36 @@ if(isset($erros['pass'])) echo "<p class=\"alerta\">". $erros['pass'] ."</p>";  
 
                 </div>
             </div>
-            <div style="margin-top: 20px" class="row justify-content-center">
+            <div style="margin-top: 20px" class="row d-flex justify-content-end">
                 <button type="submit" class="btn btn-primary btn-lg" form="registro" name="submit"
                     value="submit">Registar</button>
             </div>
+            <br>
+            <?php if(isset($data)) :?>
+                <table class="table table-striped  table-hover">
+                    <tr class="thead-dark">
+                        <th>Dia</th>
+                        <th>Hora Inicio</th>
+                        <th>Hora Fim</th>
+                    </tr>
+                    <?php foreach($data as $user ): ?>
+                        <tr>
+                            <td><?= $user[0] ?></td>
+                            <td><?= $user[1] ?></td>
+                            <td><?= $user[2] ?></td>
+
+
+
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+
+
+
+
+
+
+            <?php endif;?>
     </div>
     </form>
     </div>

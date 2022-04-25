@@ -1,10 +1,13 @@
 <?php
-if(!isLoggedIn()){ 
+include SITE_ROOT . "/resources/voluntario/search.php";
+if(!isLoggedIn()){
 header('Location: index.php');
 exit();
 }
+
 $user = array();
-$data = getAllUsers_();
+$data = getAllInstitutos();
+
 // pagina inicial do voluntario ou do instituto,
 // se for voluntario mostra uma lista dos institutos da sua area
 // se for instituto mostra uma lista de voluntarios da sua area

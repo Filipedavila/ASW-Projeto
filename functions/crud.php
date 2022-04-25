@@ -246,11 +246,8 @@ function updateAreaGeografica($dados, $id){
 
 function getDisponibilidades($id)
 {
-  $conn = getConnection();
-  $query = "SELECT * FROM Disponibilidade  WHERE id_U = '{$id}' "; 
-  $result = array();
-  $result = getQuery($query);
-   return $result;
+  $query = "SELECT dia,hora_inicio,hora_fim FROM Disponibilidade  WHERE id_U = '{$id}' ";
+  return getData($query);
 }
 
 
