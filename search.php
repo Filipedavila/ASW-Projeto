@@ -7,7 +7,7 @@ exit();
 }
 
 $user = array();
-$data = getDisponibilidadesInst($_SESSION['id']);
+$data = getDisponibilidades($_SESSION['id']);
 print_r($data);
 // pagina inicial do voluntario ou do instituto,
 // se for voluntario mostra uma lista dos institutos da sua area
