@@ -16,8 +16,7 @@ $utilizador = array();
     if(isset($_SESSION['id'])){
 
         $data = getVoluntario($_SESSION['id']);
-        print_r($data);
-    
+
 
 
     }

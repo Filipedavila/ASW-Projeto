@@ -1,8 +1,15 @@
 <?php
 
-function getInstitutesBySchedule($voluntarioShedule){
+function getInstitutesBySchedule($id,$voluntarioShedule){
     $conn = getConnection();
-    $query = "SELECT id,nome,email,tipo,telefone FROM Instituto  INNER JOIN Disponibilidade";
+    $query = getDisponibilidades($id)
+
+    $query2 = "SELECT * FROM Instituicao 
+                INNER JOIN Disponibilidade 
+                    ON Instituicao.id_U = Disponibilidade.id_U 
+                    WHERE Utilizador.codigo_distrito = 
+                          AND Utilizador.codigo_concelho =  
+                              And Disponibilidade.hora_inicio <= "
     $result = mysqli_query($conn,$query);
     $data = array();
 

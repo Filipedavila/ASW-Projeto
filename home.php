@@ -4,7 +4,14 @@ if(!isLoggedIn()){
 header('Location: index.php');
 exit();
 }
+$available = array();
+if(isset($_SESSION['id'])){
 
+    $available = getDisponibilidades($_SESSION['id']);
+$data2 = getInstitutesBySchedule($available);
+
+
+}
 $user = array();
 $data = getAllInstitutos();
 
