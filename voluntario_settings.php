@@ -118,10 +118,6 @@ if(isset($erros['pass'])) echo "<p class=\"alerta\">". $erros['pass'] ."</p>";  
 
 
     <form action="" method="POST" id="registro" >
-
-
-
-
     <!--  verificar se esta em falta o nome -->
     <div class=" row">
         <div class="col">
@@ -133,7 +129,6 @@ if(isset($erros['pass'])) echo "<p class=\"alerta\">". $erros['pass'] ."</p>";  
                         echo " is-invalid";?> " name="nome" id="nome" value="<?php echo $data[0]['nome'] ?> "  >
 
         </div>
-        <div class="col">
         <div class="col">         
                 <label for="tel">Telefone: 
                     <?php if (in_array('tel', $missing)) 

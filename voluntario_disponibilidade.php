@@ -48,25 +48,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     }
 
-    // se não houver erros ou valores vazios
-    if(empty($missing) && empty($erros)){
-        $utilizador['codigo_distrito'] = htmlspecialchars($_POST['codigo_distrito']);
-        $utilizador['codigo_concelho'] = htmlspecialchars($_POST['codigo_distrito']);
-        $utilizador['codigo_freguesia'] = htmlspecialchars($_POST['codigo_freguesia']);
-        $utilizador['codigo_distrito'] = strip_tags($utilizador['codigo_distrito']);
-        $utilizador['codigo_concelho'] = strip_tags($utilizador['codigo_concelho']);
-        $utilizador['codigo_freguesia'] = strip_tags($utilizador['codigo_freguesia']);
     //para cada valor do pos tratar e adicionar a uma array associativa
     $result = insertVoluntarioDisponibilidade($utilizador,$_SESSION['id']);
-    $result2 = updateAreaGeografica($utilizador,$_SESSION['id']);
+    //$result2 = updateAreaGeografica($utilizador,$_SESSION['id']);
    
-        if($result && $result2){
-            header("Location: index.php?page=home");
+        if($result){
+            header("Location: index.php?page=voluntario_disponibilidade");
           }else{
           $erros['submit'] = TRUE;
           print_r($erros);
         }
-    }
+    
     }
 ?>
 <article class="form-group container">
@@ -96,8 +88,7 @@ if(isset($erros['pass'])) echo "<p class=\"alerta\">". $erros['pass'] ."</p>";  
                         <option value="4">Quarta-feira</option>
                         <option value="5">Quinta-feira</option>
                         <option value="6">Sexta-feira</option>
-                        <option value="7">Sábado</option>
-                        
+                        <option value="7">Sábado</option>    
                     </select>
                 </div>
                 <div class="col">
@@ -120,81 +111,14 @@ if(isset($erros['pass'])) echo "<p class=\"alerta\">". $erros['pass'] ."</p>";  
                         value="<?php echo $data[0]['hora_final'] ?>">
                 </div>
             </div>
-            <h3 style="margin-top: 10px">Área Geográfica</h3>
-            <div class="row">
-
-                <div class="col">
-                    <label for="dist" class="">
-                        Distrito
-                    </label>
-                    <select name="codigo_distrito" class="form-control" id="dist">
-                        <?php
-
-                    $distritos = getDistritos();
-                    if($distritos > 0 ){
-                        foreach($distritos as $key => $valor ){
-                        $option =  "<option ";
-                            if($valor == $data[0]['codig_distrito']){
-                                $option .= " selected='selected' ";
-                            }
-                        echo  $option ." value=" . $valor['cod_distrito'] . ">". $valor['nome']   . "</option>" ; 
-                        }
-                    }
-                    ?>
-                    </select>
-
-                </div>
-                <div class="col">
-
-                    <label for="conc" class="">
-                        Concelho
-                    </label>
-                    <select name="codigo_concelho" class="form-control" id="conc">
-                        <?php
-
-                    $concelho = getConcelhos();
-                    if($concelho > 0 ){
-                    foreach($concelho as $valor ){
-                        $option =  "<option ";
-                        if($valor == $data[0]['codigo_concelho']){
-                            $option .= " selected='selected' ";
-                        }
-                    echo  $option ." value=" . $valor['codigo_concelho'] . ">". $valor['nome']   . "</option>" ; 
-                    }
-                }
-                ?>
-                    </select>
-                </div>
-                <div class="col">
-
-
-                    <label for="freg" class="">
-                        Freguesia
-                    </label>
-                    <select name="codigo_freguesia" class="form-control" id="freg">
-                        <?php
-
-                        $freguesias = getFreguesias();
-                        if($freguesias > 0 ){
-                            foreach($freguesias as $freg ){
-                                $option =  "<option ";
-                                if($freg == $data[0]['codigo_freguesia']){
-                                    $option .= " selected='selected' ";
-                                }
-                            echo  $option ." value=" . $freg['cod_freguesia'] . ">". $freg['nome']   . "</option>" ; 
-                            }
-                        }
-                        ?>
-                    </select>
-
-
-                </div>
+            <br>
+            <div class="row justify-content-center">
+                <button type="submit" class="btn btn-primary btn-lg" form="registro" name="submit" value="submit">Registar</button>
             </div>
-            <div style="margin-top: 20px" class="row d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary btn-lg" form="registro" name="submit"
-                    value="submit">Registar</button>
+               
             </div>
             <br>
+            <h3>Minhas disponibilidades</h3>
             <?php if(isset($data)) :?>
                 <table class="table table-striped  table-hover">
                     <tr class="thead-dark">
@@ -207,18 +131,9 @@ if(isset($erros['pass'])) echo "<p class=\"alerta\">". $erros['pass'] ."</p>";  
                             <td><?= $user[0] ?></td>
                             <td><?= $user[1] ?></td>
                             <td><?= $user[2] ?></td>
-
-
-
                         </tr>
                     <?php endforeach; ?>
                 </table>
-
-
-
-
-
-
             <?php endif;?>
     </div>
     </form>
