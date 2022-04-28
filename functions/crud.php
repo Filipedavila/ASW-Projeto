@@ -250,15 +250,27 @@ function getDisponibilidades($id)
   return getData($query);
 }
 
-function getDisponibilidadesInst($id){
+function getDisponibilidadesDias($id)
+{
+  $query = "SELECT dia,hora_inicio,hora_fim FROM Disponibilidade  WHERE id_U = '{$id}' ";
+  $data = array();   $temp = getData($valor);
+  foreach ($arr as $valor) {
+   
+
+    array_push($data, $temp  );
+
+}
+  return getData($data);
+}
+function getDisponibilidadesInstDia($id){
   $voluntarioDados = getDisponibilidades($id);
   
   $query = "SELECT dia, hora_inicio, hora_fim 
             FROM Disponibilidade WHERE 
-            tipo LIKE 'Instituto' AND dia = \"{$voluntarioDados['dia']}\"
-                                   AND (hora_inicio BETWEEN  \"{$voluntarioDados['hora_inicial']}\" 
-                                       AND \"{$voluntarioDados['hora_final']}\" OR hora_fim BETWEEN  
-                                           \"{$voluntarioDados['hora_inicial']}\" AND \"{$voluntarioDados['hora_final']}\");";
+            tipo LIKE 'Instituto' AND dia = \"{$voluntarioDados[0]}\"
+                                   AND (hora_inicio BETWEEN  \"{$voluntarioDados[1]}\" 
+                                       AND \"{$voluntarioDados[1]}\" OR \"{$voluntarioDados[2]}\" BETWEEN  
+                                           \"{$voluntarioDados[1]}\" AND \"{$voluntarioDados[2]}\");";
   
   return getData($query);
 }

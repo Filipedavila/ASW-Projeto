@@ -12,7 +12,7 @@
     </a>
     <div class="dropdown-menu">
         <a class="dropdown-item" href="#">Institutos Perto</a>
-        <a class="dropdown-item" href="#">Institutos por Local </a>
+        <a class="dropdown-item" href="index.php?page=search">Institutos por Local </a>
     </div>
 </li>
 <li class="nav-item">

@@ -1,41 +1,25 @@
-<?php
 
-$data = array();
+<?php 
+$data= array();
+if(!isLoggedIn()){ 
+  header( "Location: /asw/admin/index.php?page=login" );
+}
+if(isset($_GET['search'])){ 
+  
+  
+    if($_GET['search']==='all'){
+    
+    $data = getAllUsers();
 
-if($_GET['pesquisa']=== 'ALL'){
-    $data = getAllUsers_();
+    }
 
+}else{
+
+    header( "Location: /asw/admin/index.php");
 }
 
+print_r($data);
 ?>
-
-<body>
-<div class="container">
-    <br>
-    <table class="table table-striped  table-hover">
-        <tr class="thead-dark">
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Tipo</th>
-            <th>Telefone</th>
-        </tr>
-        <?php foreach($data as $user ): ?>
-            <tr>
-                <td><?= $user[0] ?></td>
-                <td><?= $user[1] ?></td>
-                <td><?= $user[2] ?></td>
-                <td><?= $user[3] ?></td>
-                <td><?= $user[4] ?></td>
-
-
-
-            </tr>
-        <?php endforeach; ?>
-    </table>
-</div>
-</body>
-
 
 
 

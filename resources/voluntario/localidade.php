@@ -1,5 +1,5 @@
 <?php
-if(issSet$_GET)
+
 
 
 /*TO DO  
