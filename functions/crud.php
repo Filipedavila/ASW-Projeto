@@ -250,18 +250,12 @@ function getDisponibilidades($id)
   return getData($query);
 }
 
-function getDisponibilidadesDias($id)
-{
-  $query = "SELECT dia,hora_inicio,hora_fim FROM Disponibilidade  WHERE id_U = '{$id}' ";
-  $data = array();   $temp = getData($valor);
-  foreach ($arr as $valor) {
-   
-
-    array_push($data, $temp  );
-
+function getDisponibilidadesDias($id){
+  $query = "SELECT dia FROM Disponibilidade  WHERE id_U = '{$id}' ";
+  return getQuery($query);
 }
-  return getData($data);
-}
+
+
 function getDisponibilidadesInstDia($id){
   $voluntarioDados = getDisponibilidades($id);
   
@@ -275,26 +269,57 @@ function getDisponibilidadesInstDia($id){
   return getData($query);
 }
 
+//funcao de teste com condicoes explicitas, tem de se substituir por variaveis
+function getDispInstByDistrito($id){
+  $vol_data = getDisponibilidades($id);
+
+  $query = "SELECT Utilizador.nome, Instituicao.tipo_inst, dia, hora_inicio, hora_fim, Utilizador.codigo_distrito ";
+  $query .= "FROM Disponibilidade, Utilizador, Instituicao ";
+  $query .= "WHERE Disponibilidade.id_U = Utilizador.id ";
+  $query .= "AND Utilizador.id = Instituicao.id_U ";
+  $query .= "AND Utilizador.tipo LIKE 'Instituto' ";
+  $query .= "AND dia = 2 ";
+  $query .= "AND (hora_inicio BETWEEN  \"08:00:00\" AND \"15:00:00\" OR hora_fim BETWEEN \"08:00:00\" AND \"15:00:00\") ";
+  $query .= "AND Utilizador.codigo_distrito = 1" ; 
+  
+  return getData($query); 
+}
+
+//funcao de teste com condicoes explicitas, tem de se substituir por variaveis
+function getDispInstByFreguesia($id){
+  $vol_data = getDisponibilidades($id);
+
+  $query = "SELECT Utilizador.nome, Instituicao.tipo_inst, dia, hora_inicio, hora_fim, Utilizador.codigo_distrito ";
+  $query .= "FROM Disponibilidade, Utilizador, Instituicao ";
+  $query .= "WHERE Disponibilidade.id_U = Utilizador.id ";
+  $query .= "AND Utilizador.id = Instituicao.id_U ";
+  $query .= "AND Utilizador.tipo LIKE 'Instituto' ";
+  $query .= "AND dia = 2 ";
+  $query .= "AND (hora_inicio BETWEEN  \"08:00:00\" AND \"15:00:00\" OR hora_fim BETWEEN \"08:00:00\" AND \"15:00:00\") ";
+  $query .= "AND Utilizador.codigo_freguesia = 1" ; 
+  
+  return getData($query); 
+}
+
+//funcao de teste com condicoes explicitas, tem de se substituir por variaveis
+function getDispInstByConcelho($id){
+  $vol_data = getDisponibilidades($id);
+
+  $query = "SELECT Utilizador.nome, Instituicao.tipo_inst, dia, hora_inicio, hora_fim, Utilizador.codigo_distrito ";
+  $query .= "FROM Disponibilidade, Utilizador, Instituicao ";
+  $query .= "WHERE Disponibilidade.id_U = Utilizador.id ";
+  $query .= "AND Utilizador.id = Instituicao.id_U ";
+  $query .= "AND Utilizador.tipo LIKE 'Instituto' ";
+  $query .= "AND dia = 2 ";
+  $query .= "AND (hora_inicio BETWEEN  \"08:00:00\" AND \"15:00:00\" OR hora_fim BETWEEN \"08:00:00\" AND \"15:00:00\") ";
+  $query .= "AND Utilizador.codigo_concelho = 1" ; 
+  
+  return getData($query); 
+}
 
 //esta funcao nao esta certa nem esta a ser usada
 function updateDisponibilidade($id_U, $hora_inicio, $hora_fim, $dia) {
-  $conn = getConnection();
   $queryUser = "UPDATE Disponibilidade SET hora_inicio = '{$hora_inicio}', hora_fim = '{$hora_fim}', dia = {$dia}  WHERE id_U = {$id_U};";
-  $result = mysqli_query($conn, $queryUser);
-
-  $sucess =false;
-  if ($result) {
-    echo "Dados alterados com sucesso";
-    mysqli_close($conn);
-    $sucess = True;
-    mysqli_free_result($result);
-
-  } else {
-    echo "Erro: Update failed" . $queryUser . "<br>" . mysqli_error($conn);
-  }
-  mysqli_close($conn);
-  return   $sucess ;
-  // SE OCORREU COM SUCESSO VAMOS TER QUE DEVOLVER UM TRUE OU FALSE
 }
 
     ?>
