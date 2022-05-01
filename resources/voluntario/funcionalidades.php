@@ -1,24 +1,16 @@
 <?php
 
-function getInstitutionsPrefer($voluntarioId){
-    $disponibilidade = getDisponibilidadeVol($voluntarioId);
-
-
-    $instituicoes = getAllInstitutions();
-
-
+function insertVoluntarioDisponibilidade($dados, $id) {
+    $query = "INSERT INTO Disponibilidade(id_U, tipo,  hora_inicio, hora_fim, dia) VALUES ( \"{$id}\", 'Voluntario' , \"{$dados['hora_inicial']}\", \"{$dados['hora_final']}\" , \"{$dados['dias']}\")";
+    $result = setQuery($query);
+    return $result;
 }
 
 
-function obterDisponibilidadeVoluntario($id){
-
-    $query = "SELECT * FROM Disponibilidade WHERE id_U = '{$id}'";
-    $data = getQuery($query);
-    $timeStart = $data['hora_inicio'];
-    $timeEnd = $data['hora_fim'];
-    $dia = $data['dia'];
-
-
+function getDisponibilidades($id)
+{
+    $query = "SELECT dia,hora_inicio,hora_fim FROM Disponibilidade  WHERE id_U = '{$id}' ";
+    return getData($query);
 }
 
 function updateDisponibilidade($id_U, $hora_inicio, $hora_fim, $dia) {

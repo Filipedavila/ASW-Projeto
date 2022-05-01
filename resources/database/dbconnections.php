@@ -45,7 +45,8 @@ function getConnection(){
 
   
 
-    } 
+    }
+
     
     mysqli_close($conn);
     return $data;

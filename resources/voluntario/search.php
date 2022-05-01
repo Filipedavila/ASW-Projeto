@@ -1,12 +1,19 @@
 <?php
-include SITE_ROOT . "/functions/crud.php";
 
-
+function getVoluntarioLocal($id){
+    $query = "SELECT codigo_distrito, codigo_concelho, codigo_freguesia FROM Utilizador WHERE id = {$id}";
+    return getOneResultQuery($query);
+}
+/**Função que obtem os institutos compativeis a um certo voluntario
+ * @param $id voluntario ID
+ * @return array Institutos Compativeis
+ */
 function getCompatibleInstitutes($id)
 {
     $query = "SELECT dia,hora_inicio,hora_fim FROM Disponibilidade  WHERE id_U = '{$id}' ";
     $data = getData($query);
     $result= array();
+    $local = getVoluntarioLocal($id);
     foreach ($data as $valor) {
 
         $institutos = getInstituteIDBySchedule($valor);
@@ -29,34 +36,154 @@ function getCompatibleInstitutes($id)
 
 
 
-    return getInstitutesByIDS($ids);
+    return getInstitutesByLocalAndID($ids,$local);
 }
 
+/**
+ * @param $voluntarioDados
+ * @return array|null
+ */
 function getInstituteIDBySchedule($voluntarioDados){
 
 
     $query = "SELECT DISTINCT id_U
             FROM Disponibilidade WHERE 
-            tipo LIKE 'Instituto' AND dia = \"{$voluntarioDados[0]}\"
-                                   AND (hora_inicio BETWEEN  \"{$voluntarioDados[1]}\" 
-                                       AND \"{$voluntarioDados[1]}\" OR \"{$voluntarioDados[2]}\" BETWEEN  
-                                           \"{$voluntarioDados[1]}\" AND \"{$voluntarioDados[2]}\");";
+            tipo LIKE 'Instituto' AND dia = '{$voluntarioDados[0]}'
+                                   AND (hora_inicio BETWEEN  '{$voluntarioDados[1]}' 
+                                       AND '{$voluntarioDados[1]}' OR '{$voluntarioDados[2]}' BETWEEN  
+                                           '{$voluntarioDados[1]}' AND '{$voluntarioDados[2]}');";
 
     return getData($query);
 }
 
-function getInstitutesByIDS($ids){
+/**
+ * @param $ids
+ * @return array
+ */
+function getInstitutesByLocalAndID($ids,$local){
     $institutos= array();
+
 foreach ($ids as $id)  {
-    $query = "SELECT id,nome,tipo_inst,codigo_concelho,codigo_distrito,codigo_freguesia FROM Utilizador,Instituicao WHERE id_U = '{$id}' AND id = '{$id}' ";
-    $result = getQuery($query);
-    print_r($result);
-    $result['codigo_distritos'] = getDistritoById($result[0]['codigo_distrito']);
-    $result['codigo_concelhos'] = getConcelhosById($result[0]['codigo_concelho']);
-    $result['codigo_freguesias'] = getFreguesiaById($result[0]['codigo_freguesia']);
-    array_push($institutos, $result[0]);
+    $query = "SELECT id,nome,tipo_inst,nome_concelho,nome_distrito,
+                         nome_freguesia,codigo_distrito,codigo_concelho,codigo_freguesia FROM Utilizador,Instituicao
+                        WHERE id_U = '{$id}' AND id = '{$id}' 
+                          AND (Utilizador.codigo_distrito = '{$local['codigo_distrito']}' AND Utilizador.codigo_concelho = '{$local['codigo_concelho']}'   )" ;
+
+    $result = getOneResultQuery($query);
+
+
+
+    array_push($institutos, $result);
 }
 return $institutos;
+}
+
+/**
+ * @return array
+ */
+//Obter todos os distritos
+function getDistritos() {
+    $query = "SELECT * FROM Distrito;";
+    $result = getQuery($query);
+    return $result;
+}
+
+
+
+//Obter todos os distritos
+
+function getFreguesias($idConcelho)
+{
+
+    $query = "SELECT * FROM Freguesia WHERE Freguesia.cod_concelho = '{$idConcelho}';";
+    $result = getQuery($query);
+    return $result;
+}
+
+
+//Obter todos os Concelhos
+function getConcelhos($idDistrito)
+{
+    $query = "SELECT * FROM Concelho WHERE Concelho.cod_distrito = '{$idDistrito}';";
+    $result = getQuery($query);
+    return $result;
+}
+
+
+function getAllUsers()
+{
+    $query = "SELECT * FROM Utilizador";
+    $result = getQuery($query);
+    return $result;
+}
+
+
+function getAllVolunters()
+{
+    $query = "SELECT * FROM Voluntario";
+    $result = getQuery($query);
+    return $result;
+}
+
+
+function getAllInstitutions()
+{
+    $query = "SELECT * FROM Instituicao";
+    $result = getData($query);
+    return $result;
+}
+
+
+function getVoluntario($id)
+{
+    $query = "SELECT * FROM Utilizador,Voluntario  WHERE id = '{$id}' AND id_u ='{$id}'";
+    $result = getQuery($query);
+    return $result;
+}
+
+function getInstitutionById($id)
+{
+    $query = "SELECT * FROM Utilizador,Instituicao  WHERE id = {$id} AND id_u ={$id}";
+    $result = getQuery($query);
+
+    return $result;
+}
+
+function getConcelhosById($idDistrito,$idConcelho)
+{
+    $query = "SELECT * FROM Concelho  WHERE Concelho.cod_concelho = '{$idDistrito}' AND Concelho.cod_distrito = '{$idConcelho}' ";
+
+    $result = getQuery($query);
+    return $result;
+}
+
+
+function getDistritoById($id)
+{
+    $query = "SELECT * FROM Distrito  WHERE Distrito.cod_distrito = '{$id}'";
+    $result = getQuery($query);
+    return $result;
+}
+function getAllFreguesiasFromConcelho($idConcelho)
+{
+    $query = "SELECT cod_freguesia,nome FROM Freguesia WHERE Freguesia.cod_concelho = '{$idConcelho}';";
+    $result = getQuery($query);
+    return $result;
+}
+
+
+function getFreguesiaById($idConcelho,$idFreguesia)
+{
+    $query = "SELECT * FROM Freguesia  WHERE Freguesia.cod_freguesia = '{$idFreguesia}' AND Freguesia.cod_concelho = '{$idConcelho}' ";
+    $result = getQuery($query);
+    return $result;
+}
+
+function getDonationByInstitute($id)
+{
+    $query = "SELECT * FROM Alimento WHERE inst_id = '{$id}'";
+    $result = getQuery($query);
+    return $result;
 }
 
 ?>

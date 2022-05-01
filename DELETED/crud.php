@@ -52,6 +52,7 @@
     $result = getData($query);
      return $result;
   }
+  /*
   function existsVoluntarioID($id){
     $query = "SELECT * FROM Voluntario WHERE id_U = '{$id}'"; 
     $exists = existsQuery($query);
@@ -67,7 +68,7 @@
     
   }
   
-  
+  */
   function getVoluntario($id)
   {
     $query = "SELECT * FROM Utilizador,Voluntario  WHERE id = '{$id}' AND id_u ='{$id}'";
@@ -123,7 +124,7 @@ function getFreguesiaById($idConcelho,$idFreguesia)
      return $result;
   } 
   
-  
+  /*
   
     function userExistsByEmail($email){
       $query = "SELECT * FROM Utilizador WHERE email = \"{$email}\"";
@@ -145,7 +146,8 @@ function getFreguesiaById($idConcelho,$idFreguesia)
       $exists = existsQuery($query);
       return $exists;
     }
-
+/*
+   * */
     function updateValuesVoluntario($values, $id){
       $conn = getConnection();
       $query = "UPDATE Voluntario SET " ;
@@ -203,25 +205,26 @@ function updateValuesInstituto($values, $id){
   return $result;
 
 }
+
 function insertVoluntarioDisponibilidade($dados, $id) {
   $query = "INSERT INTO Disponibilidade(id_U, tipo,  hora_inicio, hora_fim, dia) VALUES ( \"{$id}\", 'Voluntario' , \"{$dados['hora_inicial']}\", \"{$dados['hora_final']}\" , \"{$dados['dias']}\")";
   $result = setQuery($query);
   return $result;
 }
-
+*/
 function updateAreaGeografica($dados, $id){
   $query = "UPDATE Utilizador SET codigo_distrito = \"{$dados['codigo_distrito']}\" , codigo_concelho = \"{$dados['codigo_concelho']}\", codigo_freguesia = \"{$dados['codigo_freguesia']}\" WHERE Utilizador.id = {$id}; " ;
   $result =setQuery($query);
   return $result;
 }
-
+/*
 function getDisponibilidades($id)
 {
   $query = "SELECT dia,hora_inicio,hora_fim FROM Disponibilidade  WHERE id_U = '{$id}' ";
   return getData($query);
 }
 
-
+/*
 //esta funcao nao esta certa nem esta a ser usada
 function updateDisponibilidade($id_U, $hora_inicio, $hora_fim, $dia) {
   $conn = getConnection();
@@ -243,5 +246,5 @@ function updateDisponibilidade($id_U, $hora_inicio, $hora_fim, $dia) {
   // SE OCORREU COM SUCESSO VAMOS TER QUE DEVOLVER UM TRUE OU FALSE
 }
 
-    ?>
+  */  ?>
       

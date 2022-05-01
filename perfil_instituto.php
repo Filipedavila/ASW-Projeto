@@ -1,18 +1,16 @@
 <?php
 
-if(!isLoggedIn() || !isLoggedInInstitute()){
+if(!isLoggedIn() ){
     header('Location: index.php');
     exit();
 }
   $data = array();
 
 
-    if(isset($_SESSION['id'])){
-        $id = $_SESSION['id'];
-        $data = getInstitution( $id );
-
+   if(isset($_GET['id'])){
+        $id =$_GET['id'];
+        $data = getInstitutionById( $id );
     }
-
 
 
 
@@ -55,7 +53,7 @@ if(!isLoggedIn() || !isLoggedInInstitute()){
             <div class="row">
                 <div class="col">
 
-                    Nome Responsavel:<?php echo $data[0]['nome_contacto'] ?> 
+                    Nome Responsavel:<?php echo $data[0]['nome_contacto'] ?>
 
 
                 </div>

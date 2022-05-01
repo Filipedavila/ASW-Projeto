@@ -1,8 +1,9 @@
 <?php
+
 if($_SERVER["REQUEST_METHOD"] == "POST"){
   // e caso a variavel submit esteja assignada
     $missing= array();
-    $loginError;
+
     $loginState =False;
   if(isset($_POST['login'])){
     // se o login e password foram assignados

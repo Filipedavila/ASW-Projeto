@@ -1,7 +1,10 @@
 <?php
 
-
-
+include SITE_ROOT . '/resources/register/validations.php';
+include SITE_ROOT . '/resources/register/register.php';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 
 $erros = array();
@@ -100,19 +103,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $data['cod_distrito'] = strip_tags($data['cod_distrito']);
         $data['cod_concelho'] = strip_tags($data['cod_concelho']);
         $data['cod_freguesia'] = strip_tags($data['cod_freguesia']);
+        $data['nome_concelho'] = getConcelhosNomeById($data['cod_distrito'],$data['cod_concelho']);
+        $data['nome_freguesia'] = getFreguesiaNomeById($data['cod_concelho'],$data['cod_freguesia']);
+        $data['nome_distrito'] = getDistritoNomeById( $data['cod_distrito']);
     //para cada valor do pos tratar e adicionar a uma array associativa
         $result = RegisterVoluntario($data);   ## OBTER ID ## mudar a função de registro
          
         if($result){
-            //caso o resultado seja positivo ir para o index
-            session_start();
-            $_SESSION["tipo"]="Voluntario";
-            $_SESSION["id"]=1;    #### POR ID"#####
-            $_SESSION["logged"]=true;
 
-        
-             header('Location: index.php');
-                 die();
+            //caso o resultado seja positivo ir para o index
+            loginUser($data["email"],$_POST["password"]);
+            die();
 
           }else{
               //caso contrario adicionar a array erros
@@ -264,7 +265,7 @@ if(isset($erros['email'])) echo "<p class=\"alerta\">". $erros['email'] ."</p>";
             <label for="dist" class="" >
             Distrito
             </label>
-        <script type="text/javascript" src="./js/locations.js"></script>
+
 
             <select name="cod_distrito"  class="form-control"  id="dist">
                 <option> Selecione </option>

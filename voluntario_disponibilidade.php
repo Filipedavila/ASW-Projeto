@@ -3,6 +3,7 @@ if(!isLoggedIn() || !isLoggedInVoluntario()){
     header('Location: index.php');
     exit();
     }
+include SITE_ROOT . '/resources/voluntario/funcionalidades.php';
 $data = array();
 if(isset($_SESSION['id'])){
 

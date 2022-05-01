@@ -1,5 +1,6 @@
 <?php
-
+include SITE_ROOT . '/resources/register/validations.php';
+include SITE_ROOT . '/resources/register/register.php';
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -111,13 +112,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $data['cod_distrito'] = strip_tags($data['cod_distrito']);
         $data['cod_concelho'] = strip_tags($data['cod_concelho']);
         $data['cod_freguesia'] = strip_tags($data['cod_freguesia']);
+        $data['nome_concelho'] = getConcelhosNomeById($data['cod_distrito'],$data['cod_concelho']);
+        $data['nome_freguesia'] = getFreguesiaNomeById($data['cod_concelho'],$data['cod_freguesia']);
+        $data['nome_distrito'] = getDistritoNomeById( $data['cod_distrito']);
     //para cada valor do pos tratar e adicionar a uma array associativa
    $result = RegisterInstitution($data);
         if($result){
             //caso o resultado seja positivo ir para o index
-            session_start();
-        
-             header('Location: index.php');
+            loginUser($data["email"],$_POST["password"]);
+            die();
                  die();
 
           }else{
@@ -146,7 +149,7 @@ echo '<script type="text/javascript">',
 
 ?>
 
-<article  class="form-group  justify-content-center">
+<article  class="form-group  container">
     <br>
 <!--  verificar se existem erros ou dados em falta -->
 <?php if (count($erros) >0  || count($missing) >0){ echo "
@@ -163,13 +166,15 @@ if(isset($erros['pass'])) echo "<p class=\"alerta\">". $erros['pass'] ."</p>";  
 
             <!--  verificar se esta em falta o nome -->
             <div class=" row">
+
                 <div class="col">
-                    <label for="nome">Nome:
+
+                    <label for="nome">Nome Instituição:
                         <?php if (in_array('nome', $missing) ) 
 echo "<span class=\"alerta\" > Introduza Nome*</span>";?>
                     </label>
                     <input type="text" class="form-control <?php if (in_array('nome', $missing)) 
-echo " is-invalid";?> " name="nome" id="nome" value="">
+echo " is-invalid";?> " name="nome" id="nome" value="<?php if(isset($_POST['nome'])) echo $_POST['nome'] ?>">
 
                 </div>
                 <div class="col">
@@ -178,8 +183,8 @@ echo " is-invalid";?> " name="nome" id="nome" value="">
 echo "<span class=\"alerta\" > Introduza Email*</span>";?>
 
                     </label>
-                    <input type="text" class="form-control" id="email" name="email" value="">
-                    <span class="help-block"> <?php  // texto de ajuda ou aviso)?> </span>
+                    <input type="text" class="form-control" id="email" name="email" value="<?php if(isset($_POST['email'])) echo $_POST['email'] ?>">
+                    <span class="help-block"> <?php  if(in_array('email',$erros)) echo $erros['email'];?> </span>
 
                 </div>
             </div>
@@ -322,33 +327,29 @@ echo " Nome em falta";?>
         </div>
     </div>
     <div class="row">
-        <div class="col-auto">
-            <br>
-            <label for="inputFile" class="col-form-label">Foto de perfil</label>
-        </div>
 
-        <div class="col">
-            <div class="custom-file">
-                <br>
 
-                <input type="file" class="form-control-file" id="inputFile" lang="pt">
-                <span id="passwordHelpInline" class="form-text">
-                    Ficheiro max 2mb
+
+            <div class="col ">
+                <label class="form-label" for="inputFile" >Foto de Perfil</label>
+                <input type="file" class="form-control-file" id="inputFile"  lang="pt">
+
+
+
 
             </div>
 
 
-        </div>
     </div>
     </div>
 
     <div class="row justify-content-center">
 
-
+    <div class="col d-flex justify-content-end">
         <button type="submit" class="btn btn-primary btn-lg" form="registro" name="submit"
             value="submit">Registar</button>
 
-
+    </div>
     </div>
     </div>
     </form>

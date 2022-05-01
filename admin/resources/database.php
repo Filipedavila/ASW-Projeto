@@ -202,7 +202,7 @@ mysqli_close($conn);
 return $column;
   }
   
-function getInstitution($id){
+function getInstitutions(){
   $conn = getConnection();
   $query = "SELECT * FROM Concelho";;
   $result = mysqli_query($conn,$query);

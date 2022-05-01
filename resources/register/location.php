@@ -1,6 +1,8 @@
 <?php
 include "../../init.php";
 
+error_reporting(E_ALL);
+
 function getDistritosJSON(){
     $query = "SELECT * FROM Distrito";
     $result = getQuery($query);
@@ -44,7 +46,7 @@ if(isset($_REQUEST["request"])){
         }
 
     }elseif ($_REQUEST["request"]== "Distritos"){
-        $distritos = getDistritosJSON();
+        $distritos = getDistritos();
         header("Content-Type: application/json");
         echo json_encode($distritos);
 
