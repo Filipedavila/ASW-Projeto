@@ -14,8 +14,9 @@
         Procurar Institutos
     </a>
     <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Institutos Perto</a>
-        <a class="dropdown-item" href="index.php?page=search">Institutos por Local </a>
+        <a class="dropdown-item" href="index.php?page=search">Institutos Disponiveis</a>
+        <a class="dropdown-item" href="index.php?page=advanced_search">Pesquisa Avançada</a>
+
     </div>
 </li>
 <li class="nav-item">
