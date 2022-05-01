@@ -15,8 +15,12 @@ if(isset($_GET['page'])){
 $content = changePage($_GET['page']);
 $pageTittle .= $_GET['page'];
 }else{
-$content = 'content';
-}
+    if(isset($_SESSION['id'])){
+        $content = 'home';
+    }else {
+        $content = 'content';
+    }
+    }
 echo '<!DOCTYPE html>';
 echo '<html lang="<?php echo $htmlLang ?>">';
 

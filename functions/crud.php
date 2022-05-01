@@ -12,22 +12,19 @@
 
   //Obter todos os distritos
   
-  function getFreguesias()
+  function getFreguesias($idConcelho)
   {
-    $conn = getConnection();
-    $query = "SELECT * FROM Freguesia;";
-    $result = array();
+
+    $query = "SELECT * FROM Freguesia WHERE Freguesia.cod_concelho = '{$idConcelho}';";
     $result = getQuery($query);
      return $result;
   }
   
   
     //Obter todos os Concelhos
-  function getConcelhos()
+  function getConcelhos($idDistrito)
   {
-    $conn = getConnection();
-    $query = "SELECT * FROM Concelho;";
-    $result = array();
+    $query = "SELECT * FROM Concelho WHERE Concelho.cod_distrito = '{$idDistrito}';";
     $result = getQuery($query);
      return $result;
   }
@@ -35,9 +32,7 @@
     
   function getAllUsers()
   {
-    $conn = getConnection();
     $query = "SELECT * FROM Utilizador";
-    $result = array();
     $result = getQuery($query);
      return $result;
   }
@@ -45,9 +40,7 @@
   
   function getAllVolunters()
   {
-    $conn = getConnection();
     $query = "SELECT * FROM Voluntarios";
-    $result = array();
     $result = getQuery($query);
      return $result;
   }
@@ -55,14 +48,11 @@
   
   function getAllInstitutions()
   {
-    $conn = getConnection();
-    $query = "SELECT * FROM Instituicao";;
-    $result = array();
-    $result = getQuery($query);
+    $query = "SELECT * FROM Instituicao";
+    $result = getData($query);
      return $result;
   }
   function existsVoluntarioID($id){
-    $conn = getConnection();
     $query = "SELECT * FROM Voluntario WHERE id_U = '{$id}'"; 
     $exists = existsQuery($query);
     return $exists;
@@ -71,7 +61,6 @@
   
 
   function existsInstitutoID($id){
-    $conn = getConnection();
     $query = "SELECT * FROM Instituicao WHERE id_U = '{$id}'"; 
     $exists = existsQuery($query);
     return $exists;
@@ -81,27 +70,22 @@
   
   function getVoluntario($id)
   {
-    $conn = getConnection();
-    $query = "SELECT * FROM Utilizador,Voluntario  WHERE id = '{$id}' AND id_u ='{$id}'"; 
-    $result = array();
+    $query = "SELECT * FROM Utilizador,Voluntario  WHERE id = '{$id}' AND id_u ='{$id}'";
     $result = getQuery($query);
      return $result;
   }
   
   function getInstitution($id)
   {
-    $conn = getConnection();
-    $query = "SELECT * FROM Utilizador,Instituicao  WHERE id = '{$id}' AND id_u ='{$id}'"; 
-    $result = array();
+    $query = "SELECT * FROM Utilizador,Instituicao  WHERE id = '{$id}' AND id_u ='{$id}'";
     $result = getQuery($query);
      return $result;
   }
   
-  function getConcelhosById($id)
+  function getConcelhosById($idDistrito,$idConcelho)
   {
-    $conn = getConnection();
-    $query = "SELECT * FROM Concelho  WHERE Concelho.cod_concelho = '{$id}' "; 
-    $result = array();
+    $query = "SELECT * FROM Concelho  WHERE Concelho.cod_concelho = '{$idDistrito}' AND Concelho.cod_distrito = '{$idConcelho}' ";
+
     $result = getQuery($query);
      return $result;
   }
@@ -109,27 +93,23 @@
    
   function getDistritoById($id)
   {
-    $conn = getConnection();
-    $query = "SELECT * FROM Distrito  WHERE Distrito.cod_distrito = '{$id}'"; 
-    $result = array();
+    $query = "SELECT * FROM Distrito  WHERE Distrito.cod_distrito = '{$id}'";
     $result = getQuery($query);
      return $result;
   }
-  
-  function getFreguesiaById($id)
+
+
+
+function getFreguesiaById($idConcelho,$idFreguesia)
   {
-    $conn = getConnection();
-    $query = "SELECT * FROM Freguesia  WHERE Freguesia.codigo_freguesia = '{$id}' "; 
-    $result = array();
+    $query = "SELECT * FROM Freguesia  WHERE Freguesia.codigo_freguesia = '{$idFreguesia}' AND Freguesia.cod_concelho = '{$idConcelho}' ";
     $result = getQuery($query);
      return $result;
   }
 
   function getDonationByInstitute($id)
   {
-    $conn = getConnection();
-    $query = "SELECT * FROM Alimento WHERE inst_id = '{$id}'"; 
-    $result = array();
+    $query = "SELECT * FROM Alimento WHERE inst_id = '{$id}'";
     $result = getQuery($query);
      return $result;
   }
@@ -137,10 +117,8 @@
   
   
   //função que adiciona uma doação
-  function addDonation($idInstitute,$name, $tipo, $quantidade ){ 
-    $conn = getConnection();
-    $query = "INSERT INTO Alimento( inst_id, id, tipo_doacao, quantidade) VALUES (" . $idInstitute . ", NULL ," .  $name . "," . $tipo . "," . $quantidade . ");"; 
-    $result = array();
+  function addDonation($idInstitute,$name, $tipo, $quantidade ){
+    $query = "INSERT INTO Alimento( inst_id, id, tipo_doacao, quantidade) VALUES (" . $idInstitute . ", NULL ," .  $name . "," . $tipo . "," . $quantidade . ");";
     $result = setQuery($query);
      return $result;
   } 
@@ -148,16 +126,13 @@
   
   
     function userExistsByEmail($email){
-      $conn = getConnection();
-      $query = "SELECT * FROM Utilizador WHERE email = \"{$email}\""; 
-
+      $query = "SELECT * FROM Utilizador WHERE email = \"{$email}\"";
       $exists = existsQuery($query);
       return $exists;
     }
   
   
     function userExistsByName($name){
-      $conn = getConnection();
       $query = "SELECT * FROM Utilizador WHERE email = '{$name}'";  
       $exists = existsQuery($query);
       return $exists;
@@ -191,7 +166,6 @@
     return $result;
     }
 function updateValuesUtilizador($values, $id){
-      $conn = getConnection();
       $query = "UPDATE Utilizador SET " ;
       $num = count($values);
       $i = 1;
@@ -212,7 +186,6 @@ function updateValuesUtilizador($values, $id){
     }
 
 function updateValuesInstituto($values, $id){
-  $conn = getConnection();
   $query = "UPDATE Instituicao SET " ;
   $num = count($values);
       $i = 1;
@@ -231,14 +204,12 @@ function updateValuesInstituto($values, $id){
 
 }
 function insertVoluntarioDisponibilidade($dados, $id) {
-  $conn = getConnection();
   $query = "INSERT INTO Disponibilidade(id_U, tipo,  hora_inicio, hora_fim, dia) VALUES ( \"{$id}\", 'Voluntario' , \"{$dados['hora_inicial']}\", \"{$dados['hora_final']}\" , \"{$dados['dias']}\")";
   $result = setQuery($query);
   return $result;
 }
 
 function updateAreaGeografica($dados, $id){
-  $conn = getConnection();
   $query = "UPDATE Utilizador SET codigo_distrito = \"{$dados['codigo_distrito']}\" , codigo_concelho = \"{$dados['codigo_concelho']}\", codigo_freguesia = \"{$dados['codigo_freguesia']}\" WHERE Utilizador.id = {$id}; " ;
   $result =setQuery($query);
   return $result;
@@ -247,31 +218,6 @@ function updateAreaGeografica($dados, $id){
 function getDisponibilidades($id)
 {
   $query = "SELECT dia,hora_inicio,hora_fim FROM Disponibilidade  WHERE id_U = '{$id}' ";
-  return getData($query);
-}
-
-function getDisponibilidadesDias($id)
-{
-  $query = "SELECT dia,hora_inicio,hora_fim FROM Disponibilidade  WHERE id_U = '{$id}' ";
-  $data = array();   $temp = getData($valor);
-  foreach ($arr as $valor) {
-   
-
-    array_push($data, $temp  );
-
-}
-  return getData($data);
-}
-function getDisponibilidadesInstDia($id){
-  $voluntarioDados = getDisponibilidades($id);
-  
-  $query = "SELECT dia, hora_inicio, hora_fim 
-            FROM Disponibilidade WHERE 
-            tipo LIKE 'Instituto' AND dia = \"{$voluntarioDados[0]}\"
-                                   AND (hora_inicio BETWEEN  \"{$voluntarioDados[1]}\" 
-                                       AND \"{$voluntarioDados[1]}\" OR \"{$voluntarioDados[2]}\" BETWEEN  
-                                           \"{$voluntarioDados[1]}\" AND \"{$voluntarioDados[2]}\");";
-  
   return getData($query);
 }
 

@@ -6,7 +6,9 @@ exit();
 }
 
 $user = array();
-$data = getAllInstitutos();
+$data = getAllInstitutions();
+
+
 
 // pagina inicial do voluntario ou do instituto,
 // se for voluntario mostra uma lista dos institutos da sua area
@@ -19,7 +21,7 @@ $data = getAllInstitutos();
     <div class="col ml-5">
     <?php if(isLoggedInInstitute() && isLoggedIn()): ?>
      
-        <h1>Bem Vindo  <?php  echo $_SESSION['user']; ?></h1>
+        <h1>Bem Vindo  <?php  var_dump($data);echo $_SESSION['user']; ?></h1>
         <p> Obrigado por se registar como Instituto</p>
     <p>Site em construção, mais funcionalidades em breve</p>
     
@@ -35,11 +37,12 @@ $data = getAllInstitutos();
     <h1>Bem Vindo  <?php  echo $_SESSION['user']; ?></h1>
     <table class="table table-striped  table-hover">
         <tr class="thead-dark">
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Tipo</th>
-            <th>Telefone</th>
+            <th>Nome Instituição</th>
+            <th>Tipo Instituição</th>
+            <th>Distrito</th>
+            <th>Concelho</th>
+            <th>Freguesia</th>
+            <th>Perfil</th>
         </tr>
         <?php foreach($data as $user ): ?>
             <tr>

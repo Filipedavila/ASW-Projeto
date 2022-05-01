@@ -142,7 +142,7 @@ return $column;
 
 function getAllVolunters(){
   $conn = getConnection();
-  $query = "SELECT * FROM Voluntarios";;
+  $query = "SELECT * FROM Voluntario";;
   $result = mysqli_query($conn,$query);
   
   
@@ -241,7 +241,7 @@ function getDonationByInstitute($id){
 
       function userExistsByEmail($email){
         $conn = getConnection();
-        $query = "SELECT * FROM Usuarios WHERE Usuarios.email = ".$email ; // verificar query
+        $query = "SELECT * FROM Utilizador WHERE Utilizador.email = ".$email ;
 
         $result = mysqli_query($conn,$query);
         mysqli_close($conn);

@@ -5,6 +5,9 @@
 <li class="nav-item">
     <a class="nav-link" href="<?php echo 'logout.php' . '?id=' . $_SESSION['id']  ?>">Logout</a>
 </li>
+<li class="nav-item">
+    <a class="nav-link" href="<?php echo 'index.php' . '?page=' . "home"   ?>">Home</a>
+</li>
 <!-- Dropdown -->
 <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">

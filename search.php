@@ -7,7 +7,7 @@ exit();
 }
 
 $user = array();
-$data = getDisponibilidades($_SESSION['id']);
+$data = getCompatibleInstitutes($_SESSION['id']);
 print_r($data);
 // pagina inicial do voluntario ou do instituto,
 // se for voluntario mostra uma lista dos institutos da sua area
@@ -34,34 +34,6 @@ print_r($data);
 <?php if(isLoggedInVoluntario() && isLoggedIn()) : ?>
      
     <h1>Bem Vindo  <?php  echo $_SESSION['user']; ?></h1>
-    <table class="table table-striped  table-hover">
-        <tr class="thead-dark">
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Tipo</th>
-            <th>Telefone</th>
-        </tr>
-        <?php foreach($data as $user ): ?>
-            <tr>
-                <td><?= $user[0] ?></td>
-                <td><?= $user[1] ?></td>
-                <td><?= $user[2] ?></td>
-                <td><?= $user[3] ?></td>
-                <td><?= $user[4] ?></td>
-
-
-
-            </tr>
-        <?php endforeach; ?>
-    </table>
-    
-            </div>
-    <div class="col">
-        <div class="text-center">
-            <img src="img/food-donate.jpg" class="rounded" alt="..."height="350px">
-          </div>
-    </div>
 
 
 <?php endif;?>

@@ -124,7 +124,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     }   
 }
-
+echo '<script type="text/javascript">',
+'getDistritos();',
+'</script>';
 
 
 ?>
@@ -180,7 +182,7 @@ if(isset($erros['email'])) echo "<p class=\"alerta\">". $erros['email'] ."</p>";
     </div>
 
     <div class="row">
-
+        <!--  Primeira Linha -->
         <div class="col"> 
 
             <label for="password">Password: 
@@ -192,42 +194,45 @@ if(isset($erros['email'])) echo "<p class=\"alerta\">". $erros['email'] ."</p>";
             <input type="password"  class="form-control" name="password" id="password">
         
         </div>
-        
+        <div class="col">
+            <label for="tel">Telefone:
+                <?php
+                ## TO DO , Caso ja exista um user com o mesmo telefone mostrar um erro a dizer que um user ja tem este contacto
+                if (in_array('tel', $missing))
+                    echo " Telefone em falta";?>
+            </label>
+            <input  type="text" pattern="\d*" maxlength="9"  class="form-control  <?php if (in_array('tel', $missing))
+                echo " isIis-invalid";?>" id="tel" name="tel" value="<?php
+            if(isset($_POST['tel'])) echo $_POST['tel'] ?>">
+        </div>
         <div class="col">
 
-            <label for="password2">Repita sua Password: 
+
+            <label for="cc">Cartão de Cidadão
+                <?php  ## TO DO ,Caso exista um utilizador com o mesmo numero de cartão de cidadão dar erro e mostra lo
+                if (in_array('cc', $missing) )
+                    echo "<span class=\"alerta\" > Em Falta Cartão de Cidadão*</span>";?>
+
+            </label>
+            <input type="number" type="text" pattern="\d*" maxlength="8"  class="form-control" name="cc" id="cc" value="<?php
+            if(isset($_POST['cc']) && !in_array("cc",$erros)) echo $_POST['cc'] ?>">
+        </div>
+
+
+    </div>
+    <!--  Segunda Linha -->
+    <div class="row">
+        <div class="col">
+
+            <label for="password2">Repita sua Password:
                 <?php       ## TO DO , apenas apresentar por favor repita a password em caso do password 1 campo preenchido
-                
-                if (in_array('password2', $missing) ) 
+
+                if (in_array('password2', $missing) )
                     echo "<span class=\"alerta\" > Repita a Password *</span>";?>
             </label>
             <input type="password"  class="form-control" name="password2" id="password2">
         </div>
-    </div>
 
-    <div class="row">
-            <div class="col">         
-                <label for="tel">Telefone: 
-                    <?php
-                     ## TO DO , Caso ja exista um user com o mesmo telefone mostrar um erro a dizer que um user ja tem este contacto
-                     if (in_array('tel', $missing)) 
-                        echo " Telefone em falta";?>
-                </label>
-                <input  type="text" pattern="\d*" maxlength="9"  class="form-control  <?php if (in_array('tel', $missing)) 
-                        echo " isIis-invalid";?>" id="tel" name="tel" value="<?php 
-                       if(isset($_POST['tel'])) echo $_POST['tel'] ?>">
-                </div>
-        <div class="col">
-    
-      
-                <label for="cc">Cartão de Cidadão
-                    <?php  ## TO DO ,Caso exista um utilizador com o mesmo numero de cartão de cidadão dar erro e mostra lo
-                    if (in_array('cc', $missing) ) 
-                    echo "<span class=\"alerta\" > Em Falta Cartão de Cidadão*</span>";?>
-
-                </label>
-                <input type="number" type="text" pattern="\d*" maxlength="8"  class="form-control" name="cc" id="cc" value="<?php 
-                       if(isset($_POST['cc']) && !in_array("cc",$erros)) echo $_POST['cc'] ?>">
 
         <div class="col">
 
@@ -252,53 +257,27 @@ if(isset($erros['email'])) echo "<p class=\"alerta\">". $erros['email'] ."</p>";
         </div>
     </div>
 
-    
 
+        <!--  Terceira  Linha -->
     <div class="row">
     <div class="col">
             <label for="dist" class="" >
             Distrito
             </label>
-            <select name="cod_distrito" class="form-control"  id="dist">
-                <?php
-                    
-                    $distritos = getDistritos();
-                    if($distritos > 0 ){
-                        foreach($distritos as $key => $valor ){
-                            echo "<option value=" . $valor['cod_distrito'] . "  onclick='getConcelho(". $valor['cod_distrito']  ." )'>". $valor['nome']   . "</option>" ; 
-                        }
-                    
-                    
-                
-                    }
-                
-            
-            ?> 
-           </select>
+        <script type="text/javascript" src="./js/locations.js"></script>
 
+            <select name="cod_distrito"  class="form-control"  id="dist">
+                <option> Selecione </option>
+
+
+            </select>
         </div>
         <div class="col">
          <label for="conc" class="" >
             Concelho
             </label>
             <select name="cod_concelho" class="form-control"  id="conc">
-                <script>
-                
-                </script>
-                <?php
-                    // if(distrito.isSet()) getConcelhos(distrito_id)
-                    $concelho = getConcelhos();
-                    if($concelho > 0 ){
-                        foreach($concelho as $valor ){
-                            echo "<option value=" . $valor['cod_concelho'] . ">". $valor['nome'] . " onclick='getFreguesia(" . $valor['cod_concelho'] . ")' </option>" ; 
-                        }
-                    
-                    
-                
-                    }
-                
-            
-            ?> 
+                <option> Selecione </option>
            </select>
 
         </div>
@@ -307,28 +286,21 @@ if(isset($erros['email'])) echo "<p class=\"alerta\">". $erros['email'] ."</p>";
             Freguesia
             </label>
             <select name="cod_freguesia" class="form-control"  id="freg">
-                <?php
-                       // if(distrito.isSet()) getConcelhos(distrito_id)
-                    $freguesias = getFreguesias();
-                    if($freguesias > 0 ){
-                        foreach($freguesias as $freg ){
-                            echo "<option value=" . $freg['cod_freguesia'] . ">". $freg['nome'] . "</option>" ; 
-                        }
-                    
-                    
-                
-                    }
-                
-            
-            ?> 
+                <option> Selecione </option>
            </select>
 
         </div>
         
     </div>
+
+        <!--  Quarta Linha -->
     <div class="row">
-        
-        <div class="col"><br>
+
+        <div class="col d-flex justify-content-center">
+        <label class="form-label" for="tipoSexo" >Tipo</label>
+            <br>
+
+
                  <div class="form-check-inline">
                 <input class="form-check-input" type="radio" name="genero" id="masculino">
                 <label class="form-check-label" for="masculino">
@@ -348,31 +320,23 @@ if(isset($erros['email'])) echo "<p class=\"alerta\">". $erros['email'] ."</p>";
                 Outro
                 </label>
                 </div>
-        </div>  
-        
-        <div class="col-auto">
-            <br>
-    <label for="inputFile" class="col-form-label">Foto de perfil</label>
-  </div>
+
+        </div>
+
         <div class="col">
-            <div class="custom-file">
-                <br>
-         
+            <label class="form-label" for="inputFile" >Foto de Perfil</label>
                     <input type="file" class="form-control-file" id="inputFile"  lang="pt">
-                    <span id="passwordHelpInline" class="form-text">
-        Ficheiro max 2mb
-    </span>
-                
-            </div>
+
+
 
     
         </div>
     </div>
-    <div class="row justify-content-center">
-        
+    <div class="row">
+        <div class="col d-flex justify-content-end">
          
              <button type="submit" class="btn btn-primary btn-lg" form="registro" name="submit" value="submit">Registar</button>
-            
+        </div>
      
     </div>
   </div>

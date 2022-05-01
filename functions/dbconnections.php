@@ -68,7 +68,7 @@ function getConnection(){
   function getData($query){
       $conn = getConnection();
       $result = mysqli_query($conn,$query);
-      $data = array();
+
 
       if (mysqli_num_rows($result) > 0) {
           $data = mysqli_fetch_all($result);

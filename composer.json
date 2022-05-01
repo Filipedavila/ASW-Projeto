@@ -1,0 +1,14 @@
+{
+  "name": "vendor_name/ASW-PROJETO",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Filipe",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+  }
+}

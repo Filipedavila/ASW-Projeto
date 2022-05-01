@@ -138,6 +138,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     
 }
+echo '<script type="text/javascript">',
+'getDistritos();',
+'</script>';
 
 
 
@@ -230,63 +233,35 @@ echo " Nome em falta";?>
 
 
 
+            <!--  Terceira  Linha -->
             <div class="row">
                 <div class="col">
-                    <label for="dist" class="">
+                    <label for="dist" class="" >
                         Distrito
                     </label>
-                    <select name="cod_distrito" class="form-control" id="dist">
-                        <?php
+                    <script type="text/javascript" src="./js/locations.js"></script>
 
-$distritos = getDistritos();
-if($distritos > 0 ){
-foreach($distritos as $key => $valor ){
-echo "<option value=" . $valor['cod_distrito'] . ">". $valor['nome']   . "</option>" ; 
-}
+                    <select name="cod_distrito"  class="form-control"  id="dist">
+                        <option> Selecione </option>
 
 
-
-}
-
-
-?>
                     </select>
-
                 </div>
                 <div class="col">
-                    <label for="conc" class="">
+                    <label for="conc" class="" >
                         Concelho
                     </label>
-                    <select name="cod_concelho" class="form-control" id="conc">
-                        <?php
-                            $concelho = getConcelhos();
-                            if($concelho > 0 ){
-                                foreach($concelho as $valor ){
-                                echo "<option value=" . $valor['cod_concelho'] . ">". $valor['nome'] . "</option>" ; 
-                                }
-                            }?>
+                    <select name="cod_concelho" class="form-control"  id="conc">
+                        <option> Selecione </option>
                     </select>
 
                 </div>
                 <div class="col">
-                    <label for="freg" class="">
+                    <label for="freg" class="" >
                         Freguesia
                     </label>
-                    <select name="cod_freguesia" class="form-control" id="freg">
-                        <?php
-
-$freguesias = getFreguesias();
-if($freguesias > 0 ){
-    foreach($freguesias as $freg ){
-        echo "<option value=" . $freg['cod_freguesia'] . ">". $freg['nome'] . "</option>" ; 
-    }
-
-
-
-}
-
-
-?>
+                    <select name="cod_freguesia" class="form-control"  id="freg">
+                        <option> Selecione </option>
                     </select>
 
                 </div>
