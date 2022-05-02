@@ -15,7 +15,7 @@ $utilizador = array();
 
     if(isset($_SESSION['id'])){
 
-        $data = getVoluntario($_SESSION['id']);
+        $data = getVoluntarioById($_SESSION['id']);
 
 
 
