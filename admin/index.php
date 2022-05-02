@@ -1,5 +1,6 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 define('BASE_DIR', realpath(__FILE__));
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -13,9 +14,15 @@ $adminLogin;
 if(!isset($admin)){
 $content="login";
 =======
+=======
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+>>>>>>> origin/main
 define('THIS_FOLDER', realpath(__FILE__));
-define('SITE_ROOT', dirname(__FILE__));
-include  SITE_ROOT .'/init.php';
+define('ADMIN_ROOT', dirname(__FILE__));
+include ADMIN_ROOT ."/init.php";
 
 
 
@@ -46,17 +53,17 @@ if(isset($_GET['page'])){
 }
 echo '<!DOCTYPE html>';
 echo '<html lang="<?php echo $htmlLang ?>">';
-include './header.php';
 
-if(isLoggedIn()){
-   
-    include    SITE_ROOT .'/nav.php';
+include ADMIN_ROOT .'/header.php';
+if(isLoggedInAdmin()){
+
+    include    ADMIN_ROOT .'/nav.php';
 
 
-    include   SITE_ROOT .'/'.$content . '.php';
-    include  SITE_ROOT .'/footer.php';
+    include   ADMIN_ROOT .'/'.$content . '.php';
+    include  ADMIN_ROOT .'/footer.php';
 }
-if(!isLoggedIn()){
+if(!isLoggedInAdmin()){
     include   './login.php';
 
 }

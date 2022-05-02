@@ -1,7 +1,7 @@
 <?php
 
 
-if(!isLoggedIn() || !isLoggedInVoluntario()){ 
+if(!isLoggedIn() || !isLoggedInVoluntario()){
     header('Location: index.php');
     exit();
     }
@@ -15,7 +15,7 @@ $utilizador = array();
 
     if(isset($_SESSION['id'])){
 
-        $data = getVoluntario($_SESSION['id']);
+        $data = getVoluntarioById($_SESSION['id']);
 
 
 

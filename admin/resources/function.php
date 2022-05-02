@@ -46,7 +46,7 @@ function loginAdmin($user,$pass){
     }
 
 
-function isLoggedIn(){
+function isLoggedInAdmin(){
 $result =false;
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -64,15 +64,6 @@ return $result;
 
 
 
-function changePage( $page){
-    $page = strip_tags($page);
-    if(!empty($page)){
-        $content =$page;
-        }else{
-        $content = 'home' ;
-        }
-        return $content;
-}
 
 function createTable($data,$titles){
 echo "<table class='table table-striped table-hover'>";

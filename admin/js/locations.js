@@ -29,7 +29,7 @@ function getDistritos() {
     })
     }}
 
-    request.open("GET", "./resources/register/location.php?request=Distritos", true);
+    request.open("GET", "./resources/location/location.php?request=Distritos", true);
     request.setRequestHeader('Content-Type', 'application/json');
     request.send();
 }
@@ -61,7 +61,7 @@ function getConcelho(idDistrito){
             concelhos.innerHTML += optionNew;
         }}
 
-    request.open("GET", "./resources/register/location.php?request=Concelho&id="+idDistrito, true);
+    request.open("GET", "./resources/location/location.php?request=Concelho&id="+idDistrito, true);
     request.setRequestHeader('Content-Type', 'application/json');
     request.send();
 }
@@ -95,7 +95,7 @@ function getConcelho(idDistrito){
                 freguesias.innerHTML += optionNew;
             }}
 
-        request.open("GET", "./resources/register/location.php?request=Freguesia&id="+idConcelho, true);
+        request.open("GET", "./resources/location/location.php?request=Freguesia&id="+idConcelho, true);
         request.setRequestHeader('Content-Type', 'application/json');
         request.send();
 

@@ -1,6 +1,6 @@
 <?php
 
-if(!isLoggedIn() || !isLoggedInInstitute()){ 
+if(!isLoggedIn() || !isLoggedInInstitute()){
     header('Location: index.php');
     exit();
     }

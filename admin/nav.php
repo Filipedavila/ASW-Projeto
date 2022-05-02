@@ -5,55 +5,52 @@
 
 ?>
 <body>
-    <div class="container-fluid ">
-    <header class="row ">
-        
-    <div class="col "><h1><a href="index.php"><img src="img/header.png" height="80" width="150"> </a></h1></div>
-
-    </header>
-
 
 
 
        <!-- Caso seja Admin --> 
-   <?php if(isLoggedIn()): ?>
+   <?php if(isLoggedInAdmin()): ?>
 
-      <nav class=" navbar-expand-sm bg-primary navbar-dark">
-  <!-- Brand -->
-  
+       <header>
+           <nav class=" navbar-expand-sm sticky-top bg-primary navbar-dark  ">
+               <div class="row container-fluid ">
+                   <ul class="col d-flex align-items-center">
+                       <!-- Links -->
+                       <ul class="nav navbar-nav ">
 
-  <!-- Links -->
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" href="<?php echo 'logout.php' ?>">Logout</a>
+    <li class="nav-item ">
+      <a class="nav-link text-light" href="<?php echo 'logout.php' ?>">Logout</a>
     </li>
     <!-- Dropdown -->
     <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+      <a class="nav-link dropdown-toggle text-light" href="#" id="navbardrop" data-toggle="dropdown">
         Pesquisa
       </a>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="<?php echo 'index.php?page=pesquisa_all&pesquisa=ALL'?>">Todos os Usuários</a>
-        <a class="dropdown-item" href="<?php echo 'search.php?users=all'  ?>">Pesquisa com Critérios </a>
+        <a class="dropdown-item" href="<?php echo 'index.php?page=home'?>">Todos os Usuários</a>
+          <a class="dropdown-item" href="<?php echo 'index.php?page=search_voluntarios'  ?>">Todos os Voluntários</a>
+
+          <a class="dropdown-item" href="<?php echo 'index.php?page=search_institutos'  ?>">Todos os Institutos</a>
+
+          <a class="dropdown-item" href="<?php echo 'index.php?page=region_search'  ?>">Pesquisa com Critérios </a>
 
       
       </div>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Mensagens</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="<?php echo 'settings.php' . '?id=' . $_SESSION['id']  ?>">Preferências</a>
-    </li>
+
+
 
   </ul>
-  
+                       <div class="col d-flex justify-content-end"">
+                       <div class="navbar-brand "><a href="index.php"><img src="img/header.png" height="80" width="150"> </a></div>
+               </div>
+               </div>
 
     
 </nav>
 
 <?php else: ?>
-
+   <header>
 
   <nav class=" navbar-expand-sm bg-primary navbar-dark">
   <!-- Brand -->
@@ -72,4 +69,4 @@
 
      <?php endif;?>
 
-
+        </header>

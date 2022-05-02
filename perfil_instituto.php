@@ -15,75 +15,97 @@ if(!isLoggedIn() ){
 
 ?>
 
-<article  class="form-group  justify-content-center">
-
-    <div class="justify-content-center">
-
-
-
-            <!--  verificar se esta em falta o nome -->
-            <div class=" row">
-                <div class="col">
-                  Nome:<?php echo $data[0]['nome'] ?>
-                </div>
-              
-            </div>
-            <div class="row">
-
-                <div class="col">
-                 Telefone:<?php echo $data[0]['telefone'] ?>
-                </div>
-            </div>
-
-            <div class="row">
-               
-                <div class="col">
-
-                    Morada:
-                        <?php echo $data[0]['morada'] ?>
-                    
-                    </div>
-
-
-            </div>
-
-
-
-            <div class="row">
-                <div class="col">
-
-                    Nome Responsavel:<?php echo $data[0]['nome_contacto'] ?>
-
-
-                </div>
-                <div class="col">
-                   Contacto Responsavel:
-                       <?php echo $data[0]['n_contacto'] ?>
-                           </div>
-
-            </div>
-
-
+<section style="background-color: #eee;">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col">
+      </div>
     </div>
 
-
     <div class="row">
-        <div class="col">
-
-            <label for="tipo_inst">Tipo de Instituição: <?php echo $data[0]['tipo_inst'] ?>
+      <div class="col-lg-6">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <h3 class="my-3"><?php echo $data[0]['nome'] ?></h3>
+            <p class="text-muted mb-1">Tipo: <?php echo $data[0]['tipo_inst'] ?></p>
+            <p class="text-muted mb-4">Descrição: <?php echo $data[0]['descricao'] ?></p>
+          </div>
         </div>
-
+      </div>
     </div>
-
-
     <div class="row">
-
-        <div class="col">
-
-        <div class="callout"> <h1> Descrição </h1> 
-        <?php echo $data[0]['descricao'] ?></div>
-    <br>
-    <h3>Disponibilidades</h3>
+      <div class="col-lg-6">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Nome contacto: </p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"><?php echo $data[0]['nome_contacto'] ?></p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Telefone</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"> <?php echo $data[0]['telefone'] ?></p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Email:</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"><?php echo $data[0]['email'] ?></p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Distrito:</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"><?php echo $data[0]['nome_distrito'] ?></p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Freguesia:</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"><?php echo $data[0]['nome_freguesia'] ?></p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Concelho:</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"><?php echo $data[0]['nome_concelho'] ?></p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Morada</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"><?php echo $data[0]['morada'] ?></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+      <div class="card mb-4">
+          <div class="card-body">
+      <h3>Disponibilidades</h3>
             <?php if(isset($dataDisp)) :?>
                 <table class="table table-striped  table-hover">
                     <tr class="thead-dark">
@@ -99,20 +121,10 @@ if(!isLoggedIn() ){
                         </tr>
                     <?php endforeach; ?>
                 </table>
-            <?php endif;?>  
-        </div>
+            <?php endif;?>
+          </div>
+      </div>  
+      </div>
     </div>
-    
-    </div>
-    </div>
-
-
-    </div>
-  
-    </form>
-
-
-
-    </div>
-
-</article>
+  </div>
+</section>

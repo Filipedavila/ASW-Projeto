@@ -2,12 +2,14 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-include './functions/crud.php';
-include './functions/dbconnections.php';
+define('SITE_ROOT', dirname(__FILE__));
+include SITE_ROOT . "/resources/voluntario/search.php";
+include SITE_ROOT . "/functions/dbconnections.php";
 
-$teste =getInstitution(52);
+$query = "SELECT dia,hora_inicio,hora_fim FROM Disponibilidade  WHERE id_U = '9' ";
+$data = getCompatibleInstitutes(9);
 
-print_r($_SERVER['DOCUMENT_ROOT']);
-print_r(dirname(__DIR__));
-print_r((__FILE__) );
+print_r($data);
+
+
 ?>

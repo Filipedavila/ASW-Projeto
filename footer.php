@@ -7,7 +7,7 @@
 <section class="mb-4">
  <!-- Facebook -->
  <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
-   ><i class="fab fa fa-facebook-f"></i
+   ><i class="fa fa-facebook-square"></i
  ></a>
 
  <!-- Twitter -->
