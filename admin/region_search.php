@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 $data= array();
 if(!isLoggedInAdmin()){
     header( "Location: /asw/admin/index.php?page=login" );

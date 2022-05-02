@@ -31,6 +31,7 @@
           <a class="dropdown-item" href="<?php echo 'index.php?page=search_voluntarios'  ?>">Todos os Voluntários</a>
 
           <a class="dropdown-item" href="<?php echo 'index.php?page=search_institutos'  ?>">Todos os Institutos</a>
+          <a class="dropdown-item" href="<?php echo 'index.php?page=age_search'  ?>">Pesquisa Por Faixa Etária</a>
 
           <a class="dropdown-item" href="<?php echo 'index.php?page=region_search'  ?>">Pesquisa com Critérios </a>
 
