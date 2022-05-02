@@ -1,26 +1,15 @@
 <?php
+    if(!isLoggedIn() || !isLoggedInVoluntario()){
+        header('Location: index.php');
+        exit();
+    }
 
-if(!isLoggedIn() || !isLoggedInVoluntario()){
-    header('Location: index.php');
-    exit();
-}
-
-$data = array();
-
-
-if(isset($_SESSION['id'])){
-    $id = $_SESSION['id'];
-    $data = getVoluntarioById( $id );
-
-}
-
-
-
-
+    $data = array();
+    if(isset($_SESSION['id'])){
+        $id = $_SESSION['id'];
+        $data = getVoluntarioById( $id );
+    }
 ?>
-
-<article  class="form-group  justify-content-center">
-
     <div class="justify-content-center">
             <div class= "row">
                 <div class="col">
@@ -39,7 +28,6 @@ if(isset($_SESSION['id'])){
                 </div>
             </div>
             <div class="row">
-
                 <div class="col">
                  <p>Telefone: <?php echo $data[0]['telefone'] ?></p>
                 </div>
@@ -51,7 +39,6 @@ if(isset($_SESSION['id'])){
                 </div>
             </div>
             <div class="row">
-               
                 <div class="col">
                     <p>Distrito: <?php echo $data[0]['nome_distrito'] ?></p>
                 </div>
@@ -63,6 +50,3 @@ if(isset($_SESSION['id'])){
                 </div>
             </div>
     </div>
-
-
-</article>
