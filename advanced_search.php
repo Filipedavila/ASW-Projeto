@@ -22,11 +22,11 @@ if($_SERVER["REQUEST_METHOD"] == FORM_METHOD){
     // e caso a variavel submit esteja assignada
     if(array_key_exists(BTN_SEARCH,$_POST)){
 
-       if(!empty($_POST[ID_SELECT_DISTRITO])&& $_POST[ID_SELECT_DISTRITO]!== SELECT_DEFAULT_VALUE){
+       if(!empty($_POST[ID_SELECT_DISTRITO])&& ($_POST[ID_SELECT_DISTRITO]!== SELECT_DEFAULT_VALUE)){
             $dataUtilizador[ID_SELECT_DISTRITO]= htmlspecialchars($_POST[ID_SELECT_DISTRITO]);
            $dataUtilizador[ID_SELECT_DISTRITO]= stripcslashes( $dataUtilizador[ID_SELECT_DISTRITO]);
         }
-        if(!empty($_POST[ID_SELECT_CONCELHO])&& $_POST[ID_SELECT_CONCELHO]!== SELECT_DEFAULT_VALUE){
+        if(!empty($_POST[ID_SELECT_CONCELHO])&& ($_POST[ID_SELECT_CONCELHO]!== SELECT_DEFAULT_VALUE)){
             $dataUtilizador[ID_SELECT_CONCELHO]= htmlspecialchars($_POST[ID_SELECT_CONCELHO]);
             $dataUtilizador[ID_SELECT_CONCELHO]= stripcslashes( $dataUtilizador[ID_SELECT_CONCELHO]);
         }

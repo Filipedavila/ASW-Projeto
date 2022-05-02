@@ -167,35 +167,6 @@ function getConcelhos($idDistrito)
     return $result;
 }
 
-/**
- * @return array
- */
-function getAllUsers()
-{
-    $query = "SELECT * FROM Utilizador";
-    $result = getQuery($query);
-    return $result;
-}
-
-/**
- * @return array
- */
-function getAllVolunters()
-{
-    $query = "SELECT * FROM Voluntario";
-    $result = getQuery($query);
-    return $result;
-}
-
-/**
- * @return array|null
- */
-function getAllInstitutions()
-{
-    $query = "SELECT * FROM Instituicao";
-    $result = getData($query);
-    return $result;
-}
 
 /**
  * @param $id

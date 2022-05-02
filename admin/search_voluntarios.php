@@ -1,6 +1,7 @@
 <?php
 
-$data = getAllUsers();
+$data = getAllVolunters();
+
 
 ?>
 
@@ -15,11 +16,10 @@ $data = getAllUsers();
         </div>
             <div class="row ">
                 <div class="col d-flex justify-content-center">
-                    <h4>Todos os Usuários de Refood Fcul</h4>
+                    <h4>Todos os Voluntarios de Refood Fcul</h4>
 
                 </div>
             </div>
-
             <table class="d-flex justify-content-center table table-striped  table-hover">
                 <tr class="thead-dark">
                     <th>Tipo de Conta</th>

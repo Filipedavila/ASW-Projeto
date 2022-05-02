@@ -1,7 +1,7 @@
 
 <?php 
 $data= array();
-if(!isLoggedIn()){ 
+if(!isLoggedInAdmin()){
   header( "Location: /asw/admin/index.php?page=login" );
 }
 if(isset($_GET['search'])){ 
