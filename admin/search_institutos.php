@@ -1,6 +1,6 @@
 <?php
 
-$data = getAllUsers();
+$data = getAllInstitutions();
 
 ?>
 
@@ -13,17 +13,14 @@ $data = getAllUsers();
 
             <h2>Bem Vindo  <?php  echo $_SESSION['user']; ?></h2>
         </div>
-            <div class="row ">
-                <div class="col d-flex justify-content-center">
-                    <h4>Todos os Usuários de Refood Fcul</h4>
+            <div class="col d-flex justify-content-center">
+                <h4>Todos os Institutos de Refood Fcul</h4>
 
-                </div>
             </div>
-
             <table class="d-flex justify-content-center table table-striped  table-hover">
                 <tr class="thead-dark">
                     <th>Tipo de Conta</th>
-                    <th>Nome</th>
+                    <th>Nome Instituto</th>
                     <th>Distrito</th>
                     <th>Concelho</th>
                     <th>Freguesia</th>
