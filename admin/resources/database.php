@@ -1,5 +1,9 @@
 <?php
+<<<<<<< HEAD:functions/database.php
 define('DB_SERVIDOR', 'localhost');
+=======
+define('DB_SERVIDOR','localhost');
+>>>>>>> origin/filipeNovo:admin/resources/database.php
 define('DB_NOME', 'asw09');
 define('DB_USUARIO', 'asw09');
 define('DB_PASSWORD', 'aswgrupo09');
@@ -8,6 +12,7 @@ function getConnection()
 
   $conn = mysqli_connect(DB_SERVIDOR, DB_USUARIO, DB_PASSWORD, DB_NOME);
 
+<<<<<<< HEAD:functions/database.php
   if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
   }
@@ -21,6 +26,21 @@ function getFreguesias()
   $result = mysqli_query($conn, $query);
 
   $data[] = mysqli_fetch_assoc($result);
+=======
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+      }
+      return $conn;
+    
+  }   
+
+  ///// FUNÇÕES LOCALIDADES 
+  
+function getFreguesias(){
+$conn = getConnection();
+$query = "SELECT * FROM Freguesia";
+$result = mysqli_query($conn,$query);
+>>>>>>> origin/filipeNovo:admin/resources/database.php
 
   if (mysqli_num_rows($result) > 0) {
     $column = array();
@@ -35,6 +55,7 @@ function getFreguesias()
   return $data;
 }
 
+<<<<<<< HEAD:functions/database.php
 function getConcelhos()
 {
   $conn = getConnection();
@@ -61,6 +82,93 @@ function getAllUsers()
   $result = mysqli_query($conn, $query);
 
 
+=======
+function getFreguesiaById($idConc,$idFreg){   // VERIFICAR se esta correto
+
+  $conn = getConnection();
+  $query = "SELECT nome FROM Freguesia WHERE cod_conselho = {$idConc} AND cod_freguesia = {$idFreg}";
+  $result = mysqli_query($conn,$query);
+  
+    $data = null;
+    
+    if (mysqli_num_rows($result) > 0) {
+    $data=mysqli_fetch_field($result);
+
+    }
+  
+  mysqli_close($conn);
+  return $data;
+}
+function getAllUsers_(){
+    $conn = getConnection();
+    $query = "SELECT id,nome,email,tipo,telefone FROM Utilizador";
+    $result = mysqli_query($conn,$query);
+    $data = array();
+
+    if (mysqli_num_rows($result) > 0) {
+    $data = mysqli_fetch_all($result);
+        } else {
+        echo "0 results";
+    }
+    mysqli_close($conn);
+    return $data;
+
+
+}
+
+  
+
+function getConcelhoById($id){
+
+  $conn = getConnection();
+  $query = "SELECT nome FROM Concelho WHERE cod_conselho ={$id}";
+  $result = mysqli_query($conn,$query);
+  
+    $data = null;
+    
+    if (mysqli_num_rows($result) > 0) {
+    $data=mysqli_fetch_field($result);
+  
+  
+    }
+  
+  mysqli_close($conn);
+  return $data;
+
+}
+
+function getDistritoById($id){
+
+  $conn = getConnection();
+  $query = "SELECT * FROM Freguesia";
+  $result = mysqli_query($conn,$query);
+  
+    $data[]= mysqli_fetch_assoc($result);
+    
+    if (mysqli_num_rows($result) > 0) {
+      $column = array();
+      foreach($result as $key => $value){
+        $column[$key] = $value;
+      }
+  
+  
+    } else {
+      echo "0 results";
+    }
+  
+  mysqli_close($conn);
+  return $data;
+
+
+}
+
+function getConcelhos(){
+  $conn = getConnection();
+  $query = "SELECT * FROM Concelho";;
+  $result = mysqli_query($conn,$query);
+  
+  
+>>>>>>> origin/filipeNovo:admin/resources/database.php
   if (mysqli_num_rows($result) > 0) {
     $column = array();
     foreach ($result as $key => $value) {
@@ -73,6 +181,7 @@ function getAllUsers()
   return $column;
 }
 
+<<<<<<< HEAD:functions/database.php
 
 function getAllVolunters()
 {
@@ -81,6 +190,17 @@ function getAllVolunters()
   $result = mysqli_query($conn, $query);
 
 
+=======
+  ///// FUNÇÕES USUARIOS 
+  
+
+function getAllVolunters(){
+  $conn = getConnection();
+  $query = "SELECT * FROM Voluntario";;
+  $result = mysqli_query($conn,$query);
+  
+  
+>>>>>>> origin/filipeNovo:admin/resources/database.php
   if (mysqli_num_rows($result) > 0) {
     $column = array();
     foreach ($result as $key => $value) {
@@ -129,6 +249,7 @@ function getVoluntario($id)
   } else {
     echo "0 results";
   }
+<<<<<<< HEAD:functions/database.php
   mysqli_close($conn);
   return $column;
 }
@@ -140,17 +261,38 @@ function getInstitution($id)
   $result = mysqli_query($conn, $query);
 
 
+=======
+mysqli_close($conn);
+return $column;
+  }
+  
+function getInstitutions(){
+  $conn = getConnection();
+  $query = "SELECT * FROM Concelho";;
+  $result = mysqli_query($conn,$query);
+  
+>>>>>>> origin/filipeNovo:admin/resources/database.php
   if (mysqli_num_rows($result) > 0) {
     $column = array();
     foreach ($result as $key => $value) {
       $column[$key] = $value;
     }
+<<<<<<< HEAD:functions/database.php
   } else {
     echo "0 results";
   }
   mysqli_close($conn);
   return $column;
 }
+=======
+
+    } else {
+      echo "0 results";
+    }
+  mysqli_close($conn);
+  return $column;
+  }
+>>>>>>> origin/filipeNovo:admin/resources/database.php
 
 
 function getDonationByInstitute($id)
@@ -165,6 +307,7 @@ function getDonationByInstitute($id)
     foreach ($result as $key => $value) {
       $column[$key] = $value;
     }
+<<<<<<< HEAD:functions/database.php
   } else {
     echo "Não existe Instituição com id" . $id;
   }
@@ -290,3 +433,38 @@ function addDonation($idInstitute,$name, $tipo, $quantidade ){
       }
 
   }
+=======
+      } else {
+        echo "Não existe Instituição com id". $id;
+      }
+    mysqli_close($conn);
+    return $column;
+  }
+
+      function userExistsByEmail($email){
+        $conn = getConnection();
+        $query = "SELECT * FROM Utilizador WHERE Utilizador.email = ".$email ;
+
+        $result = mysqli_query($conn,$query);
+        mysqli_close($conn);
+        if (mysqli_num_rows($result) > 0) {
+         return 0;
+          }else{
+           return 1;
+          }
+      }
+
+      function userExistsByCondC($conducao){
+        $conn = getConnection();
+        $query = "SELECT * FROM Voluntario WHERE Voluntario.conducao = ".$conducao ;  // verificar query
+
+        $result = mysqli_query($conn,$query);
+        mysqli_close($conn);
+        if (mysqli_num_rows($result) > 0) {
+         return 0;
+          }else{
+           return 1;
+          }
+      }    
+?>
+>>>>>>> origin/filipeNovo:admin/resources/database.php

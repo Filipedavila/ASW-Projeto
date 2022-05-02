@@ -1,48 +1,75 @@
 <?php
-//if(isset($_SESSION['tipo'])&& isset($_SESSION['id'] && isset($_SESSION['']) 
 
 
 
 
 ?>
 <body>
-    <div class="container-fluid">
-    <header class="row">
+    <div class="container-fluid ">
+    <header class="row ">
         
-    <div class="col"><h1><a href="index.html"><img src="img/header.png" height="80" width="150"> </a></h1></div>
-    </header>
-<nav class="navbar navbar-expand-md navbar-dark bg-primary bg-gradient">
-  <a class="navbar-brand" href="register.php">Register</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <div class="col "><h1><a href="index.php"><img src="img/header.png" height="80" width="150"> </a></h1></div>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link"  href="index.php?page=register.php">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
+    </header>
+
+
+
+
+       <!-- Caso seja Admin --> 
+   <?php if(isLoggedIn()): ?>
+
+      <nav class=" navbar-expand-sm bg-primary navbar-dark">
+  <!-- Brand -->
+  
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="<?php echo 'logout.php' ?>">Logout</a>
+    </li>
+    <!-- Dropdown -->
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        Pesquisa
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="<?php echo 'index.php?page=pesquisa_all&pesquisa=ALL'?>">Todos os Usuários</a>
+        <a class="dropdown-item" href="<?php echo 'search.php?users=all'  ?>">Pesquisa com Critérios </a>
+
+      
+      </div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Mensagens</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="<?php echo 'settings.php' . '?id=' . $_SESSION['id']  ?>">Preferências</a>
+    </li>
+
+  </ul>
+  
+
+    
 </nav>
+
+<?php else: ?>
+
+
+  <nav class=" navbar-expand-sm bg-primary navbar-dark">
+  <!-- Brand -->
+  
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="<?php echo 'index.php' . '?page=' . "login" ?>">Login</a>
+    </li>
+  </ul>
+  
+
+    
+</nav>
+
+     <?php endif;?>
+
+

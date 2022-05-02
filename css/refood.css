@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Patrick+Hand&family=Ubuntu+Condensed&display=swap');
+body{
+
+    font-family: 'Ubuntu Condensed', sans-serif;
+
+}
+.alerta {
+
+    color: brown;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-style: italic;
+
+}

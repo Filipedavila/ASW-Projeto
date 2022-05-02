@@ -2,105 +2,143 @@
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
   // e caso a variavel submit esteja assignada
-    $missing;
-    $loginError;
+    $missing= array();
 
-    // se foi post e  a var login está posta foi uma tentativa de login
-    if(isset($_POST['login'])){
-      // se o login e password foram assignados
-       if(isset($_POST['email']) && isset($_POST['password'])){
-          $email = htmlspecialchars($_POST['email']);
-          $email = strip_tags($email);
+    $loginState =False;
+  if(isset($_POST['login'])){
+    // se o login e password foram assignados
+    if(!empty(trim($_POST['username'])) && !empty(trim($_POST['password']))){
+        $user = htmlspecialchars($_POST['username']);
+        $user = strip_tags($user);
 
-          $password = crypt($_POST['password'] ,CRYPT_MD5);
-          
-          $login = loginUser($email,$password);
-              if(!($login == NULL)){
-                 session_start();
-                 $_SESSION['username'] = $login;
-                 
-            /// redirecionar para outra pagina, temos de arranjar forma de permanecer com login
-
-              }else{
-                 $loginError =TRUE;
-
-             }
-        }else{
-          $loginError =TRUE;
         
-        }
+        
+        $login = loginUser($user,$_POST['password']);
+      
+            if($login){
 
+              echo "<p> LOGIN COM SUCESS</p>";
+              header( "Location: index.php?page=home" );
+              die();
 
+            
+            }else{
+              // mensagem de erro quando os dados de login forem invalidos
+              $loginError ="Dados Inválidos";
 
-  
+          }
+      }else{
+        // mensagem de erro quando não houverem os dados todos no post
+        $loginError ="Por favor insira todos os dados";
+      
+      }
 
     }
-  
-
-
-
-
-  }
-
-
-
-
+}
 ?>
-    
-    <article class="row mt-5">
-    <div class="container py-5 h-100">
-    <div class="row d-flex align-items-center justify-content-center h-100">
-      <div class="col-md-8 col-lg-7 col-xl-6">
-        <img src="./img/volunteer.png" class="img-fluid" alt="voluntariado">
-      </div>
-      <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-        <form action="" method="POST">
-        <?php if (isset($loginError)){ echo "
+
+<article class="container">
+    <br>
+    <div class="row d-flex justify-content-center ">
+        <div class="col-sm-4">
+            <form action="" id="loginUser" method="POST">
+                <?php if (isset($loginError)){ echo "
   <p>Dados de Login Inválidos</p>";}
- ?>
-          <!-- Email input -->
-          <div class="form-outline mb-4">
-            <input type="email" name="email" id="email" class="form-control form-control-lg" />
-            <label class="form-label"  for="email">Endereço Email</label>
-          </div>
+                ?>
+                <!-- Email input -->
+                <div class="form-outline mb-5">
+                    <input type="email"  name="username" id="email" class="form-control" />
+                    <label class="form-label" for="form2Example1">Endereço Email</label>
+                </div>
 
-          <!-- Password input -->
-          <div class="form-outline mb-4">
-            <input type="password" id="password" class="form-control form-control-lg" />
-            <label class="form-label" name="password" for="password">Password</label>
-          </div>
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                    <input type="password"  id="password" name="password" " class="form-control" />
+                    <label class="form-label" for="form2Example2">Password</label>
+                </div>
 
-          <div class="d-flex justify-content-around align-items-center mb-4">
-            <!-- Checkbox -->
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                value=""
-                id="form1Example3"
-                checked
-              />
-              <label class="form-check-label" for="form1Example3"> Lembrar-me </label>
+                <!-- 2 column grid layout for inline styling -->
+                <div class="row mb-4">
+                    <div class="col d-flex justify-content-center">
+                        <!-- Checkbox -->
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="savePassword" checked />
+                            <label class="form-check-label" for="form2Example31"> Lembrar-me </label>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <!-- Submit button -->
+                <button type="submit" form="loginUser" name="login" class="btn btn-primary btn-block mb-4">Entrar</button>
+
+                <!-- Register buttons -->
+                <div class="text-center">
+                    <p>não estás registado? </p>
+                    <p>Regista-te como <a  href="./index.php?page=register">Voluntário</a></p>
+                    <p>ou Regista-te como <a href="./index.php?page=registerInst">Instituto</a></p>
+
+
+
+                </div>
+            </form>
+
+        </div>
+
+        <div id="carouselExampleSlidesOnly" class="carousel carousel-dark slide" data-ride="carousel">
+
+            <div class="carousel-inner">
+
+                <div class="carousel-item active">
+                    <img  class="d-block w-100" src="img/food-donate.jpg" class="rounded img-fluid" alt="First slide"height="350px">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Refood, o Nosos lema é ajudar o próximo</h5>
+                        <p>Junta te a nós nesta missão</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img  class="d-block w-100" src="img/volunteer.jpg" class="rounded img-fluid" alt="Second slide"height="350px">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Refood, o Nosos lema é ajudar o próximo</h5>
+                        <p>Junta te a nós nesta missão</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img  class="d-block w-100" src="img/volunterGivingFood.jpeg" class="rounded img-fluid" alt="Second slide"height="350px">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Refood, o Nosos lema é ajudar o próximo</h5>
+                        <p>Junta te a nós nesta missão</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img  class="d-block w-100" src="img/volunterFoodBox.jpeg" class="rounded img-fluid" alt="Second slide"height="350px">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Refood, o Nosos lema é ajudar o próximo</h5>
+                        <p>Junta te a nós nesta missão</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img  class="d-block w-100" src="img/help.jpeg" class="rounded img-fluid" alt="Second slide"height="350px">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Refood, o Nosos lema é ajudar o próximo</h5>
+                        <p>Junta te a nós nesta missão</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img  class="d-block w-100" src="img/food-donate.jpg" class="rounded img-fluid" alt="Second slide"height="350px">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Refood, o Nosos lema é ajudar o próximo</h5>
+                        <p>Junta te a nós nesta missão</p>
+                    </div>
+                </div>
+
             </div>
-            <a href="#!">Esqueceu a password?</a>
-          </div>
 
-          <!-- Submit button -->
-          <button type="submit" name="login" class="btn btn-primary btn-lg btn-block">Entrar</button>
 
-          <div class="divider d-flex align-items-center my-4">
-            <p class="text-center fw-bold mx-3 mb-0 text-muted ">OU</p>
-          </div>
+        </div>
 
-          <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="./index.php?page=register" role="button">
-            Registar Instituição
-          </a>
-          <a class="btn btn-primary btn-lg btn-block" style="background-color: #55acee" href="./index.php?page=registerInst" role="button">
-           Registar Voluntário</a>
 
-        </form>
-      </div>
     </div>
-  </div>
-    </article>
+</article>
 </body>

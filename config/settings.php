@@ -4,4 +4,5 @@ $WEBSITE_NAME = 'Fcul Reefod';
 $htmlLang = 'pt';
 $startPage = 'content';
 $pageDescription='';
-?>
+
+

@@ -1,5 +1,10 @@
-<?php ?>
+<?php
+$pageTitle = "Não definido";  // depois teremos de fazer sistema de titulos , provavelmentee a guardar os nomes 
+// de paginas em db
+
+?>
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -11,6 +16,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Supermercado+One&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<<<<<<< HEAD
     
     <title>Admin - Refood</title>
+=======
+
+    <link href="./css/signin.css">
+    <?php if(!isLoggedIn()) echo "<link href='./css/signin.css' rel='stylesheet'>";?>
+    <title> <php?php echo $pageTitle ?></title> 
+>>>>>>> origin/filipeNovo
 </head>

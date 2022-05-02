@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SwUserDefinedSpecifications">
+    <option name="specTypeByUrl">
+      <map />
+    </option>
+  </component>
+  <component name="UnattendedHostPersistenceState">
+    <option name="openedFilesInfos">
+      <list>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="89" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/search.php" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="27" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/resources/voluntario/search.php" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="143" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/home.php" />
+        </OpenedFileInfo>
+      </list>
+    </option>
+  </component>
+</project>
