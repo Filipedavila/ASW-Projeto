@@ -10,43 +10,95 @@
         $data = getVoluntarioById( $id );
     }
 ?>
-    <div class="justify-content-center">
-            <div class= "row">
-                <div class="col">
-                    <p>Imagem de Perfil: <?php echo $data[0]['imgPath'] ?></p>
-                </div>
-            </div>
-            <div class=" row">
-                <div class="col">
-                    <p>Nome: <?php echo $data[0]['nome'] ?></p>
-                </div>
-                <div class="col">
-                <p>Gênero: <?php echo $data[0]['genero'] ?></p>
-                </div>
-                <div class="col">
-                <p>Data de nascimento: <?php echo $data[0]['dob'] ?></p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                 <p>Telefone: <?php echo $data[0]['telefone'] ?></p>
-                </div>
-                <div class="col">
-                 <p>Carta de certidão: <?php echo $data[0]['cc'] ?></p>
-                </div>
-                <div class="col">
-                 <p>Carta de condução: <?php echo $data[0]['carta_conducao'] ?></p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <p>Distrito: <?php echo $data[0]['nome_distrito'] ?></p>
-                </div>
-                <div class="col"> 
-                    <p>Freguesia: <?php echo $data[0]['nome_freguesia'] ?></p>
-                </div>
-                <div class="col"> 
-                    <p>Freguesia: <?php echo $data[0]['nome_concelho'] ?></p>
-                </div>
-            </div>
+
+<section style="background-color: #eee;">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col">
+      </div>
     </div>
+
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img src="img/profile_default.png"
+              class="rounded-circle img-fluid" style="width: 150px;">
+            <h5 class="my-3"><?php echo $data[0]['nome'] ?></h5>
+            <p class="text-muted mb-1"><?php echo $data[0]['genero'] ?></p>
+            <p class="text-muted mb-4"><?php echo $data[0]['dob'] ?></p>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Telefone</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"><?php echo $data[0]['telefone'] ?></p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Carta de certidão</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"> <?php echo $data[0]['cc'] ?></p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Carta de condução:</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"><?php echo $data[0]['carta_conducao'] ?></p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Mobile</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">(098) 765-4321</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Distrito:</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"><?php echo $data[0]['nome_distrito'] ?></p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Freguesia:</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"><?php echo $data[0]['nome_freguesia'] ?></p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Concelho:</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"><?php echo $data[0]['nome_concelho'] ?></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
