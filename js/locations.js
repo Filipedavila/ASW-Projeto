@@ -50,13 +50,15 @@ function getConcelho(idDistrito){
 
             let data = JSON.parse(this.responseText);
 
-
+            let optionNew;
             data.forEach( concelho => {
-                let optionNew = "<option value='"+concelho.cod_concelho+"' onclick='getFreguesia("+concelho.cod_concelho+")'>"+ concelho.nome +" </option>";
+                 optionNew = "<option value='"+concelho.cod_concelho+"' onclick='getFreguesia("+concelho.cod_concelho+")'>"+ concelho.nome +" </option>";
                 concelhos.innerHTML += optionNew;
 
 
             });
+            optionNew = "<option  placeholder='Selecione' selected>Selecione</option>";
+            concelhos.innerHTML += optionNew;
         }}
 
     request.open("GET", "resources/register/location.php?request=Concelho&id="+idDistrito, true);
@@ -82,13 +84,15 @@ function getConcelho(idDistrito){
 
                 let data = JSON.parse(this.responseText);
                 console.log(data[0]);
-
+                let optionNew;
                 data.forEach( freguesia => {
-                    let optionNew = "<option value='"+freguesia.cod_freguesia+"'>"+ freguesia.nome +" </option>";
+                     optionNew = "<option value='"+freguesia.cod_freguesia+"'>"+ freguesia.nome +" </option>";
                     freguesias.innerHTML += optionNew;
 
 
                 })
+                optionNew = "<option  selected>Selecione</option>";
+                freguesias.innerHTML += optionNew;
             }}
 
         request.open("GET", "resources/register/location.php?request=Freguesia&id="+idConcelho, true);

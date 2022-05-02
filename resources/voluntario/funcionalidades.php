@@ -1,18 +1,32 @@
 <?php
-
+/**
+ * @param $dados
+ * @param $id
+ * @return bool
+ */
 function insertVoluntarioDisponibilidade($dados, $id) {
     $query = "INSERT INTO Disponibilidade(id_U, tipo,  hora_inicio, hora_fim, dia) VALUES ( \"{$id}\", 'Voluntario' , \"{$dados['hora_inicial']}\", \"{$dados['hora_final']}\" , \"{$dados['dias']}\")";
     $result = setQuery($query);
     return $result;
 }
 
-
+/**
+ * @param $id
+ * @return array|null
+ */
 function getDisponibilidades($id)
 {
     $query = "SELECT dia,hora_inicio,hora_fim FROM Disponibilidade  WHERE id_U = '{$id}' ";
     return getData($query);
 }
 
+/**
+ * @param $id_U
+ * @param $hora_inicio
+ * @param $hora_fim
+ * @param $dia
+ * @return bool
+ */
 function updateDisponibilidade($id_U, $hora_inicio, $hora_fim, $dia) {
     $conn = getConnection();
     $queryUser = "UPDATE Disponibilidade SET hora_inicio = '{$hora_inicio}', hora_fim = '{$hora_fim}', dia = {$dia}  WHERE id_U = {$id_U};";

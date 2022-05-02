@@ -317,7 +317,7 @@ echo " Nome em falta";?>
 
             <label for="description"></label>
             <textarea class="form-control" name="description" cols="10" rows="4"
-                value="<?php if(isset($_POST['description'])) echo $_POST['description'] ?>"> Breve descrição sobre a sua Instituição
+                value="<?php if(isset($_POST['description'])) echo $_POST['description'] ?>" placeholder="Breve descrição sobre a sua Instituição">
 </textarea>
 
 

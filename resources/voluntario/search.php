@@ -1,5 +1,57 @@
 <?php
 
+function searchInstitutionsByConditions($valuesUtilizador,$valuesInstituto)
+{   print_r($valuesUtilizador);
+    $query = "SELECT * FROM Utilizador,Instituicao WHERE Utilizador.id = Instituicao.id_U ";
+    $num = count($valuesUtilizador);
+    $i = 1;
+    if(count($valuesUtilizador)>0) {
+        foreach ($valuesUtilizador as $key => $value) {
+            $query .= " AND Utilizador.{$key}=". "\"".$value."\"" ;
+            if ($i < $num) {
+
+            }
+            $i += 1;
+        }
+    }
+
+    $num = count($valuesInstituto);
+    $i = 1;
+    if(count($valuesInstituto)>0) {
+        foreach ($valuesInstituto as $key => $value) {
+            $query .= " AND Instituicao.{$key}=". "\"".$value."\"" ;
+            if ($i < $num) {
+
+            }
+            $i += 1;
+        }
+    }
+
+    $result = getQuery($query);
+    return $result;
+}
+function searchInstitutionsByConditionsAndDonations($valuesUtilizador, $donation)
+{
+    $query = "SELECT * FROM Utilizador,Instituicao,Alimento WHERE 
+                 Utilizador.id = Instituicao.id_U AND Alimento.inst_id = Instituicao.id_U 
+                    AND Alimento.tipo_doacao =  '{$donation}' ";
+    $num = count($valuesUtilizador);
+    $i = 1;
+    if(count($valuesUtilizador)>0) {
+        foreach ($valuesUtilizador as $key => $value) {
+            $query .= " AND Utilizador.{$key}=". "\"".$value."\"" ;
+            if ($i < $num) {
+
+            }
+            $i += 1;
+        }
+    }
+
+
+    $result = getQuery($query);
+    print_r($result);
+    return $result;
+}
 function getVoluntarioLocal($id){
     $query = "SELECT codigo_distrito, codigo_concelho, codigo_freguesia FROM Utilizador WHERE id = {$id}";
     return getOneResultQuery($query);
@@ -91,7 +143,10 @@ function getDistritos() {
 
 
 //Obter todos os distritos
-
+/**
+ * @param $idConcelho
+ * @return array
+ */
 function getFreguesias($idConcelho)
 {
 
@@ -100,7 +155,10 @@ function getFreguesias($idConcelho)
     return $result;
 }
 
-
+/**
+ * @param $idDistrito
+ * @return array
+ */
 //Obter todos os Concelhos
 function getConcelhos($idDistrito)
 {
@@ -109,7 +167,9 @@ function getConcelhos($idDistrito)
     return $result;
 }
 
-
+/**
+ * @return array
+ */
 function getAllUsers()
 {
     $query = "SELECT * FROM Utilizador";
@@ -117,7 +177,9 @@ function getAllUsers()
     return $result;
 }
 
-
+/**
+ * @return array
+ */
 function getAllVolunters()
 {
     $query = "SELECT * FROM Voluntario";
@@ -125,7 +187,9 @@ function getAllVolunters()
     return $result;
 }
 
-
+/**
+ * @return array|null
+ */
 function getAllInstitutions()
 {
     $query = "SELECT * FROM Instituicao";
@@ -133,7 +197,10 @@ function getAllInstitutions()
     return $result;
 }
 
-
+/**
+ * @param $id
+ * @return array
+ */
 function getVoluntario($id)
 {
     $query = "SELECT * FROM Utilizador,Voluntario  WHERE id = '{$id}' AND id_u ='{$id}'";
@@ -141,6 +208,10 @@ function getVoluntario($id)
     return $result;
 }
 
+/**
+ * @param $id
+ * @return array
+ */
 function getInstitutionById($id)
 {
     $query = "SELECT * FROM Utilizador,Instituicao  WHERE id = {$id} AND id_u ={$id}";
@@ -149,6 +220,11 @@ function getInstitutionById($id)
     return $result;
 }
 
+/**
+ * @param $idDistrito
+ * @param $idConcelho
+ * @return array
+ */
 function getConcelhosById($idDistrito,$idConcelho)
 {
     $query = "SELECT * FROM Concelho  WHERE Concelho.cod_concelho = '{$idDistrito}' AND Concelho.cod_distrito = '{$idConcelho}' ";
@@ -157,13 +233,21 @@ function getConcelhosById($idDistrito,$idConcelho)
     return $result;
 }
 
-
+/**
+ * @param $id
+ * @return array
+ */
 function getDistritoById($id)
 {
     $query = "SELECT * FROM Distrito  WHERE Distrito.cod_distrito = '{$id}'";
     $result = getQuery($query);
     return $result;
 }
+
+/**
+ * @param $idConcelho
+ * @return array
+ */
 function getAllFreguesiasFromConcelho($idConcelho)
 {
     $query = "SELECT cod_freguesia,nome FROM Freguesia WHERE Freguesia.cod_concelho = '{$idConcelho}';";
@@ -171,7 +255,11 @@ function getAllFreguesiasFromConcelho($idConcelho)
     return $result;
 }
 
-
+/**
+ * @param $idConcelho
+ * @param $idFreguesia
+ * @return array
+ */
 function getFreguesiaById($idConcelho,$idFreguesia)
 {
     $query = "SELECT * FROM Freguesia  WHERE Freguesia.cod_freguesia = '{$idFreguesia}' AND Freguesia.cod_concelho = '{$idConcelho}' ";
@@ -179,6 +267,10 @@ function getFreguesiaById($idConcelho,$idFreguesia)
     return $result;
 }
 
+/**
+ * @param $id
+ * @return array
+ */
 function getDonationByInstitute($id)
 {
     $query = "SELECT * FROM Alimento WHERE inst_id = '{$id}'";

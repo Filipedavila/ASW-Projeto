@@ -1,11 +1,11 @@
 <?php
 ?>
 <li class="nav-item">
-    <a class="nav-link" href="<?php echo 'logout.php' . '?id=' . $_SESSION['id']  ?>"><span class="navbar-text"> Logout</span></a>
+    <a class="nav-link" href="<?php echo 'logout.php' . '?id=' . $_SESSION['id']  ?>"><span class="navbar-text text-light"> Logout</span></a>
 </li>
 <!-- Dropdown -->
 <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+    <a class="nav-link dropdown-toggle text-light" href="#" id="navbardrop" data-toggle="dropdown">
         Procurar Voluntarios
     </a>
     <div class="dropdown-menu">
@@ -14,11 +14,11 @@
     </div>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="#">Mensagens</a>
+    <a class="nav-link text-light" href="#">Mensagens</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="<?php echo 'index.php' . '?page=' . "instituto_settings" . "&id=". $_SESSION['id']  ?>">Preferências</a>
+    <a class="nav-link text-light" href="<?php echo 'index.php' . '?page=' . "instituto_settings" . "&id=". $_SESSION['id']  ?>">Preferências</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="<?php echo 'index.php' . '?page=' . "perfil_instituto" . "&id=". $_SESSION['id']  ?>">Meu Perfil</a>
+    <a class="nav-link text-light" href="<?php echo 'index.php' . '?page=' . "perfil_instituto" . "&id=". $_SESSION['id']  ?>">Meu Perfil</a>
 </li>
