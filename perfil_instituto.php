@@ -1,5 +1,5 @@
 <?php
-
+include SITE_ROOT . '/resources/voluntario/funcionalidades.php';
 if(!isLoggedIn() ){
     header('Location: index.php');
     exit();
@@ -10,9 +10,8 @@ if(!isLoggedIn() ){
    if(isset($_GET['id'])){
         $id =$_GET['id'];
         $data = getInstitutionById( $id );
+        $dataDisp = getDisponibilidades($id);
     }
-
-
 
 ?>
 
@@ -83,11 +82,24 @@ if(!isLoggedIn() ){
 
         <div class="callout"> <h1> Descrição </h1> 
         <?php echo $data[0]['descricao'] ?></div>
-
-
-
-
-
+    <br>
+    <h3>Disponibilidades</h3>
+            <?php if(isset($dataDisp)) :?>
+                <table class="table table-striped  table-hover">
+                    <tr class="thead-dark">
+                        <th>Dia</th>
+                        <th>Hora Inicio</th>
+                        <th>Hora Fim</th>
+                    </tr>
+                    <?php foreach($dataDisp as $user ): ?>
+                        <tr>
+                            <td><?= $user[0] ?></td>
+                            <td><?= $user[1] ?></td>
+                            <td><?= $user[2] ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            <?php endif;?>  
         </div>
     </div>
     
@@ -96,6 +108,7 @@ if(!isLoggedIn() ){
 
 
     </div>
+  
     </form>
 
 

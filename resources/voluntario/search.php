@@ -201,7 +201,7 @@ function getAllInstitutions()
  * @param $id
  * @return array
  */
-function getVoluntario($id)
+function getVoluntarioById($id)
 {
     $query = "SELECT * FROM Utilizador,Voluntario  WHERE id = '{$id}' AND id_u ='{$id}'";
     $result = getQuery($query);
