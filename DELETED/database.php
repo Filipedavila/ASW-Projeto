@@ -1,21 +1,7 @@
 <?php
-define('DB_SERVIDOR','localhost');
-define('DB_NOME', 'asw09');
-define('DB_USUARIO', 'asw09');
-define('DB_PASSWORD','aswgrupo09');
-function getConnection(){
 
-    $conn = mysqli_connect(DB_SERVIDOR, DB_USUARIO, DB_PASSWORD, DB_NOME);
 
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-      }
-      return $conn;
-    
-  }   
-
-  ///// FUNÇÕES LOCALIDADES 
-  
+  /*
 function getFreguesias(){
 $conn = getConnection();
 $query = "SELECT * FROM Freguesia";
@@ -263,5 +249,5 @@ function getDonationByInstitute($id){
           }else{
            return 1;
           }
-      }    
+      }*/
 ?>
