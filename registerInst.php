@@ -115,18 +115,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         array_push($missing ,"c_freguesia");
      }
     
-<<<<<<< HEAD
-     
-    // se não houver erros ou valores vazios
-    if(!empty($missing) && !empty($erros)){
-    $dados = array();
-    //para cada valor do pos tratar e adicionar a uma array associativa
-    foreach($_POST as $key =>$value){
-     $valor = htmlspecialchars($value);
-     $valor = stripcslashes($valor);
-     array_push($dados[$key],$valor);
-=======
->>>>>>> origin/filipeNovo
     }
     // se não houve[r erros ou valores vazios
     if(empty($missing) && empty($erros)){
