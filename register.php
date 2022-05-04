@@ -10,10 +10,12 @@ error_reporting(E_ALL);
 $erros = array();
 $missing = array();
 $data = array();
-
-
+$uploadOk = 0;
+$target_dir = SITE_ROOT ."/img/upload/";
 //Caso tenha sido feito um pedido Post
 if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $data['imgPath'] = "NULL";
+
     // e caso a variavel submit esteja assignada
     if(array_key_exists('submit',$_POST)){
 
@@ -44,9 +46,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
    }else{
        $data['email'] = htmlspecialchars($_POST['email']);
        $data['email'] = stripcslashes( $data['email']);
-        $checkResult = userExistsByEmail($data['email']);
-             if($checkResult){
-                  $erros['email']= "Utilizador com email" . $data['email'] . " já existe.";
+        $existsEmail = userExistsByEmail($data['email']);
+             if($existsEmail){
+                  $erros['email']= "Utilizador com email " . $data['email'] . " já existe.";
             }
       }   
      // e caso a variavel cc não esteja assignada
@@ -54,13 +56,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         array_push($missing ,"tel");
     } else{
         $data['tel'] = htmlspecialchars($_POST['tel']);
-        $data['tel'] = stripcslashes($data['tel']);  
+        $data['tel'] = stripcslashes($data['tel']);
+         $existsTel = userExistsByTel($data['tel']);
+         if($existsTel){
+             $erros['tel']= "Utilizador com o contacto" . $data['tel'] . " já existe.";
+         }
     }
     if(empty($_POST['cc'])){
        array_push($missing ,"cc");
     }else{
         $data['cc'] = htmlspecialchars($_POST['cc']);
         $data['cc'] = stripcslashes($data['cc']);
+        $existsCC = userExistsByCC($data['cc'] );
+        if($existsCC){
+            $erros['cc']= "Cartão de Cidadão" . $_POST['cc'] . " já existente.";
+        }
     }
      // e caso a variavel Cconducao não esteja assignada
     if(empty($_POST['Cconducao'])){
@@ -70,18 +80,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // caso existe adiciona a array erros;
         $data['Cconducao'] = htmlspecialchars($_POST['Cconducao']);
         $data['Cconducao']  = stripcslashes(  $data['Cconducao'] );
-        $checkResult = userExistsByCondC($data['Cconducao'] );
-        if($checkResult){
-         $erros['Cconducao']= "Utilizador com email" . $_POST['Cconducao'] . " já existe.";
+        $hasCconducao = userExistsByCondC($data['Cconducao'] );
+        if($hasCconducao){
+         $erros['Cconducao']= "Carta de condução" . $_POST['Cconducao'] . " já existente.";
         }
        // e caso a variavel gen não esteja assignada  
     }if(empty($_POST['dob'])){
         array_push($missing ,"dob");
     }else{
-        $data['dob'] = htmlspecialchars($_POST['dob']);
-        $data['dob']  = stripcslashes(  $data['dob'] );
-       
-    }if(empty($_POST['genero'])){
+            $data['dob'] = htmlspecialchars($_POST['dob']);
+            $data['dob']  = stripcslashes(  $data['dob'] );
+        }
+    if(empty($_POST['genero'])){
         array_push($missing ,"genero");
 
     }else{
@@ -94,7 +104,29 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     
     }
+        if (isset($_POST["inputFile"])) {
+            $target_file = $target_dir . basename($_FILES["inputFile"]["name"]);
+            $uploadOk = 1;
+            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+            $tipo = $_FILES["inputFile"]["type"];
+            $uploadOk = 1;
+            if ($tipo == "image/jpeg" || $tipo == "image/png" || $tipo == "image/jpg" ||   $tipo == "image/pjpeg" ) {
 
+
+            } else {
+                $erros['imgPath'] = "Foto deverá estár no formato png ou jpg";
+                $uploadOk = 0;
+            }
+
+        }
+
+
+        if($uploadOk == 1){
+            $checkUpload =move_uploaded_file($_FILES["inputFile"]["temp_name"], $target_file);
+            if($checkUpload){
+                $data['imgPath'] =  $_FILES["inputFile"]["name"];
+            }
+        }
     // se não houve[r erros ou valores vazios
     if(empty($missing) && empty($erros)){
         $data['cod_distrito'] = htmlspecialchars($_POST['cod_distrito']);
@@ -107,7 +139,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $data['nome_freguesia'] = getFreguesiaNomeById($data['cod_concelho'],$data['cod_freguesia']);
         $data['nome_distrito'] = getDistritoNomeById( $data['cod_distrito']);
     //para cada valor do pos tratar e adicionar a uma array associativa
-        $result = RegisterVoluntario($data);   ## OBTER ID ## mudar a função de registro
+
+        $result = RegisterVoluntario($data);
          
         if($result){
 
@@ -125,6 +158,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     }   
 }
+
+//Obter distritos para select list
 echo '<script type="text/javascript">',
 'getDistritos();',
 '</script>';
@@ -148,7 +183,7 @@ if(isset($erros['email'])) echo "<p class=\"alerta\">". $erros['email'] ."</p>";
 <div class=" justify-content-center">
 
 
-    <form action="" method="POST" id="registro" >
+    <form  enctype="multipart/form-data" action="" method="POST" id="registro" >
 
 
 
@@ -163,17 +198,23 @@ if(isset($erros['email'])) echo "<p class=\"alerta\">". $erros['email'] ."</p>";
                     echo "<span class=\"alerta\" > Introduza Nome*</span>";?>
             </label>
             <input type="text" class="form-control <?php if (in_array('nome', $missing)) 
-                        echo " is-invalid";?> " name="nome" id="nome" value="<?php if(isset($_POST['nome'])) echo $_POST['nome'] ?>" >
+                        echo " is-invalid";?> " name="nome" id="nome" value="<?php if(isset($_POST['nome']))
+                            echo $_POST['nome'] ?>" placeholder="Digite aqui o Seu nome" >
 
         </div>
         <div class="col">
             <label for="email">Email:
                 <?php // Caso o campo email esteja na lista de missing 
-                if (in_array('email', $missing) ) 
-                    echo "<span class=\"alerta\" > Introduza Email*</span>";?>
+                if (in_array('email', $missing ) ){
+                    echo "<span class=\"alerta\" > Introduza Email*</span>";
+                }else if(in_array('email', $erros )){
+                    echo "<span class=\"alerta\" >".$erros['email']."</span>";
+                }
+                   ?>
 
             </label>
-            <input type="text"  class="form-control" id="email" name="email" value="<?php if(isset($_POST['email'])) echo $_POST['email'] ?>">
+            <input type="email"  class="form-control" id="email" name="email" value="<?php if(isset($_POST['email']))
+                echo $_POST['email'] ?>" placeholder="Digite aqui o seu email">
             <span class="help-block"> 
                 <?php  // Caso o campo email esteja na lista de erros , aviso de erro
                  if(isset( $erros['email']))
@@ -192,31 +233,37 @@ if(isset($erros['email'])) echo "<p class=\"alerta\">". $erros['email'] ."</p>";
             if (in_array('password', $missing) ) 
                 echo "<span class=\"alerta\" > Password em falta*</span>";?>
             </label>    
-            <input type="password"  class="form-control" name="password" id="password">
+            <input type="password"  class="form-control" name="password" id="password"  placeholder="Digite aqui a sua password" >
         
         </div>
         <div class="col">
             <label for="tel">Telefone:
                 <?php
-                ## TO DO , Caso ja exista um user com o mesmo telefone mostrar um erro a dizer que um user ja tem este contacto
-                if (in_array('tel', $missing))
-                    echo " Telefone em falta";?>
+                // Caso o campo tel esteja na lista de missing
+                if (in_array('tel', $missing)) {
+                    echo "<span class=\"alerta\" > Introduza Telefone*</span>";
+                } else if (in_array('tel', $erros)) {
+                    echo "<span class=\"alerta\" >" . $erros['tel'] . "</span>";
+                }?>
+
             </label>
-            <input  type="text" pattern="\d*" maxlength="9"  class="form-control  <?php if (in_array('tel', $missing))
+            <input  type="tel" pattern="\d*" maxlength="9"  class="form-control  <?php if (in_array('tel', $missing))
                 echo " isIis-invalid";?>" id="tel" name="tel" value="<?php
-            if(isset($_POST['tel'])) echo $_POST['tel'] ?>">
+            if(isset($_POST['tel'])) echo $_POST['tel'] ?>"  placeholder="Máximo de 9 Digitos" >
         </div>
         <div class="col">
 
 
             <label for="cc">Cartão de Cidadão
-                <?php  ## TO DO ,Caso exista um utilizador com o mesmo numero de cartão de cidadão dar erro e mostra lo
-                if (in_array('cc', $missing) )
-                    echo "<span class=\"alerta\" > Em Falta Cartão de Cidadão*</span>";?>
-
+               <?php
+                if (in_array('cc', $missing)) {
+                    echo "<span class=\"alerta\" > Em Falta Cartão de Cidadão*</span>";
+                } else if (in_array('cc', $erros)) {
+                    echo "<span class=\"alerta\" >" . $erros['cc'] . "</span>";
+                }?>
             </label>
-            <input type="number" type="text" pattern="\d*" maxlength="8"  class="form-control" name="cc" id="cc" value="<?php
-            if(isset($_POST['cc']) && !in_array("cc",$erros)) echo $_POST['cc'] ?>">
+            <input type="text" type="text" pattern="\d*" maxlength="8"  class="form-control" name="cc" id="cc" value="<?php
+            if(isset($_POST['cc']) && !in_array("cc",$erros)) echo $_POST['cc'] ?>"  placeholder="Digite o seu nº de Cartão de Cidadão" >
         </div>
 
 
@@ -231,25 +278,37 @@ if(isset($erros['email'])) echo "<p class=\"alerta\">". $erros['email'] ."</p>";
                 if (in_array('password2', $missing) )
                     echo "<span class=\"alerta\" > Repita a Password *</span>";?>
             </label>
-            <input type="password"  class="form-control" name="password2" id="password2">
+            <input type="password"  class="form-control" name="password2" id="password2"  placeholder="Repita a Sua password" >
         </div>
 
 
         <div class="col">
 
             <label for="Cconducao">Carta de Condução
-            <?php if (in_array('Cconducao', $missing) ) 
-                    echo "<span class=\"alerta\" > Em Falta *</span>";?>
+                <?php
+                if (in_array('Cconducao', $missing)) {
+                    echo "<span class=\"alerta\" > Em Falta Cartão de Condução*</span>";
+                } else if (in_array('Cconducao', $erros)) {
+                    echo "<span class=\"alerta\" >" . $erros['Cconducao'] . "</span>";
+                }?>
             </label>
 
-            <input type="number"  type="text" pattern="\d*" maxlength="8"  class="form-control" name="Cconducao" id="Cconducao" value="<?php 
-                       if(isset($_POST['Cconducao']) && !in_array("Cconducao",$erros)) echo $_POST['Cconducao'] ?>">
+            <input type="text"   pattern="\d*" maxlength="8"  class="form-control" name="Cconducao" id="Cconducao" value="<?php
+                       if(isset($_POST['Cconducao']) && !in_array("Cconducao",$erros)) echo $_POST['Cconducao'] ?>"
+                   placeholder="Digite o nº da carta de condução" >
 
         </div>
         <div class="col">
 
             <label for="dob">Data de Nascimento
-            <?php if (in_array('dob', $missing) ) 
+                <?php
+                if (in_array('dob', $missing)) {
+                    echo "<span class=\"alerta\" > Em Falta Cartão de Condução*</span>";
+                } else if (in_array('dob', $erros)) {
+                    echo "<span class=\"alerta\" >" . $erros['dob'] . "</span>";
+                }?>
+
+            <?php if (in_array('dob', $missing) )
                     echo "<span class=\"alerta\" > Em Falta *</span>";?>
 
             </label>
@@ -325,8 +384,13 @@ if(isset($erros['email'])) echo "<p class=\"alerta\">". $erros['email'] ."</p>";
         </div>
 
         <div class="col">
-            <label class="form-label" for="inputFile" >Foto de Perfil</label>
-                    <input type="file" class="form-control-file" id="inputFile"  lang="pt">
+            <label class="form-label" for="inputFile" >Foto de Perfil
+            <?php   if (in_array('imgPath', $erros)) {
+                echo "<span class=\"alerta\" >" . $erros['imgPath'] . "</span>";
+            }?></label>
+            <!-- MAX_FILE_SIZE deve preceder o campo input -->
+            <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+                    <input type="file" class="form-control-file" id="inputFile" name="inputFile"  lang="pt">
 
 
 

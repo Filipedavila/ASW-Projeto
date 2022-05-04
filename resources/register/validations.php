@@ -4,6 +4,12 @@ function userExistsByEmail($email){
     $exists = existsQuery($query);
     return $exists;
 }
+function userExistsByTel($telefone){
+    $query = "SELECT telefone FROM Utilizador WHERE Utilizador.telefone = \"{$telefone}\"";
+    $exists = existsQuery($query);
+    return $exists;
+}
+
 
 
 function userExistsByName($name){
@@ -16,6 +22,12 @@ function userExistsByName($name){
 function userExistsByCondC($conducao){
     $conn = getConnection();
     $query = "SELECT * FROM Voluntario WHERE carta_conducao = '{$conducao}'";
+    $exists = existsQuery($query);
+    return $exists;
+}
+function userExistsByCC($cc){
+    $conn = getConnection();
+    $query = "SELECT * FROM Voluntario WHERE Voluntario.cc = '{$cc}'";
     $exists = existsQuery($query);
     return $exists;
 }

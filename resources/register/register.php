@@ -39,8 +39,8 @@ function RegisterVoluntario($dados)
                                 {$dados['cod_distrito']} , {$dados['cod_concelho']}, {$dados['cod_freguesia']},
                                 \"{$dados['nome_distrito']}\" , \"{$dados['nome_concelho']}\", \"{$dados['nome_freguesia']}\"); ";
 
-    $queryVoluntario ="INSERT INTO Voluntario (id_U ,cc, carta_conducao, genero, dob)";
-    $queryVoluntario .=  "VALUES (LAST_INSERT_ID(), \"{$dados['cc']}\" ,  \"{$dados['Cconducao']}\" ,   \"{$dados['genero']}\" ,   \"{$dados['dob']}\"  );";
+    $queryVoluntario ="INSERT INTO Voluntario (id_U ,cc, carta_conducao, genero, dob,imgPath)";
+    $queryVoluntario .=  "VALUES (LAST_INSERT_ID(), \"{$dados['cc']}\" ,  \"{$dados['Cconducao']}\" ,   \"{$dados['genero']}\" ,   \"{$dados['dob']}\",   \"{$dados['imgPath']}\"  );";
 
     $result = mysqli_query($conn,  $queryUser);
     $result2 = mysqli_query($conn, $queryVoluntario);
@@ -92,6 +92,28 @@ function RegisterInstitution($dados)
     mysqli_close($conn);
     return   $sucess ;
 }   // SE OCORREU COM SUCESSO VAMOS TER QUE DEVOLVER UM TRUE OU FALSE
+
+
+function uploadPhoto($path){
+
+    $target_dir = SITE_ROOT ."/uploads/";
+    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+// Check if image file is a actual image or fake image
+    if (isset($_POST["submit"])) {
+        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+        if ($check !== false) {
+            echo "File is an image - " . $check["mime"] . ".";
+            $uploadOk = 1;
+        } else {
+            echo "File is not an image.";
+            $uploadOk = 0;
+        }
+    }
+
+
+}
 
 
 ?>
