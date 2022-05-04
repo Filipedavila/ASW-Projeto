@@ -25,16 +25,6 @@ function getAllUsers()
 
 
 /**
- * @return array|null
- */
-function getAllInstitutions()
-{
-    $query = "SELECT * FROM Utilizador,Instituicao WHERE Utilizador.id = Instituicao.id_U";
-    $result = getQuery($query);
-    return $result;
-}
-
-/**
  * @param $valuesUtilizador
  * @param $tipo
  * @return array

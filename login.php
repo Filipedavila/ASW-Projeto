@@ -40,7 +40,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <article class="container">
     <br>
     <div class="row d-flex justify-content-center ">
-        <div class="col-sm-4">
+        <div class="col-sm-4 mr-5 ">
             <form action="" id="loginUser" method="POST">
                 <?php if (isset($loginError)){ echo "
   <p>Dados de Login Inválidos</p>";}
@@ -85,51 +85,52 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </form>
 
         </div>
+        <div class="col" >
 
-        <div id="carouselExampleSlidesOnly" class="carousel carousel-dark slide" data-ride="carousel">
+        <div id="carouselExampleSlidesOnly" class="carousel carousel-dark  carousel-fade   slide" data-ride="carousel">
 
             <div class="carousel-inner">
 
                 <div class="carousel-item active">
-                    <img  class="d-block w-100" src="img/food-donate.jpg" class="rounded img-fluid" alt="First slide"height="350px">
+                    <img  class="d-block w-100" src="img/food-donate.jpg" class="rounded img-fluid " alt="First slide"height="350px">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Refood, o Nosos lema é ajudar o próximo</h5>
-                        <p>Junta te a nós nesta missão</p>
+                        <h5 class=" w-100  bg-dark">Refood, o Nosos lema é ajudar o próximo</h5>
+
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img  class="d-block w-100" src="img/volunteer.jpg" class="rounded img-fluid" alt="Second slide"height="350px">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Refood, o Nosos lema é ajudar o próximo</h5>
-                        <p>Junta te a nós nesta missão</p>
+
+                        <h5 class=" w-100  bg-dark">Junta te a nós nesta missão</h5>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img  class="d-block w-100" src="img/volunterGivingFood.jpeg" class="rounded img-fluid" alt="Second slide"height="350px">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Refood, o Nosos lema é ajudar o próximo</h5>
-                        <p>Junta te a nós nesta missão</p>
+                        <h5 class=" w-100  bg-dark">Refood, o Nosos lema é ajudar o próximo</h5>
+
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img  class="d-block w-100" src="img/volunterFoodBox.jpeg" class="rounded img-fluid" alt="Second slide"height="350px">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Refood, o Nosos lema é ajudar o próximo</h5>
-                        <p>Junta te a nós nesta missão</p>
+
+                        <h5 class=" w-100  bg-dark">Junta te a nós nesta missão</h5>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img  class="d-block w-100" src="img/help.jpeg" class="rounded img-fluid" alt="Second slide"height="350px">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Refood, o Nosos lema é ajudar o próximo</h5>
-                        <p>Junta te a nós nesta missão</p>
+                        <h5 class=" w-100  bg-dark">Refood, o Nosos lema é ajudar o próximo</h5>
+
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img  class="d-block w-100" src="img/food-donate.jpg" class="rounded img-fluid" alt="Second slide"height="350px">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Refood, o Nosos lema é ajudar o próximo</h5>
-                        <p>Junta te a nós nesta missão</p>
+
+                        <h5 class=" w-100  bg-dark">Junta te a nós nesta missão</h5>
                     </div>
                 </div>
 
@@ -138,7 +139,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
         </div>
 
-
+        </div>
     </div>
 </article>
 </body>

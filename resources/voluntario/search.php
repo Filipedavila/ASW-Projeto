@@ -1,7 +1,7 @@
 <?php
 
 function searchInstitutionsByConditions($valuesUtilizador,$valuesInstituto)
-{   print_r($valuesUtilizador);
+{
     $query = "SELECT * FROM Utilizador,Instituicao WHERE Utilizador.id = Instituicao.id_U ";
     $num = count($valuesUtilizador);
     $i = 1;
@@ -49,7 +49,7 @@ function searchInstitutionsByConditionsAndDonations($valuesUtilizador, $donation
 
 
     $result = getQuery($query);
-    print_r($result);
+
     return $result;
 }
 function getVoluntarioLocal($id){

@@ -42,7 +42,7 @@ if($_SERVER["REQUEST_METHOD"] == FORM_METHOD){
             }else if($_POST[ID_SEARCH_OPTIONS] === ID_OPTION_TIPO_DOACAO){
                 $doacao  = htmlspecialchars($_POST[ID_INPUT_PESQUISA]);
                 $doacao= stripcslashes( $doacao);
-                print_r($doacao);
+
             }
 
              }
@@ -126,7 +126,7 @@ echo '<script type="text/javascript">',
                     Distrito
                 </label>
 
-                <select name="<?= ID_SELECT_DISTRITO ?>"  class="form-control-sm"  id="dist">
+                <select name="<?= ID_SELECT_DISTRITO ?>"  class="form-control"  id="dist">
                     <option value="<?= SELECT_DEFAULT_VALUE?>" selected> Selecione </option>
 
                 </select>
@@ -136,7 +136,7 @@ echo '<script type="text/javascript">',
                 <label for="conc" class="" >
                     Concelho
                 </label>
-                <select name="<?= ID_SELECT_CONCELHO ?>" class="form-control-sm"  id="conc" >
+                <select name="<?= ID_SELECT_CONCELHO ?>" class="form-control"  id="conc" >
                     <option value="<?= SELECT_DEFAULT_VALUE?>" selected> Selecione </option>
                 </select>
 
@@ -145,7 +145,7 @@ echo '<script type="text/javascript">',
                 <label for="freg" class="" >
                     Freguesia
                 </label>
-                <select name="<?= ID_SELECT_FREGUESIA ?>" class="form-control-sm"  id="freg" >
+                <select name="<?= ID_SELECT_FREGUESIA ?>" class="form-control"  id="freg" >
                     <option value="<?= SELECT_DEFAULT_VALUE?>" selected> Selecione </option>
                 </select>
 
@@ -159,13 +159,13 @@ echo '<script type="text/javascript">',
             <option type="button" value="Selecione" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" selected>
                 Tipo Pesquisa
             </option>
-            <option value="<?= ID_OPTION_TIPO_INSTITUTO ?>" class="form-control-sm" > Tipo de Instituição
+            <option value="<?= ID_OPTION_TIPO_INSTITUTO ?>" class="form-control" > Tipo de Instituição
             </option>
-            <option value="<?= ID_OPTION_TIPO_DOACAO ?>" class="form-control-sm"  > Tipo de Doação
+            <option value="<?= ID_OPTION_TIPO_DOACAO ?>" class="form-control"  > Tipo de Doação
             </option>
 
         </select>
-        <input type="text" name="<?= ID_INPUT_PESQUISA ?>" class="form-control-md" placeholder="Pesquisa por parametros">
+        <input type="text" name="<?= ID_INPUT_PESQUISA ?>" class="form-control-lg" placeholder="Pesquisa por parametros">
 
     </div>
 </div>
