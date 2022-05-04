@@ -19,7 +19,7 @@
                     <img  class="d-block w-100" src="img/food-donate.jpg" class="rounded img-fluid " alt="First slide"height="350px">
                     <div class="carousel-caption d-none d-md-block">
                         <h5 class=" w-100  bg-dark">Refood, o Nosos lema é ajudar o próximo</h5>
-                        <p class=" w-100  bg-dark">Junta te a nós nesta missão</p>
+
                     </div>
                 </div>
                 <div class="carousel-item">
