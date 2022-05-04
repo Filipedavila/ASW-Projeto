@@ -65,30 +65,32 @@ function getCompatibleInstitutes($id)
     $query = "SELECT dia,hora_inicio,hora_fim FROM Disponibilidade  WHERE id_U = '{$id}' ";
     $data = getData($query);
     $result= array();
+    $resultado =null;
     $local = getVoluntarioLocal($id);
+    if($data != null ){
     foreach ($data as $valor) {
 
         $institutos = getInstituteIDBySchedule($valor);
-        if(isset($institutos)){
-        array_push($result,$institutos  );
+        if (isset($institutos)) {
+            array_push($result, $institutos);
         }
-        $institutos=null;
+        $institutos = null;
 
 
     }
 
     $idInstitutes = array();
     foreach ($result as $subArray) {
-        foreach ($subArray as $idInst){
+        foreach ($subArray as $idInst) {
             array_push($idInstitutes, $idInst[0]);
         }
 
     }
-    $ids =array_unique($idInstitutes);
+    $ids = array_unique($idInstitutes);
 
-
-
-    return getInstitutesByLocalAndID($ids,$local);
+$resultado = getInstitutesByLocalAndID($ids,$local);
+}
+    return $resultado;
 }
 
 /**
@@ -140,7 +142,15 @@ function getDistritos() {
     return $result;
 }
 
-
+/**
+ * @return array|null
+ */
+function getAllInstitutions()
+{
+    $query = "SELECT * FROM Utilizador,Instituicao WHERE Utilizador.id = Instituicao.id_U";
+    $result = getQuery($query);
+    return $result;
+}
 
 //Obter todos os distritos
 /**
