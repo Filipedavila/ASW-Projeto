@@ -33,11 +33,10 @@ function RegisterVoluntario($dados)
 {
     $conn = getConnection();
 
-    $queryUser = "INSERT INTO Utilizador (email, tipo, telefone, pass, nome, codigo_distrito, codigo_concelho, codigo_freguesia,nome_distrito,nome_concelho,nome_freguesia) ";
+    $queryUser = "INSERT INTO Utilizador (email, tipo, telefone, pass, nome, codigo_distrito, codigo_concelho, codigo_freguesia) ";
     $queryUser .= " VALUES ( \"{$dados['email']}\" , \"Voluntario\" ,
                                 {$dados['tel']} , '{$dados['password']}' , \"{$dados['nome']}\" , 
-                                {$dados['cod_distrito']} , {$dados['cod_concelho']}, {$dados['cod_freguesia']},
-                                \"{$dados['nome_distrito']}\" , \"{$dados['nome_concelho']}\", \"{$dados['nome_freguesia']}\"); ";
+                                {$dados['cod_distrito']} , {$dados['cod_concelho']}, {$dados['cod_freguesia']}); ";
 
     $queryVoluntario ="INSERT INTO Voluntario (id_U ,cc, carta_conducao, genero, dob,imgPath)";
     $queryVoluntario .=  "VALUES (LAST_INSERT_ID(), \"{$dados['cc']}\" ,  \"{$dados['Cconducao']}\" ,   \"{$dados['genero']}\" ,   \"{$dados['dob']}\",   \"{$dados['imgPath']}\"  );";
@@ -65,14 +64,9 @@ function RegisterInstitution($dados)
     $conn = getConnection();
     $queryUser = "INSERT INTO Utilizador (email, tipo, telefone, pass, nome, codigo_distrito, codigo_concelho, codigo_freguesia,nome_distrito,nome_concelho,nome_freguesia) ";
     $queryUser .= " VALUES ( \"{$dados['email']}\" , \"Instituto\" , {$dados['tel']} , '{$dados['password']}' ,
-                            \"{$dados['nome']}\" , {$dados['cod_distrito']} , {$dados['cod_concelho']}, {$dados['cod_freguesia']},
-                              \"{$dados['nome_distrito']}\" , \"{$dados['nome_concelho']}\", \"{$dados['nome_freguesia']}\"); ";
+                            \"{$dados['nome']}\" , {$dados['cod_distrito']} , {$dados['cod_concelho']}, {$dados['cod_freguesia']}); ";
     $queryInst = "INSERT INTO Instituicao (id_U, 	tipo_inst, descricao, morada, n_contacto, nome_contacto)";
     $queryInst .= "VALUES ( LAST_INSERT_ID(), \"{$dados['tipo']}\" ,  \"{$dados['description']}\" , \"{$dados['morada']}\" , {$dados['contatoR']} , \"{$dados['nomeR']}\");";
-
-
-//      $queryVoluntario ="INSERT INTO Voluntario (id_U ,cc, carta_conducao, genero, dob)";
-    //    $queryVoluntario .=  "VALUES (LAST_INSERT_ID(), \"{$dados['tipo']}\" ,  \"{$dados['Cconducao']}\" ,   \"{$dados['genero']}\" ,   \"{$dados['dob']}\"  );";
 
 
     $result = mysqli_query($conn,  $queryUser);

@@ -18,7 +18,7 @@ if(isset($_GET['search'])){
     header( "Location: /asw/admin/index.php");
 }
 
-print_r($data);
+
 ?>
 
 

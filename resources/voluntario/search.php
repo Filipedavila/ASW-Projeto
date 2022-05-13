@@ -2,7 +2,11 @@
 
 function searchInstitutionsByConditions($valuesUtilizador,$valuesInstituto)
 {
-    $query = "SELECT * FROM Utilizador,Instituicao WHERE Utilizador.id = Instituicao.id_U ";
+    $query = "SELECT  Utilizador.id,Instituicao.id_U,Utilizador.nome,Utilizador.tipo, Instituicao.tipo_inst, Concelho.nome as nome_concelho , Distrito.nome as nome_distrito ,
+       Freguesia.nome as nome_freguesia,Utilizador.codigo_distrito,Utilizador.codigo_concelho,Utilizador.codigo_freguesia FROM Utilizador,Instituicao,Concelho, Freguesia, Distrito WHERE Utilizador.id = Instituicao.id_U AND 
+(Utilizador.codigo_distrito = Distrito.cod_distrito AND Utilizador.codigo_distrito=Distrito.cod_distrito
+                           AND Utilizador.codigo_concelho = Concelho.cod_concelho AND Utilizador.codigo_concelho = Freguesia.cod_concelho AND
+                                             Utilizador.codigo_freguesia = Freguesia.cod_freguesia)";
     $num = count($valuesUtilizador);
     $i = 1;
     if(count($valuesUtilizador)>0) {
@@ -32,9 +36,12 @@ function searchInstitutionsByConditions($valuesUtilizador,$valuesInstituto)
 }
 function searchInstitutionsByConditionsAndDonations($valuesUtilizador, $donation)
 {
-    $query = "SELECT * FROM Utilizador,Instituicao,Alimento WHERE 
+    $query = "SELECT Utilizador.id,Instituicao.id_U,Utilizador.nome,Utilizador.tipo, Instituicao.tipo_inst, Concelho.nome as nome_concelho , Distrito.nome as nome_distrito ,
+       Freguesia.nome as nome_freguesia,Utilizador.codigo_distrito,Utilizador.codigo_concelho,Utilizador.codigo_freguesia FROM Utilizador,Instituicao,Alimento,Concelho, Freguesia, Distrito WHERE 
                  Utilizador.id = Instituicao.id_U AND Alimento.inst_id = Instituicao.id_U 
-                    AND Alimento.tipo_doacao =  '{$donation}' ";
+                    AND Alimento.tipo_doacao =  '{$donation}' AND (Utilizador.codigo_distrito = Distrito.cod_distrito AND Utilizador.codigo_distrito=Distrito.cod_distrito
+                           AND Utilizador.codigo_concelho = Concelho.cod_concelho AND Utilizador.codigo_concelho = Freguesia.cod_concelho AND
+                                             Utilizador.codigo_freguesia = Freguesia.cod_freguesia)";
     $num = count($valuesUtilizador);
     $i = 1;
     if(count($valuesUtilizador)>0) {
@@ -118,13 +125,13 @@ function getInstitutesByLocalAndID($ids,$local){
     $institutos= array();
 
 foreach ($ids as $id)  {
-    $query = "SELECT id,nome,tipo_inst,nome_concelho,nome_distrito,
-                         nome_freguesia,codigo_distrito,codigo_concelho,codigo_freguesia FROM Utilizador,Instituicao
-                        WHERE id_U = '{$id}' AND id = '{$id}' 
-                          AND (Utilizador.codigo_distrito = '{$local['codigo_distrito']}' AND Utilizador.codigo_concelho = '{$local['codigo_concelho']}'   )" ;
+    $query = "SELECT Utilizador.id,Utilizador.nome,Instituicao.tipo_inst, Concelho.nome as nome_concelho , Distrito.nome as nome_distrito ,
+                         Freguesia.nome as nome_freguesia ,Utilizador.codigo_distrito,Utilizador.codigo_concelho,Utilizador.codigo_freguesia FROM Utilizador,Instituicao, Concelho, Freguesia, Distrito
+                        WHERE  Utilizador.id = '{$id}'  AND Instituicao.id_U = Utilizador.id
+                          AND (Utilizador.codigo_distrito = '{$local['codigo_distrito']}' AND Utilizador.codigo_concelho = '{$local['codigo_concelho']}' AND (Utilizador.codigo_distrito = Distrito.cod_distrito AND Utilizador.codigo_distrito=Distrito.cod_distrito
+                           AND Utilizador.codigo_concelho = Concelho.cod_concelho AND Utilizador.codigo_concelho = Freguesia.cod_concelho AND  Utilizador.codigo_freguesia = Freguesia.cod_freguesia))";
 
     $result = getOneResultQuery($query);
-
 
 
     array_push($institutos, $result);
@@ -147,7 +154,12 @@ function getDistritos() {
  */
 function getAllInstitutions()
 {
-    $query = "SELECT * FROM Utilizador,Instituicao WHERE Utilizador.id = Instituicao.id_U";
+    $query = "SELECT Utilizador.id,Utilizador.nome,Utilizador.tipo, Concelho.nome as nome_concelho , Distrito.nome as nome_distrito ,
+       Freguesia.nome as nome_freguesia,Utilizador.codigo_distrito,Utilizador.codigo_concelho,Utilizador.codigo_freguesia
+FROM Utilizador,Instituicao,Concelho, Freguesia, Distrito
+WHERE Utilizador.id = Instituicao.id_U AND (Utilizador.codigo_distrito = Distrito.cod_distrito AND Utilizador.codigo_distrito=Distrito.cod_distrito
+                           AND Utilizador.codigo_concelho = Concelho.cod_concelho AND Utilizador.codigo_concelho = Freguesia.cod_concelho AND
+                                             Utilizador.codigo_freguesia = Freguesia.cod_freguesia)";
     $result = getQuery($query);
     return $result;
 }
@@ -184,7 +196,14 @@ function getConcelhos($idDistrito)
  */
 function getVoluntario($id)
 {
-    $query = "SELECT * FROM Utilizador,Voluntario  WHERE id = '{$id}' AND id_u ='{$id}'";
+
+    $query = "SELECT Utilizador.id,Utilizador.nome,Utilizador.tipo,Voluntario.genero, Voluntario.dob, Utilizador.telefone,Voluntario.cc,
+             Voluntario.carta_conducao, Concelho.nome as nome_concelho , Distrito.nome as nome_distrito ,
+       Freguesia.nome as nome_freguesia,Utilizador.codigo_distrito,Utilizador.codigo_concelho,Utilizador.codigo_freguesia
+FROM Utilizador,Voluntario,Concelho, Freguesia, Distrito
+WHERE Utilizador.id = '{$id}' AND (Utilizador.codigo_distrito = Distrito.cod_distrito AND Utilizador.codigo_distrito=Distrito.cod_distrito
+                           AND Utilizador.codigo_concelho = Concelho.cod_concelho AND Utilizador.codigo_concelho = Freguesia.cod_concelho AND
+                                             Utilizador.codigo_freguesia = Freguesia.cod_freguesia)";
     $result = getQuery($query);
     return $result;
 }

@@ -1,7 +1,7 @@
 <?php
 $data= array();
 if(!isLoggedInAdmin()){
-    header( "Location: /asw/admin/index.php?page=login" );
+    header( "Location: index.php?page=login" );
 }
 const ID_SELECT_DISTRITO = "codigo_distrito";
 const ID_SELECT_CONCELHO = "codigo_concelho";
@@ -29,11 +29,11 @@ if($_SERVER["REQUEST_METHOD"] == FORM_METHOD){
         }
         if($_POST['tipo']===RADIO_INSTITUTO){
 
-            $result = searchUsuarioByLocal($dataUtilizador, RADIO_INSTITUTO);
+            $result = searchInstitutoByLocal($dataUtilizador, RADIO_INSTITUTO);
 
         }else if( $_POST['tipo']===RADIO_VOLUNTARIO){
 
-            $result = searchUsuarioByLocal($dataUtilizador, RADIO_VOLUNTARIO);
+            $result = searchVoluntarioByLocal($dataUtilizador, RADIO_VOLUNTARIO);
 
         }
 
@@ -139,6 +139,7 @@ echo '<script type="text/javascript">',
 
             <?php if($_POST['tipo']== RADIO_VOLUNTARIO): ?>
             <tr class="thead-dark">
+                <th>Tipo </th>
                 <th>Nome </th>
                 <th>Email </th>
                 <th>Distrito</th>
@@ -150,6 +151,7 @@ echo '<script type="text/javascript">',
                 <?php if(count($user) > 0): ?>
 
                     <tr>
+                        <td><?= $user['tipo'] ?></td>
                         <td><?= $user['nome'] ?></td>
                         <td><?= $user['email'] ?></td>
                         <td><?= $user['nome_distrito'] ?></td>

@@ -135,9 +135,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $data['cod_distrito'] = strip_tags($data['cod_distrito']);
         $data['cod_concelho'] = strip_tags($data['cod_concelho']);
         $data['cod_freguesia'] = strip_tags($data['cod_freguesia']);
-        $data['nome_concelho'] = getConcelhosNomeById($data['cod_distrito'],$data['cod_concelho']);
-        $data['nome_freguesia'] = getFreguesiaNomeById($data['cod_concelho'],$data['cod_freguesia']);
-        $data['nome_distrito'] = getDistritoNomeById( $data['cod_distrito']);
+
     //para cada valor do pos tratar e adicionar a uma array associativa
 
         $result = RegisterVoluntario($data);
@@ -263,7 +261,7 @@ if(isset($erros['email'])) echo "<p class=\"alerta\">". $erros['email'] ."</p>";
                 }?>
             </label>
             <input type="text" type="text" pattern="\d*" maxlength="8"  class="form-control" name="cc" id="cc" value="<?php
-            if(isset($_POST['cc']) && !in_array("cc",$erros)) echo $_POST['cc'] ?>"  placeholder="Digite o seu nº de Cartão de Cidadão" >
+            if(isset($_POST['cc'])) echo $_POST['cc'] ?>"  placeholder="Digite o seu nº de Cartão de Cidadão" >
         </div>
 
 
@@ -294,7 +292,7 @@ if(isset($erros['email'])) echo "<p class=\"alerta\">". $erros['email'] ."</p>";
             </label>
 
             <input type="text"   pattern="\d*" maxlength="8"  class="form-control" name="Cconducao" id="Cconducao" value="<?php
-                       if(isset($_POST['Cconducao']) && !in_array("Cconducao",$erros)) echo $_POST['Cconducao'] ?>"
+                       if(isset($_POST['Cconducao'])) echo $_POST['Cconducao'] ?>"
                    placeholder="Digite o nº da carta de condução" >
 
         </div>
@@ -312,7 +310,7 @@ if(isset($erros['email'])) echo "<p class=\"alerta\">". $erros['email'] ."</p>";
                     echo "<span class=\"alerta\" > Em Falta *</span>";?>
 
             </label>
-            <input type="date" class="form-control" name="dob" id="dob">
+            <input type="date" class="form-control" name="dob" min = "01-01-2005" id="dob">
        
         </div>
     </div>
@@ -362,20 +360,20 @@ if(isset($erros['email'])) echo "<p class=\"alerta\">". $erros['email'] ."</p>";
 
 
                  <div class="form-check-inline">
-                <input class="form-check-input" type="radio" name="genero" id="masculino">
+                <input class="form-check-input" type="radio" name="genero" id="masculino" value="masculino" >
                 <label class="form-check-label" for="masculino">
                     Masculino  <?php if (in_array('genero', $missing) ) 
                         echo "<span class=\"alerta\" > Em Falta *</span>";?>
                 </label>
                 </div>
                 <div class="form-check-inline">
-                <input class="form-check-input" type="radio" name="genero" id="feminino" >
+                <input class="form-check-input" type="radio" name="genero" id="feminino" value="feminino" >
                 <label class="form-check-label" for="flexRadioDefault2">
                 Feminino
                 </label>
                 </div>
                 <div class="form-check-inline">
-                <input class="form-check-input" type="radio" name="genero" id="outro" >
+                <input class="form-check-input" type="radio" name="genero" id="outro" value="outro" >
                 <label class="form-check-label" for="outro">
                 Outro
                 </label>

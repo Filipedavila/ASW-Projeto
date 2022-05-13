@@ -9,7 +9,12 @@
  */
 function getAllVolunters()
 {
-    $query = "SELECT * FROM Utilizador,Voluntario WHERE  Utilizador.id = Voluntario.id_U";
+    $query = "SELECT Utilizador.id,Utilizador.nome,Utilizador.tipo, Concelho.nome as nome_concelho , Distrito.nome as nome_distrito ,
+       Freguesia.nome as nome_freguesia,Utilizador.codigo_distrito,Utilizador.codigo_concelho,Utilizador.codigo_freguesia
+FROM Utilizador,Voluntario,Concelho, Freguesia, Distrito
+WHERE Utilizador.id = Voluntario.id_U AND (Utilizador.codigo_distrito = Distrito.cod_distrito AND Utilizador.codigo_distrito=Distrito.cod_distrito
+                           AND Utilizador.codigo_concelho = Concelho.cod_concelho AND Utilizador.codigo_concelho = Freguesia.cod_concelho AND
+                                             Utilizador.codigo_freguesia = Freguesia.cod_freguesia)";
     $result = getQuery($query);
     return $result;
 }
@@ -18,7 +23,12 @@ function getAllVolunters()
  */
 function getAllUsers()
 {
-    $query = "SELECT * FROM Utilizador";
+    $query = "SELECT Utilizador.id,Utilizador.nome,Utilizador.tipo, Concelho.nome as nome_concelho , Distrito.nome as nome_distrito ,
+       Freguesia.nome as nome_freguesia,Utilizador.codigo_distrito,Utilizador.codigo_concelho,Utilizador.codigo_freguesia
+FROM Utilizador,Concelho, Freguesia, Distrito
+WHERE  (Utilizador.codigo_distrito = Distrito.cod_distrito AND Utilizador.codigo_distrito=Distrito.cod_distrito
+                           AND Utilizador.codigo_concelho = Concelho.cod_concelho AND Utilizador.codigo_concelho = Freguesia.cod_concelho AND
+                                             Utilizador.codigo_freguesia = Freguesia.cod_freguesia)";
     $result = getQuery($query);
     return $result;
 }
@@ -30,9 +40,13 @@ function getAllUsers()
  * @return array
  *
  */
-function searchUsuarioByLocal($valuesUtilizador,$tipo)
+function searchInstitutoByLocal($valuesUtilizador)
 {
-    $query = "SELECT * FROM Utilizador, ".$tipo." WHERE Utilizador.id = ".$tipo.".id_U ";
+    $query = "SELECT Utilizador.id,Utilizador.nome, Utilizador.email,Instituicao.tipo_inst, Concelho.nome as nome_concelho , Distrito.nome as nome_distrito ,
+       Freguesia.nome as nome_freguesia,Utilizador.codigo_distrito,Utilizador.codigo_concelho,Utilizador.codigo_freguesia  FROM Utilizador, Instituicao , Voluntario,Concelho, Freguesia, Distrito WHERE Utilizador.id = Instituicao.id_U 
+    AND  (Utilizador.codigo_distrito = Distrito.cod_distrito AND Utilizador.codigo_distrito=Distrito.cod_distrito
+        AND Utilizador.codigo_concelho = Concelho.cod_concelho AND Utilizador.codigo_concelho = Freguesia.cod_concelho AND
+        Utilizador.codigo_freguesia = Freguesia.cod_freguesia)";
 
     if(count($valuesUtilizador)>0) {
         foreach ($valuesUtilizador as $key => $value) {
@@ -46,6 +60,31 @@ function searchUsuarioByLocal($valuesUtilizador,$tipo)
     return $result;
 }
 
+/**
+ * @param $valuesUtilizador
+ * @param $tipo
+ * @return array
+ *
+ */
+function searchVoluntarioByLocal($valuesUtilizador)
+{
+    $query = "SELECT Utilizador.id,Utilizador.nome, Utilizador.email,Utilizador.tipo, Concelho.nome as nome_concelho , Distrito.nome as nome_distrito ,
+       Freguesia.nome as nome_freguesia,Utilizador.codigo_distrito,Utilizador.codigo_concelho,Utilizador.codigo_freguesia  FROM Utilizador, Voluntario ,Concelho, Freguesia, Distrito WHERE Utilizador.id = Voluntario.id_U 
+    AND  (Utilizador.codigo_distrito = Distrito.cod_distrito AND Utilizador.codigo_distrito=Distrito.cod_distrito
+        AND Utilizador.codigo_concelho = Concelho.cod_concelho AND Utilizador.codigo_concelho = Freguesia.cod_concelho AND
+        Utilizador.codigo_freguesia = Freguesia.cod_freguesia)";
+
+    if(count($valuesUtilizador)>0) {
+        foreach ($valuesUtilizador as $key => $value) {
+            $query .= " AND Utilizador.{$key}=". "\"".$value."\"" ;
+
+        }
+    }
+
+
+    $result = getQuery($query);
+    return $result;
+}
 
 /**
  * @param $idade
@@ -53,7 +92,11 @@ function searchUsuarioByLocal($valuesUtilizador,$tipo)
  */
 function searchVoluntarioByAge($idade)
 {
-    $query = "SELECT * FROM Utilizador,Voluntario  WHERE Utilizador.id = Voluntario.id_U ";
+    $query = "SELECT Utilizador.id,Utilizador.nome,Utilizador.email, Concelho.nome as nome_concelho , Distrito.nome as nome_distrito ,
+       Freguesia.nome as nome_freguesia,Utilizador.codigo_distrito,Utilizador.codigo_concelho,Utilizador.codigo_freguesia
+FROM Utilizador,Voluntario,Concelho, Freguesia, Distrito WHERE Utilizador.id = Voluntario.id_U AND (Utilizador.codigo_distrito = Distrito.cod_distrito AND Utilizador.codigo_distrito=Distrito.cod_distrito
+                           AND Utilizador.codigo_concelho = Concelho.cod_concelho AND Utilizador.codigo_concelho = Freguesia.cod_concelho AND
+                                             Utilizador.codigo_freguesia = Freguesia.cod_freguesia)";
     if(!empty($idade['idade_minima'])) {
         $data_minima = date("Y-m-d", strtotime("-".$idade['idade_minima']." years"));
         $query .= "AND Voluntario.dob < '{$data_minima}' ";

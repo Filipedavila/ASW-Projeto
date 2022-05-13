@@ -112,9 +112,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $data['cod_distrito'] = strip_tags($data['cod_distrito']);
         $data['cod_concelho'] = strip_tags($data['cod_concelho']);
         $data['cod_freguesia'] = strip_tags($data['cod_freguesia']);
-        $data['nome_concelho'] = getConcelhosNomeById($data['cod_distrito'],$data['cod_concelho']);
-        $data['nome_freguesia'] = getFreguesiaNomeById($data['cod_concelho'],$data['cod_freguesia']);
-        $data['nome_distrito'] = getDistritoNomeById( $data['cod_distrito']);
+
     //para cada valor do pos tratar e adicionar a uma array associativa
    $result = RegisterInstitution($data);
         if($result){

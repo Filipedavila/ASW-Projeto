@@ -4,7 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 $data= array();
 if(!isLoggedInAdmin()) {
-    header("Location: /asw/admin/index.php?page=login");
+    header("Location: /admin/index.php?page=login");
 }
     const RADIO_INSTITUTO = "Instituicao";
     const RADIO_VOLUNTARIO = "Voluntario";
