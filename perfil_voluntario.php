@@ -7,7 +7,7 @@ if(!isLoggedIn() || !isLoggedInVoluntario()){
 $data = array();
 if(isset($_SESSION['id'])){
     $id = $_SESSION['id'];
-    $data = getVoluntario( $id );
+    $data = getVoluntarioById( $id );
 }
 ?>
 

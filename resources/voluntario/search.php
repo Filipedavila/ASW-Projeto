@@ -118,10 +118,10 @@ function getInstitutesByLocalAndID($ids,$local){
     $institutos= array();
 
 foreach ($ids as $id)  {
-    $query = "SELECT id,nome,tipo_inst,nome_concelho,nome_distrito,
-                         nome_freguesia,codigo_distrito,codigo_concelho,codigo_freguesia FROM Utilizador,Instituicao
-                        WHERE id_U = '{$id}' AND id = '{$id}' 
-                          AND (Utilizador.codigo_distrito = '{$local['codigo_distrito']}' AND Utilizador.codigo_concelho = '{$local['codigo_concelho']}'   )" ;
+    $query = "SELECT Utilizador.id,Utilizador.nome,Utilizador.tipo_inst, Concelho.nome , Distrito.nome,
+                         Freguesia.nome ,Utilizador.codigo_distrito,Utilizador.codigo_concelho,Utilizador.codigo_freguesia FROM Utilizador,Instituicao, Concelho, Freguesia, Distrito
+                        WHERE  Utilizador.id = '{$id}' AND Instituicao.id_U = Utilizador.id
+                          AND (Utilizador.codigo_distrito = '{$local['codigo_distrito']}' AND Utilizador.codigo_concelho = '{$local['codigo_concelho']}' AND Utilizador.codigo_distrito = Distrito.cod_distrito AND Utilizador.codigo_concelho = Concelho.cod_concelho)" ;
 
     $result = getOneResultQuery($query);
 

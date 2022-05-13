@@ -36,7 +36,7 @@ function getConnection(){
     $conn = getConnection();
     $result = mysqli_query($conn, $query);
     $data = array();
-    if(mysqli_num_rows($result) ==1 ){
+    if(mysqli_num_rows($result) == 1 ){
       $data = array();
       
       $data = mysqli_fetch_assoc($result);
