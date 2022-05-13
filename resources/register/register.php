@@ -19,8 +19,7 @@ function getFreguesiaNomeById($idConcelho,$idFreguesia)
 {
     $query = "SELECT nome FROM Freguesia  WHERE Freguesia.cod_freguesia = '{$idFreguesia}' AND Freguesia.cod_concelho = '{$idConcelho}' ";
     $result = getOneResultQuery($query);
-    $nome = $result['nome'];
-    return $nome;
+    return $result['nome'];
 }
 function getConcelhosNomeById($idDistrito,$idConcelho)
 {

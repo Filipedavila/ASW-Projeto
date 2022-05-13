@@ -1,11 +1,15 @@
 <?php
 
+include SITE_ROOT . '/resources/register/validations.php';
+include SITE_ROOT . '/resources/register/register.php';
+
 if(!isLoggedIn()){
 header('Location: index.php');
 exit();
 }
 
 $user = array();
+
 $data = getCompatibleInstitutes($_SESSION['id']);
 $noResults = false;
 
@@ -88,13 +92,14 @@ if ($data == null){
         </tr>
 
         <?php foreach($data as $user ): ?>
+
           <?php if(count($user) > 0): ?>
             <tr>
                 <td><?= $user['nome'] ?></td>
-                <td><?= $user['tipo_inst'] ?></td>
-                <td><?= $user['nome_distrito'] ?></td>
-                <td><?= $user['nome_concelho'] ?></td>
-                <td><?= $user['nome_freguesia'] ?></td>
+                <td><?= $user['tipo'] ?></td>
+                <td><?= getConcelhosNomeById($user['codigo_distrito'], $user['codigo_concelho']  ); ?></td>
+                <td><?= getDistritoNomeById( $user['codigo_distrito']) ?></td>
+                <td><?= getFreguesiaNomeById($user['codigo_concelho'],$user['codigo_freguesia']) ?></td>
                 <td><a href="index.php?page=perfil_instituto&id=<?= $user['id'] ?>"> perfil</a></td>
 
 

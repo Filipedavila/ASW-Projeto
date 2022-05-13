@@ -50,7 +50,7 @@ function isLoggedInVoluntario(){
         $_SESSION = array();
     }  
     if(!empty($_SESSION)){
-        if($_SESSION['tipo'] === "Voluntario"){
+        if($_SESSION['tipo'] === "V"){
          $result = true;
         }
     }
@@ -62,7 +62,7 @@ function isLoggedInInstitute(){ $result =false;
       $_SESSION = array();
   }  
   if(!empty($_SESSION)){
-      if($_SESSION['tipo'] === "Instituto"){
+      if($_SESSION['tipo'] === "I"){
        $result = true;
       }
   }
