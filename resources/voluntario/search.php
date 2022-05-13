@@ -1,7 +1,7 @@
 <?php
 
 function searchInstitutionsByConditions($valuesUtilizador,$valuesInstituto)
-{   print_r($valuesUtilizador);
+{
     $query = "SELECT * FROM Utilizador,Instituicao WHERE Utilizador.id = Instituicao.id_U ";
     $num = count($valuesUtilizador);
     $i = 1;
@@ -49,7 +49,7 @@ function searchInstitutionsByConditionsAndDonations($valuesUtilizador, $donation
 
 
     $result = getQuery($query);
-    print_r($result);
+
     return $result;
 }
 function getVoluntarioLocal($id){
@@ -65,30 +65,32 @@ function getCompatibleInstitutes($id)
     $query = "SELECT dia,hora_inicio,hora_fim FROM Disponibilidade  WHERE id_U = '{$id}' ";
     $data = getData($query);
     $result= array();
+    $resultado =null;
     $local = getVoluntarioLocal($id);
+    if($data != null ){
     foreach ($data as $valor) {
 
         $institutos = getInstituteIDBySchedule($valor);
-        if(isset($institutos)){
-        array_push($result,$institutos  );
+        if (isset($institutos)) {
+            array_push($result, $institutos);
         }
-        $institutos=null;
+        $institutos = null;
 
 
     }
 
     $idInstitutes = array();
     foreach ($result as $subArray) {
-        foreach ($subArray as $idInst){
+        foreach ($subArray as $idInst) {
             array_push($idInstitutes, $idInst[0]);
         }
 
     }
-    $ids =array_unique($idInstitutes);
+    $ids = array_unique($idInstitutes);
 
-
-
-    return getInstitutesByLocalAndID($ids,$local);
+$resultado = getInstitutesByLocalAndID($ids,$local);
+}
+    return $resultado;
 }
 
 /**
@@ -116,10 +118,10 @@ function getInstitutesByLocalAndID($ids,$local){
     $institutos= array();
 
 foreach ($ids as $id)  {
-    $query = "SELECT id,nome,tipo_inst,nome_concelho,nome_distrito,
-                         nome_freguesia,codigo_distrito,codigo_concelho,codigo_freguesia FROM Utilizador,Instituicao
-                        WHERE id_U = '{$id}' AND id = '{$id}' 
-                          AND (Utilizador.codigo_distrito = '{$local['codigo_distrito']}' AND Utilizador.codigo_concelho = '{$local['codigo_concelho']}'   )" ;
+    $query = "SELECT Utilizador.id,Utilizador.nome,Utilizador.tipo_inst, Concelho.nome , Distrito.nome,
+                         Freguesia.nome ,Utilizador.codigo_distrito,Utilizador.codigo_concelho,Utilizador.codigo_freguesia FROM Utilizador,Instituicao, Concelho, Freguesia, Distrito
+                        WHERE  Utilizador.id = '{$id}' AND Instituicao.id_U = Utilizador.id
+                          AND (Utilizador.codigo_distrito = '{$local['codigo_distrito']}' AND Utilizador.codigo_concelho = '{$local['codigo_concelho']}' AND Utilizador.codigo_distrito = Distrito.cod_distrito AND Utilizador.codigo_concelho = Concelho.cod_concelho)" ;
 
     $result = getOneResultQuery($query);
 
@@ -140,7 +142,15 @@ function getDistritos() {
     return $result;
 }
 
-
+/**
+ * @return array|null
+ */
+function getAllInstitutions()
+{
+    $query = "SELECT * FROM Utilizador,Instituicao WHERE Utilizador.id = Instituicao.id_U";
+    $result = getQuery($query);
+    return $result;
+}
 
 //Obter todos os distritos
 /**

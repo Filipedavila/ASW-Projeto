@@ -1,13 +1,26 @@
 <?php
 
+include SITE_ROOT . '/resources/register/validations.php';
+include SITE_ROOT . '/resources/register/register.php';
+
 if(!isLoggedIn()){
 header('Location: index.php');
 exit();
 }
 
 $user = array();
-$data = getCompatibleInstitutes($_SESSION['id']);
 
+$data = getCompatibleInstitutes($_SESSION['id']);
+$noResults = false;
+
+if ($data == null){
+    $data = getAllInstitutions();
+}else{
+    if(empty($data[0])){
+        $noResults = true;
+
+    }
+}
 // pagina inicial do voluntario ou do instituto,
 // se for voluntario mostra uma lista dos institutos da sua area
 // se for instituto mostra uma lista de voluntarios da sua area
@@ -32,6 +45,35 @@ $data = getCompatibleInstitutes($_SESSION['id']);
     </article>
 <?php endif;?>
 <?php if(isLoggedInVoluntario() && isLoggedIn()) : ?>
+<?php if($noResults): ?>
+<div class="container  ">
+
+    <div class="row d-flex justify-content-center ">
+
+
+        <h2> Não Existem Institutos Disponiveis para as sua disponibilidade</h2>
+
+
+
+    </div>
+    <div class="row d-flex justify-content-center ">
+
+
+        <p> Não Existem Institutos Disponiveis para as sua disponibilidade</p>
+    </div>
+        <div class="row d-flex justify-content-center ">
+
+        <img src="./img/notfound.png" alt="not found instituto" class="img-fluid">
+
+
+
+    </div>
+</div>
+<?php else: ?>
+
+
+
+
 <div class="container ">
 
      <div class="row d-flex justify-content-center">
@@ -48,14 +90,16 @@ $data = getCompatibleInstitutes($_SESSION['id']);
             <th>Freguesia</th>
             <th>Perfil</th>
         </tr>
+
         <?php foreach($data as $user ): ?>
+
           <?php if(count($user) > 0): ?>
             <tr>
                 <td><?= $user['nome'] ?></td>
-                <td><?= $user['tipo_inst'] ?></td>
-                <td><?= $user['nome_distrito'] ?></td>
-                <td><?= $user['nome_concelho'] ?></td>
-                <td><?= $user['nome_freguesia'] ?></td>
+                <td><?= $user['tipo'] ?></td>
+                <td><?= getConcelhosNomeById($user['codigo_distrito'], $user['codigo_concelho']  ); ?></td>
+                <td><?= getDistritoNomeById( $user['codigo_distrito']) ?></td>
+                <td><?= getFreguesiaNomeById($user['codigo_concelho'],$user['codigo_freguesia']) ?></td>
                 <td><a href="index.php?page=perfil_instituto&id=<?= $user['id'] ?>"> perfil</a></td>
 
 
@@ -65,8 +109,9 @@ $data = getCompatibleInstitutes($_SESSION['id']);
     </table>
 </div>
 <?php endif;?>
+    <?php endif;?>
 </div>
-        
+
   </article>
 
 </body>

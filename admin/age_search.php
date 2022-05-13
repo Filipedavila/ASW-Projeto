@@ -3,50 +3,44 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 $data= array();
-if(!isLoggedInAdmin()){
-    header( "Location: /asw/admin/index.php?page=login" );
+if(!isLoggedInAdmin()) {
+    header("Location: /asw/admin/index.php?page=login");
 }
-const ID_SELECT_DISTRITO = "codigo_distrito";
-const ID_SELECT_CONCELHO = "codigo_concelho";
-const RADIO_INSTITUTO = "Instituicao";
-const RADIO_VOLUNTARIO = "Voluntario";
-const ID_SEARCH_OPTIONS = "searchOptions";
-const SELECT_DEFAULT_VALUE = "Selecione";
-const BTN_SEARCH = "btn_search";
-const ID_FORM_ADVANCED_SEARCH = "searchForm";
-const FORM_METHOD = "POST";
-$dataUtilizador = array();
-$dataInstituto = array();
-$result=array();
-if($_SERVER["REQUEST_METHOD"] == FORM_METHOD){
-    // e caso a variavel submit esteja assignada
-    if(array_key_exists(BTN_SEARCH,$_POST)){
+    const RADIO_INSTITUTO = "Instituicao";
+    const RADIO_VOLUNTARIO = "Voluntario";
+    const ID_IDADE_MINIMA = "idade_minima";
+    const ID_IDADE_MAXIMA = "idade_maxima";
+    const BTN_SEARCH = "btn_search";
+    const ID_FORM_ADVANCED_SEARCH = "searchForm";
+    const FORM_METHOD = "POST";
+    $dataUtilizador = array();
+    $dataInstituto = array();
+    $result = array();
+    if ($_SERVER["REQUEST_METHOD"] == FORM_METHOD) {
+        // e caso a variavel submit esteja assignada
+        if (array_key_exists(BTN_SEARCH, $_POST)) {
+            if (isset($_POST[ID_IDADE_MINIMA])) {
+                $data[ID_IDADE_MINIMA] = htmlspecialchars($_POST[ID_IDADE_MINIMA]);
+                $data[ID_IDADE_MINIMA] = stripcslashes($data[ID_IDADE_MINIMA]);
+            }
+            if (isset($_POST[ID_IDADE_MAXIMA])) {
+                $data[ID_IDADE_MAXIMA] = htmlspecialchars($_POST[ID_IDADE_MAXIMA]);
+                $data[ID_IDADE_MAXIMA] = stripcslashes($data[ID_IDADE_MAXIMA]);
+            }
 
-       if(!empty($_POST[ID_SELECT_DISTRITO])&& $_POST[ID_SELECT_DISTRITO]!== SELECT_DEFAULT_VALUE){
-            $dataUtilizador[ID_SELECT_DISTRITO]= htmlspecialchars($_POST[ID_SELECT_DISTRITO]);
-           $dataUtilizador[ID_SELECT_DISTRITO]= stripcslashes( $dataUtilizador[ID_SELECT_DISTRITO]);
-        }
-        if(!empty($_POST[ID_SELECT_CONCELHO])&& $_POST[ID_SELECT_CONCELHO]!== SELECT_DEFAULT_VALUE){
-            $dataUtilizador[ID_SELECT_CONCELHO]= htmlspecialchars($_POST[ID_SELECT_CONCELHO]);
-            $dataUtilizador[ID_SELECT_CONCELHO]= stripcslashes( $dataUtilizador[ID_SELECT_CONCELHO]);
-        }
-        if($_POST['tipo']===RADIO_INSTITUTO){
 
-            $result = searchUsuarioByLocal($dataUtilizador, RADIO_INSTITUTO);
+            if ($_POST['tipo'] === RADIO_VOLUNTARIO) {
 
-        }else if( $_POST['tipo']===RADIO_VOLUNTARIO){
+                $result = searchVoluntarioByAge($data);
 
-            $result = searchUsuarioByLocal($dataUtilizador, RADIO_VOLUNTARIO);
+            }
 
-        }
 
 
 
     }
 
 }
-
-
 echo '<script type="text/javascript">',
 'getDistritos();',
 '</script>';
@@ -60,7 +54,7 @@ echo '<script type="text/javascript">',
 
     <div class="row ">
         <div class="col d-flex justify-content-center">
-            <h2>Pesquisa por Região</h2>
+            <h2>Pesquisa por faixa etária</h2>
 
         </div>
     </div>
@@ -70,7 +64,7 @@ echo '<script type="text/javascript">',
 
 
             <div class="col d-flex justify-content-center">
-                <p>Pesquisa por região para institutos ou voluntarios</p>
+                <p>Pesquisa por faixa etária para  voluntarios</p>
             </div>
     </div>
 
@@ -78,28 +72,15 @@ echo '<script type="text/javascript">',
         <div class="row d-flex justify-content-center">
 
             <div class="col-auto">
-
-                <label for="dist" class="" >
-                    Distrito
-                </label>
-
-                <select name="<?= ID_SELECT_DISTRITO ?>"  class="form-control-sm"  id="dist">
-                    <option value="<?= SELECT_DEFAULT_VALUE?>" selected> Selecione </option>
-
-                </select>
+                <label for="idadeMin">Idade Minima</label>
+                <input type="Number" id="idadeMin" name="<?= ID_IDADE_MINIMA ?>"   class="form-control" min="16" max="80">
 
             </div>
-
             <div class="col-auto">
-                <label for="conc" class="" >
-                    Concelho
-                </label>
-                <select name="<?= ID_SELECT_CONCELHO ?>" class="form-control-sm"  id="conc" >
-                    <option value="<?= SELECT_DEFAULT_VALUE?>" selected> Selecione </option>
-                </select>
+                <label for="idadeMax">Idade Minima</label>
+                <input type="Number" id="idadeMax" name="<?= ID_IDADE_MAXIMA ?>" class="form-control"  min="16" max="80">
 
             </div>
-
         </div>
 
 
@@ -107,13 +88,13 @@ echo '<script type="text/javascript">',
 
 
         <div class="col-sm-3 mt-4">
-            <input class="form-check-input" type="radio" name="tipo" id="radioInstituto" value="<?= RADIO_INSTITUTO ?>" checked>
+            <input class="form-check-input" type="radio" name="tipo" id="radioInstituto" value="<?= RADIO_INSTITUTO ?>" disabled>
             <label class="form-check-label" for="radioInstituto">
                 Instituto
             </label>
         </div>
         <div class="col-sm3 mt-4">
-            <input class="form-check-input" type="radio" name="tipo" id="radioVoluntario" value="<?= RADIO_VOLUNTARIO ?>">
+            <input class="form-check-input" type="radio" name="tipo" id="radioVoluntario" value="<?= RADIO_VOLUNTARIO ?>" checked>
             <label class="form-check-label" for="radioVoluntario">
                 Voluntario
             </label>

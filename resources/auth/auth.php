@@ -11,9 +11,9 @@ function loginUser($email, $password){
       if (session_status() === PHP_SESSION_NONE) {
           session_start();
       }  
+       echo $user['pass'];
        if(password_verify($password, $user['pass'])){
 
-     
         $_SESSION['tipo'] = $user['tipo'];
 
         $nomeExploded = explode(" ", $user['nome']);       
@@ -50,7 +50,7 @@ function isLoggedInVoluntario(){
         $_SESSION = array();
     }  
     if(!empty($_SESSION)){
-        if($_SESSION['tipo'] === "Voluntario"){
+        if($_SESSION['tipo'] === "V"){
          $result = true;
         }
     }
@@ -62,7 +62,7 @@ function isLoggedInInstitute(){ $result =false;
       $_SESSION = array();
   }  
   if(!empty($_SESSION)){
-      if($_SESSION['tipo'] === "Instituto"){
+      if($_SESSION['tipo'] === "I"){
        $result = true;
       }
   }

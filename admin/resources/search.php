@@ -25,15 +25,11 @@ function getAllUsers()
 
 
 /**
- * @return array|null
+ * @param $valuesUtilizador
+ * @param $tipo
+ * @return array
+ *
  */
-function getAllInstitutions()
-{
-    $query = "SELECT * FROM Utilizador,Instituicao WHERE Utilizador.id = Instituicao.id_U";
-    $result = getQuery($query);
-    return $result;
-}
-
 function searchUsuarioByLocal($valuesUtilizador,$tipo)
 {
     $query = "SELECT * FROM Utilizador, ".$tipo." WHERE Utilizador.id = ".$tipo.".id_U ";
@@ -50,6 +46,35 @@ function searchUsuarioByLocal($valuesUtilizador,$tipo)
     return $result;
 }
 
+
+/**
+ * @param $idade
+ * @return array
+ */
+function searchVoluntarioByAge($idade)
+{
+    $query = "SELECT * FROM Utilizador,Voluntario  WHERE Utilizador.id = Voluntario.id_U ";
+    if(!empty($idade['idade_minima'])) {
+        $data_minima = date("Y-m-d", strtotime("-".$idade['idade_minima']." years"));
+        $query .= "AND Voluntario.dob < '{$data_minima}' ";
+
+    }
+    if(!empty($idade['idade_maxima'])) {
+        $data_maxima = date("Y-m-d", strtotime("-".$idade['idade_maxima']." years"));
+
+        $query .= " AND Voluntario.dob > '{$data_maxima}'";
+
+    }
+    $result = getQuery($query);
+
+    return $result;
+}
+
+/**
+ * @param $valuesUtilizador
+ * @param $valuesInstituto
+ * @return array
+ */
 function searchInstitutosByParameters($valuesUtilizador,$valuesInstituto)
 {   print_r($valuesUtilizador);
     $query = "SELECT * FROM Utilizador,Instituicao WHERE Utilizador.id = Instituicao.id_U ";
@@ -80,27 +105,4 @@ function searchInstitutosByParameters($valuesUtilizador,$valuesInstituto)
     $result = getQuery($query);
     return $result;
 }
-function serch($valuesUtilizador, $donation)
-{
-    $query = "SELECT * FROM Utilizador,Instituicao,Alimento WHERE 
-                 Utilizador.id = Instituicao.id_U AND Alimento.inst_id = Instituicao.id_U 
-                    AND Alimento.tipo_doacao =  '{$donation}' ";
-    $num = count($valuesUtilizador);
-    $i = 1;
-    if(count($valuesUtilizador)>0) {
-        foreach ($valuesUtilizador as $key => $value) {
-            $query .= " AND Utilizador.{$key}=". "\"".$value."\"" ;
-            if ($i < $num) {
-
-            }
-            $i += 1;
-        }
-    }
-
-
-    $result = getQuery($query);
-    print_r($result);
-    return $result;
-}
-
 ?>
