@@ -61,9 +61,9 @@ function RegisterInstitution($dados)
 {
     $conn = getConnection();
     $queryUser = "INSERT INTO Utilizador (email, tipo, telefone, pass, nome, codigo_distrito, codigo_concelho, codigo_freguesia) ";
-    $queryUser .= " VALUES ( \"{$dados['email']}\" , \"Instituto\" , {$dados['tel']} , '{$dados['password']}' ,
-                            \"{$dados['nome']}\" , {$dados['cod_distrito']} , {$dados['cod_concelho']}, {$dados['cod_freguesia']}; ";
-    $queryInst = "INSERT INTO Instituicao (id_U, 	tipo_inst, descricao, morada, n_contacto, nome_contacto)";
+    $queryUser .= " VALUES ( \"{$dados['email']}\" , \"I\" , {$dados['tel']} , '{$dados['password']}' ,
+                            \"{$dados['nome']}\" , {$dados['cod_distrito']} , {$dados['cod_concelho']}, {$dados['cod_freguesia']});";
+    $queryInst = "INSERT INTO Instituicao (id_U, tipo, descricao, morada, n_contacto, nome_contacto)";
     $queryInst .= "VALUES ( LAST_INSERT_ID(), \"{$dados['tipo']}\" ,  \"{$dados['description']}\" , \"{$dados['morada']}\" , {$dados['contatoR']} , \"{$dados['nomeR']}\");";
 
 
