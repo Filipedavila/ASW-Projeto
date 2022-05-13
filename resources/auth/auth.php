@@ -11,9 +11,9 @@ function loginUser($email, $password){
       if (session_status() === PHP_SESSION_NONE) {
           session_start();
       }  
+       echo $user['pass'];
        if(password_verify($password, $user['pass'])){
 
-     
         $_SESSION['tipo'] = $user['tipo'];
 
         $nomeExploded = explode(" ", $user['nome']);       

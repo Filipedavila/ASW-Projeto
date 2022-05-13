@@ -13,7 +13,7 @@ $utilizador = array();
 
     if(isset($_SESSION['id'])){
 
-        $data =  getInstitution($_SESSION['id']);
+        $data =  getInstitutionById($_SESSION['id']);
 
 
 
