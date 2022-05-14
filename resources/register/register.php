@@ -62,7 +62,7 @@ function RegisterVoluntario($dados)
 function RegisterInstitution($dados)
 {
     $conn = getConnection();
-    $queryUser = "INSERT INTO Utilizador (email, tipo, telefone, pass, nome, codigo_distrito, codigo_concelho, codigo_freguesia,nome_distrito,nome_concelho,nome_freguesia) ";
+    $queryUser = "INSERT INTO Utilizador (email, tipo, telefone, pass, nome, codigo_distrito, codigo_concelho, codigo_freguesia) ";
     $queryUser .= " VALUES ( \"{$dados['email']}\" , \"Instituto\" , {$dados['tel']} , '{$dados['password']}' ,
                             \"{$dados['nome']}\" , {$dados['cod_distrito']} , {$dados['cod_concelho']}, {$dados['cod_freguesia']}); ";
     $queryInst = "INSERT INTO Instituicao (id_U, 	tipo_inst, descricao, morada, n_contacto, nome_contacto)";
