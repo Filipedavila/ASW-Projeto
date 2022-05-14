@@ -13,7 +13,7 @@ function search(idConcelho) {
             console.log(data[0]);
 
             data.forEach( freguesia => {
-                let optionNew = "<option value='"+freguesia.cod_freguesia+"'>"+ freguesia.nome +" </option>";
+                let optionNew = "<option value='"+freguesia.cod_freguesia+"'>"+ freguesia.nome_freguesia +" </option>";
                 freguesias.innerHTML += optionNew;
 
 

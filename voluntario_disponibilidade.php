@@ -47,6 +47,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $utilizador['hora_final']  = stripcslashes(  $utilizador['hora_final'] );
        
     }
+
+         if (count($erros) >0  || count($missing) >0){ echo  "
+        <p class=\"alerta\">Registro Invalido, por favor corrija os dados</p>";}
     }
 
     //para cada valor do pos tratar e adicionar a uma array associativa
@@ -107,9 +110,9 @@ if(isset($erros['pass'])) echo "<p class=\"alerta\">". $erros['pass'] ."</p>";  
                         <?php if (in_array('hora_final', $missing)) 
                         echo " hora_final em falta";?>
                     </label>
-                    <input type="time" class="form-control" name = "hora_final" <?php if (in_array('hora_final', $missing)) 
-                        echo " isIis-invalid";?>" id="hora_final" name="hora_final"
-                        value="<?php echo $data[0]['hora_final'] ?>">
+                    
+                    <input type="time" class="form-control" name = "hora_final" min = "<?php if(isset ($data[0]['hora_inicial']))?>" <?php if (in_array('hora_final', $missing)) echo " isIis-invalid";?>" id="hora_final" name="hora_final"
+                        value="<?php echo $data[0]['hora_final'] ?>" <?php if (isset($data[0]['hora_inicial']) && (isset($data[0]['hora_final'])) && strtotime(($data[0]['hora_inicial']) > strtotime($data[0]['hora_final']))) array_push($erros,'submit');?>"> <?php echo count($erros);?>
                 </div>
             </div>
             <br>

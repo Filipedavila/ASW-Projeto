@@ -5,7 +5,7 @@
  */
 function getDistritoNomeById($id)
 {
-    $query = "SELECT nome FROM Distrito  WHERE Distrito.cod_distrito = '{$id}'";
+    $query = "SELECT nome_distrito FROM Distrito  WHERE Distrito.cod_distrito = '{$id}'";
     $result = getOneResultQuery($query);
     return $result['nome'];
 }
@@ -17,14 +17,14 @@ function getDistritoNomeById($id)
  */
 function getFreguesiaNomeById($idConcelho,$idFreguesia)
 {
-    $query = "SELECT nome FROM Freguesia  WHERE Freguesia.cod_freguesia = '{$idFreguesia}' AND Freguesia.cod_concelho = '{$idConcelho}' ";
+    $query = "SELECT nome_freguesia FROM Freguesia  WHERE Freguesia.cod_freguesia = '{$idFreguesia}' AND Freguesia.cod_concelho = '{$idConcelho}' ";
     $result = getOneResultQuery($query);
     $nome = $result['nome'];
     return $nome;
 }
 function getConcelhosNomeById($idDistrito,$idConcelho)
 {
-    $query = "SELECT nome FROM Concelho  WHERE Concelho.cod_concelho = '{$idConcelho}' AND Concelho.cod_distrito = '{$idDistrito}' ";
+    $query = "SELECT nome_concelho FROM Concelho  WHERE Concelho.cod_concelho = '{$idConcelho}' AND Concelho.cod_distrito = '{$idDistrito}' ";
 
     $result = getOneResultQuery($query);
     return $result['nome'];
