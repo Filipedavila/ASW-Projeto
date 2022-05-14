@@ -9,8 +9,7 @@
  */
 function getAllVolunters()
 {
-    $query = "SELECT Utilizador.id,Utilizador.nome,Utilizador.tipo, Concelho.nome as nome_concelho , Distrito.nome as nome_distrito ,
-       Freguesia.nome as nome_freguesia,Utilizador.codigo_distrito,Utilizador.codigo_concelho,Utilizador.codigo_freguesia
+    $query = "SELECT *
 FROM Utilizador,Voluntario,Concelho, Freguesia, Distrito
 WHERE Utilizador.id = Voluntario.id_U AND (Utilizador.codigo_distrito = Distrito.cod_distrito AND Utilizador.codigo_distrito=Distrito.cod_distrito
                            AND Utilizador.codigo_concelho = Concelho.cod_concelho AND Utilizador.codigo_concelho = Freguesia.cod_concelho AND
@@ -23,8 +22,7 @@ WHERE Utilizador.id = Voluntario.id_U AND (Utilizador.codigo_distrito = Distrito
  */
 function getAllUsers()
 {
-    $query = "SELECT Utilizador.id,Utilizador.nome,Utilizador.tipo, Concelho.nome as nome_concelho , Distrito.nome as nome_distrito ,
-       Freguesia.nome as nome_freguesia,Utilizador.codigo_distrito,Utilizador.codigo_concelho,Utilizador.codigo_freguesia
+    $query = "SELECT *
 FROM Utilizador,Concelho, Freguesia, Distrito
 WHERE  (Utilizador.codigo_distrito = Distrito.cod_distrito AND Utilizador.codigo_distrito=Distrito.cod_distrito
                            AND Utilizador.codigo_concelho = Concelho.cod_concelho AND Utilizador.codigo_concelho = Freguesia.cod_concelho AND
@@ -42,8 +40,7 @@ WHERE  (Utilizador.codigo_distrito = Distrito.cod_distrito AND Utilizador.codigo
  */
 function searchInstitutoByLocal($valuesUtilizador)
 {
-    $query = "SELECT Utilizador.id,Utilizador.nome, Utilizador.email,Instituicao.tipo_inst, Concelho.nome as nome_concelho , Distrito.nome as nome_distrito ,
-       Freguesia.nome as nome_freguesia,Utilizador.codigo_distrito,Utilizador.codigo_concelho,Utilizador.codigo_freguesia  FROM Utilizador, Instituicao , Voluntario,Concelho, Freguesia, Distrito WHERE Utilizador.id = Instituicao.id_U 
+    $query = "SELECT *  FROM Utilizador, Instituicao , Voluntario,Concelho, Freguesia, Distrito WHERE Utilizador.id = Instituicao.id_U 
     AND  (Utilizador.codigo_distrito = Distrito.cod_distrito AND Utilizador.codigo_distrito=Distrito.cod_distrito
         AND Utilizador.codigo_concelho = Concelho.cod_concelho AND Utilizador.codigo_concelho = Freguesia.cod_concelho AND
         Utilizador.codigo_freguesia = Freguesia.cod_freguesia)";
@@ -68,8 +65,7 @@ function searchInstitutoByLocal($valuesUtilizador)
  */
 function searchVoluntarioByLocal($valuesUtilizador)
 {
-    $query = "SELECT Utilizador.id,Utilizador.nome, Utilizador.email,Utilizador.tipo, Concelho.nome as nome_concelho , Distrito.nome as nome_distrito ,
-       Freguesia.nome as nome_freguesia,Utilizador.codigo_distrito,Utilizador.codigo_concelho,Utilizador.codigo_freguesia  FROM Utilizador, Voluntario ,Concelho, Freguesia, Distrito WHERE Utilizador.id = Voluntario.id_U 
+    $query = "SELECT *  FROM Utilizador, Voluntario ,Concelho, Freguesia, Distrito WHERE Utilizador.id = Voluntario.id_U 
     AND  (Utilizador.codigo_distrito = Distrito.cod_distrito AND Utilizador.codigo_distrito=Distrito.cod_distrito
         AND Utilizador.codigo_concelho = Concelho.cod_concelho AND Utilizador.codigo_concelho = Freguesia.cod_concelho AND
         Utilizador.codigo_freguesia = Freguesia.cod_freguesia)";
@@ -92,8 +88,7 @@ function searchVoluntarioByLocal($valuesUtilizador)
  */
 function searchVoluntarioByAge($idade)
 {
-    $query = "SELECT Utilizador.id,Utilizador.nome,Utilizador.email, Concelho.nome as nome_concelho , Distrito.nome as nome_distrito ,
-       Freguesia.nome as nome_freguesia,Utilizador.codigo_distrito,Utilizador.codigo_concelho,Utilizador.codigo_freguesia
+    $query = "SELECT *
 FROM Utilizador,Voluntario,Concelho, Freguesia, Distrito WHERE Utilizador.id = Voluntario.id_U AND (Utilizador.codigo_distrito = Distrito.cod_distrito AND Utilizador.codigo_distrito=Distrito.cod_distrito
                            AND Utilizador.codigo_concelho = Concelho.cod_concelho AND Utilizador.codigo_concelho = Freguesia.cod_concelho AND
                                              Utilizador.codigo_freguesia = Freguesia.cod_freguesia)";

@@ -22,7 +22,7 @@ function getDistritos() {
 
     let select = document.getElementById("dist");
     data.forEach( distrito => {
-        let optionNew = "<option value='"+distrito.cod_distrito+"' onclick='getConcelho("+distrito.cod_distrito +")'>"+ distrito.nome +" </option>";
+        let optionNew = "<option value='"+distrito.cod_distrito+"' onclick='getConcelho("+distrito.cod_distrito +")'>"+ distrito.nome_distrito +" </option>";
         select.innerHTML += optionNew;
 
 
@@ -52,7 +52,7 @@ function getConcelho(idDistrito){
 
             let optionNew;
             data.forEach( concelho => {
-                 optionNew = "<option value='"+concelho.cod_concelho+"' onclick='getFreguesia("+concelho.cod_concelho+")'>"+ concelho.nome +" </option>";
+                 optionNew = "<option value='"+concelho.cod_concelho+"' onclick='getFreguesia("+concelho.cod_concelho+")'>"+ concelho.nome_concelho +" </option>";
                 concelhos.innerHTML += optionNew;
 
 
@@ -86,7 +86,7 @@ function getConcelho(idDistrito){
                 console.log(data[0]);
                 let optionNew;
                 data.forEach( freguesia => {
-                     optionNew = "<option value='"+freguesia.cod_freguesia+"'>"+ freguesia.nome +" </option>";
+                     optionNew = "<option value='"+freguesia.cod_freguesia+"'>"+ freguesia.nome_freguesia +" </option>";
                     freguesias.innerHTML += optionNew;
 
 
