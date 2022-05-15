@@ -10,7 +10,15 @@ function InfoInstDoacoes($id)
 	//Verifica a ligação à BD
 	if(mysqli_connect_error()){die("Database connection failed:".mysqli_connect_error());}
 
-	$sql="SELECT * FROM Utilizador WHERE id LIKE \"".$id."\"";
+	$sql="SELECT Instituicao.tipo_inst, Utilizador.telefone, Distrito.nome_Distrito, Concelho.nome_Concelho ,Freguesia.nome_Freguesia  FROM Utilizador, Instituicao, Distrito, Concelho, Freguesia WHERE Utilizador.id LIKE {$id} 
+	AND Utilizador.id = Instituicao.id_U 
+	AND Utilizador.codigo_distrito = Distrito.cod_distrito
+	AND Utilizador.codigo_concelho = Concelho.cod_concelho
+	AND Utilizador.codigo_distrito = Concelho.cod_distrito 	 
+	AND Utilizador.codigo_freguesia = Freguesia.cod_freguesia 
+	AND Utilizador.codigo_concelho = Freguesia.cod_concelho;";
+
+
 	$result=mysqli_query($conn,$sql);
     
 	while($row=mysqli_fetch_array($result,MYSQLI_NUM))
