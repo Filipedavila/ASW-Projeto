@@ -1,5 +1,5 @@
 <?php
-include "../../../init.php";
+include "../../init.php";
 
 error_reporting(E_ALL);
 
@@ -12,14 +12,14 @@ function getDistritosJSON(){
 
 function getConcelhosJson($idDistrito)
 {
-    $query = "SELECT cod_concelho,nome FROM Concelho WHERE Concelho.cod_distrito = '{$idDistrito}';";
+    $query = "SELECT cod_concelho, nome_concelho FROM Concelho WHERE Concelho.cod_distrito = '{$idDistrito}';";
     $result = getQuery($query);
     return $result;
 }
 function getFreguesiasJson($idConcelho)
 {
 
-    $query = "SELECT cod_freguesia,nome FROM Freguesia WHERE Freguesia.cod_concelho = '{$idConcelho}';";
+    $query = "SELECT cod_freguesia,nome_freguesia FROM Freguesia WHERE Freguesia.cod_concelho = '{$idConcelho}';";
     $result = getQuery($query);
     return $result;
 }
@@ -46,7 +46,7 @@ if(isset($_REQUEST["request"])){
         }
 
     }elseif ($_REQUEST["request"]== "Distritos"){
-        $distritos = getDistritos();
+        $distritos = getDistritosJSON();
         header("Content-Type: application/json");
         echo json_encode($distritos);
 
