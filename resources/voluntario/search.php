@@ -3,11 +3,11 @@
 function searchInstitutionsByConditions($valuesUtilizador,$valuesInstituto)
 {
     $query = "SELECT * FROM Utilizador,Instituicao,Concelho, Freguesia, Distrito WHERE Utilizador.id = Instituicao.id_U 
-    AND Utilizador.codigo_distrito = Distrito.cod_distrito
+    AND (Utilizador.codigo_distrito = Distrito.cod_distrito
     AND Utilizador.codigo_concelho = Concelho.cod_concelho
     AND Utilizador.codigo_distrito = Concelho.cod_distrito 	 
     AND Utilizador.codigo_freguesia = Freguesia.cod_freguesia 
-    AND Utilizador.codigo_concelho = Freguesia.cod_concelho;";
+    AND Utilizador.codigo_concelho = Freguesia.cod_concelho)";
 
     $num = count($valuesUtilizador);
     $i = 1;
@@ -41,11 +41,11 @@ function searchInstitutionsByConditionsAndDonations($valuesUtilizador, $donation
     $query = "SELECT * FROM Utilizador,Instituicao,Alimento,Concelho, Freguesia, Distrito WHERE 
                  Utilizador.id = Instituicao.id_U AND Alimento.inst_id = Instituicao.id_U 
                     AND Alimento.tipo_doacao =  '{$donation}'
-                    AND Utilizador.codigo_distrito = Distrito.cod_distrito
+                    AND (Utilizador.codigo_distrito = Distrito.cod_distrito
                     AND Utilizador.codigo_concelho = Concelho.cod_concelho
                     AND Utilizador.codigo_distrito = Concelho.cod_distrito 	 
                     AND Utilizador.codigo_freguesia = Freguesia.cod_freguesia 
-                    AND Utilizador.codigo_concelho = Freguesia.cod_concelho;";
+                    AND Utilizador.codigo_concelho = Freguesia.cod_concelho)";
                     
     $num = count($valuesUtilizador);
     $i = 1;

@@ -10,6 +10,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $client = new nusoap_client(
         'http://appserver-01.alunos.di.fc.ul.pt/~asw09/ASW-Projeto/webServices/InfoInstDoacoes/db_serv.php'
     );
+    
+    /*
+    $client = new nusoap_client(
+        'http://localhost/ASW-Projeto/webServices/InfoInstDoacoes/db_serv.php'
+    );
+    */
     $error = $client->getError();
     $result = $client->call('InfoInstDoacoes', array('id' => $id));	//handle errors
 
