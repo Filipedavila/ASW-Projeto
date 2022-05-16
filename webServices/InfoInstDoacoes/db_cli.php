@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     $client = new nusoap_client(
-        'http://appserver-01.alunos.di.fc.ul.pt/~asw09/ASW-Projeto/webServices/InfoInstDoacoes/db_serv.php'
+        'http://appserver-01.alunos.di.fc.ul.pt/~asw09/ASW-Projeto/webServices/InfoInstDoacoes/db_serv.php?wsdl',true
     );
      
    /* 
