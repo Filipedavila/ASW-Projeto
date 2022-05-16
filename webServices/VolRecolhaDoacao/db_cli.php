@@ -18,12 +18,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo "<h2>Resposta</h2>";
     echo "<pre>" . htmlspecialchars($client->response, ENT_QUOTES) . "</pre>";
 
-    if ($client->fault)
-    {   //check faults
-    }
-    else {    $error = $client->getError();		 //handle errors
-            echo "<h2>$result</h2>";
-    }
+    if($client->fault) {
+        echo "<strong>Fault:</strong>".
+        print_r($callResult);
+        } else { //check error
+        $err = $client->getError();
+        if($err) { //write the error
+        echo "<strong>Error:</strong>".$err;
+        }
+        else { echo "<h2>$result</h2>"; } //result ok
+        }
  }
 }
 ?>
