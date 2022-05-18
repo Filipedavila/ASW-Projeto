@@ -10,14 +10,17 @@ function InfoInstDoacoes($id)
 	//Verifica a ligação à BD
 	if(mysqli_connect_error()){die("Database connection failed:".mysqli_connect_error());}
 
-	$sql="SELECT Instituicao.tipo_inst, Utilizador.telefone, Distrito.nome_Distrito, Concelho.nome_Concelho ,Freguesia.nome_Freguesia  FROM Utilizador, Instituicao, Distrito, Concelho, Freguesia WHERE Utilizador.id LIKE {$id} 
+	$sql="SELECT Instituicao.tipo_inst, Utilizador.telefone, Distrito.nome_Distrito, Concelho.nome_Concelho ,Freguesia.nome_Freguesia, Alimento.tipo_doacao, Alimento.quantidade, Disponibilidade.hora_inicio, Disponibilidade.hora_fim, Disponibilidade.dia
+	FROM Utilizador, Instituicao, Distrito, Concelho, Freguesia, Disponibilidade, Alimento WHERE Utilizador.id = {$id} 
 	AND Utilizador.id = Instituicao.id_U 
 	AND Utilizador.codigo_distrito = Distrito.cod_distrito
 	AND Utilizador.codigo_concelho = Concelho.cod_concelho
 	AND Utilizador.codigo_distrito = Concelho.cod_distrito 	 
 	AND Utilizador.codigo_freguesia = Freguesia.cod_freguesia 
-	AND Utilizador.codigo_concelho = Freguesia.cod_concelho;";
-
+	AND Utilizador.codigo_concelho = Freguesia.cod_concelho
+	AND Disponibilidade.id_U = Utilizador.id
+	AND Utilizador.id =  Disponibilidade.id_U
+	AND Alimento.inst_id = Disponibilidade.id_U;";
 
 	$result=mysqli_query($conn,$sql);
     
@@ -29,6 +32,7 @@ function InfoInstDoacoes($id)
 	// echo $html;
 	mysqli_close($conn);
 	return $html;
+
 }
 
 $server = new soap_server();
