@@ -86,13 +86,13 @@ if(isset($erros['pass'])) echo "<p class=\"alerta\">". $erros['pass'] ."</p>";  
                         <label for="dias">Dia</label>
                     </div>
                     <select name="dias" class="form-control">
-                        <option value="1">Domingo</option>
-                        <option value="2">Segunda-feira</option>
-                        <option value="3">Terça-feira</option>
-                        <option value="4">Quarta-feira</option>
-                        <option value="5">Quinta-feira</option>
-                        <option value="6">Sexta-feira</option>
-                        <option value="7">Sábado</option>    
+                        <option value="Domingo">Domingo</option>
+                        <option value="Segunda-feira">Segunda-feira</option>
+                        <option value="Terça-feira">Terça-feira</option>
+                        <option value="Quarta-feira">Quarta-feira</option>
+                        <option value="Quinta-feira">Quinta-feira</option>
+                        <option value="Sexta-feira">Sexta-feira</option>
+                        <option value="Sábado">Sábado</option>    
                     </select>
                 </div>
                 <div class="col">

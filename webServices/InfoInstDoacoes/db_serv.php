@@ -1,5 +1,7 @@
 <?php
 require_once "../lib/nusoap.php";
+include SITE_ROOT . '/config/db_settings.php';
+
 
 function InfoInstDoacoes($id)
 {   //$conn = getConnection();
