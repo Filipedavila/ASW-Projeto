@@ -3,15 +3,19 @@ require_once "../lib/nusoap.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // The request is using the POST method
-    if(isset($_POST['id'])){
-        $id = $_POST['id'];
+    if(isset($_POST['idVol']) && isset($_POST['utilizador']) && isset($_POST['password']) && isset($_POST['IDInst']) && isset($_POST['IDDoacao']) ){
+        $idVol = $_POST['idVol'];
+        $utilizador = $_POST['utilizador'];
+        $password = $_POST['password'];
+        $IDInst = $_POST['IDInst'];
+        $IDDoacao = $_POST['IDDoacao'];
 
 
     $client = new nusoap_client(
         'http://appserver-01.alunos.di.fc.ul.pt/~asw09/ASW-Projeto/webServices/VolRecolhaDoacao/db_serv.php'
     );
     $error = $client->getError();
-    $result = $client->call('InfoInstDoações', array('id' => $id));	//handle errors
+    $result = $client->call('VolRecolhaDoacao', array('idVol' => $idVol, 'utilizador' => $utilizador, 'password' => $password , 'IDInst' => $IDInst, 'IDDoacao' => $IDDoacao));	//handle errors
 
     echo "<h2>Pedido</h2>";
     echo "<pre>" . htmlspecialchars($client->request, ENT_QUOTES) . "</pre>";

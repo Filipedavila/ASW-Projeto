@@ -23,15 +23,20 @@ function InfoInstDoacoes($id)
 	AND Alimento.inst_id = Disponibilidade.id_U;";
 
 	$result=mysqli_query($conn,$sql);
-    
-	while($row=mysqli_fetch_array($result,MYSQLI_NUM))
-	{
-		$html[]="<tr><td>".implode("</td><td>",$row)."</td></tr>";
+	if (mysqli_num_rows($result) == 0) { 
+		return "Sem dados";
+	} else {
+
+		while($row=mysqli_fetch_array($result,MYSQLI_NUM))
+			{
+				$html[]="<tr><td>".implode("</td><td>",$row)."</td></tr>";
+			}
+			$html="<table>".implode("\n",$html)."</table>";	
+			// echo $html;
+			mysqli_close($conn);
+			return $html;
+
 	}
-	$html="<table>".implode("\n",$html)."</table>";	
-	// echo $html;
-	mysqli_close($conn);
-	return $html;
 
 }
 
