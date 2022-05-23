@@ -11,6 +11,7 @@ if(isset($_GET['id'])){
     $id =$_GET['id'];
     $data = getInstitutionById( $id );
     $dataDisp = getDisponibilidades($id);
+    $dataDonation = getAlimentos($id);
 }
 
 ?>
@@ -111,6 +112,25 @@ if(isset($_GET['id'])){
                                 <tr class="thead-dark">
                                     <th>Dia</th>
                                     <th>Hora Inicio</th>
+                                    <th>Hora Fim</th>
+                                </tr>
+                                <?php foreach($dataDisp as $user ): ?>
+                                    <tr>
+                                        <td><?= $user[0] ?></td>
+                                        <td><?= $user[1] ?></td>
+                                        <td><?= $user[2] ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </table>
+                        <?php endif;?>
+                    </div>
+                    <div class="card-body">
+                        <h3>Itens Para Doação</h3>
+                        <?php if(isset($dataDisp)) :?>
+                            <table class="table table-striped  table-hover">
+                                <tr class="thead-dark">
+                                    <th>Item</th>
+                                    <th>Quantidade</th>
                                     <th>Hora Fim</th>
                                 </tr>
                                 <?php foreach($dataDisp as $user ): ?>

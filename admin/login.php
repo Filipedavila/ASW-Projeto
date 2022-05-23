@@ -19,8 +19,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
          
               if($login){
 
-                 echo "<p> LOGIN COM SUCESS</p>";
-                 header( "Location:index.php?page=home" );   /// NO FINAL TEMOS QUE ALTERAR
+                 echo "<p> LOGIN COM SUCESSO</p>";
+                 header( "Location:index.php?page=home" );
                  die();
             /// redirecionar para outra pagina, temos de arranjar forma de permanecer com login
                

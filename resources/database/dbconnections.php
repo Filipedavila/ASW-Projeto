@@ -99,3 +99,19 @@ function getConnection(){
     mysqli_close($conn);
     return $result;
   }
+      function getJoinedData($query){
+          $conn = getConnection();
+          $result = mysqli_query($conn,$query);
+
+          $arrayResult = array();
+
+          while($nt=mysqli_fetch_row($result)) {
+          array_push($arrayResult,$nt[0]);
+
+          }
+          mysqli_free_result($result);
+          mysqli_close($conn);
+          return $arrayResult;
+
+
+  }

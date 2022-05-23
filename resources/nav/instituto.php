@@ -1,20 +1,15 @@
 <?php
 ?>
+
 <li class="nav-item">
-    <a class="nav-link" href="<?php echo 'logout.php' . '?id=' . $_SESSION['id']  ?>"><span class="navbar-text text-light"> Logout</span></a>
+    <a class="nav-link text-light" href="<?php echo 'logout.php' . '?id=' . $_SESSION['id']  ?>">Logout</a>
 </li>
-<!-- Dropdown -->
-<li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle text-light" href="#" id="navbardrop" data-toggle="dropdown">
-        Procurar Voluntarios
-    </a>
-    <div class="dropdown-menu">
-        <a class="dropdown-item" href="<?php echo 'search.php' . '?id=' . $_SESSION['id'] . '&search=local'  ?>">Voluntarios Perto</a>
-        <a class="dropdown-item" href="<?php echo 'search.php' . '?id=' . $_SESSION['id'] . '&search=choose'  ?>">Voluntarios por Local </a>
-    </div>
+
+<li class="nav-item">
+    <a class="nav-link text-light" href="<?php echo 'index.php' . '?page=' . "home"   ?>">Pesquisar Voluntários</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link text-light" href="#">Mensagens</a>
+    <a class="nav-link text-light" href="<?php echo 'index.php' . '?page=' . "mensagem"   ?>">Mensagens</a>
 </li>
 <li class="nav-item">
     <a class="nav-link text-light" href="<?php echo 'index.php' . '?page=' . "instituto_settings" . "&id=". $_SESSION['id']  ?>">Preferências</a>

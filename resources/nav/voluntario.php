@@ -14,12 +14,14 @@
         Procurar Institutos
     </a>
     <div class="dropdown-menu">
-        <a class="dropdown-item" href="index.php?page=search">Institutos Disponiveis</a>
+        <a class="dropdown-item" href="index.php?page=home">Institutos Disponiveis</a>
         <a class="dropdown-item " href="index.php?page=advanced_search">Pesquisa Avançada</a>
 
     </div>
 </li>
-
+<li class="nav-item">
+    <a class="nav-link text-light" href="<?php echo 'index.php' . '?page=' . "mensagem"   ?>">Mensagens</a>
+</li>
 <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle text-light" href="#" id="navbardrop" data-toggle="dropdown">
         Preferências

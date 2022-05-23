@@ -13,7 +13,7 @@ $utilizador = array();
 
     if(isset($_SESSION['id'])){
 
-        $data =  getInstitution($_SESSION['id']);
+        $data =  getInstitutionById($_SESSION['id']);
 
 
 
@@ -108,7 +108,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
         }
     }
-    // fazer chamada a função para registar
     
     
 
@@ -120,6 +119,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     
 }
+
+
+echo '<script type="text/javascript">',
+'getDistritos();',
+'</script>';
+
 
 
 
@@ -183,80 +188,38 @@ echo " Nome em falta";?>
             </div>
 
 
-
             <div class="row">
                 <div class="col">
-                    <label for="dist" class="">
+                    <label for="dist" class="" >
                         Distrito
                     </label>
-                    <select name="codigo_distrito" class="form-control" id="dist">
-                    <?php
+                    <script type="text/javascript" src="./js/locations.js"></script>
 
-                    $distritos = getDistritos();
-                    if($distritos > 0 ){
-                    foreach($distritos as $key => $valor ){
-                       $option =  "<option ";
-                        if($valor == $data[0]['codig_distrito']){
-                            $option .= " selected='selected' ";
-                        }
-                    echo  $option ." value=" . $valor['cod_distrito'] . ">". $valor['nome']   . "</option>" ; 
-                    }
+                    <select name="cod_distrito"  class="form-control"  id="dist">
+                        <option> Selecione </option>
 
-                    }
-                    ?>
 
-                </select>
-
+                    </select>
                 </div>
                 <div class="col">
-                    <label for="conc" class="">
+                    <label for="conc" class="" >
                         Concelho
                     </label>
-                    <select name="codigo_concelho" class="form-control" id="conc">
-                        <?php
-
-                    $concelho = getConcelhos();
-                    if($concelho > 0 ){
-                    foreach($concelho as $valor ){
-                        $option =  "<option ";
-                        if($valor == $data[0]['codigo_concelho']){
-                            $option .= " selected='selected' ";
-                        }
-                    echo  $option ." value=" . $valor['codigo_concelho'] . ">". $valor['nome']   . "</option>" ; 
-                    
-
-                    }
-                }
-
-                ?>
+                    <select name="cod_concelho" class="form-control"  id="conc">
+                        <option> Selecione </option>
                     </select>
 
                 </div>
                 <div class="col">
-                    <label for="freg" class="">
+                    <label for="freg" class="" >
                         Freguesia
                     </label>
-                   <select name="codigo_freguesia" class="form-control" id="freg">
-                    <?php
-
-                        $freguesias = getFreguesias();
-                        if($freguesias > 0 ){
-                            foreach($freguesias as $freg ){
-                                $option =  "<option ";
-                                if($freg == $data[0]['codigo_freguesia']){
-                                    $option .= " selected='selected' ";
-                                }
-                            echo  $option ." value=" . $freg['cod_freguesia'] . ">".$freg['nome']   . "</option>" ; 
-                            }
-        
-
-
-                        }
-                
-                        ?>
+                    <select name="cod_freguesia" class="form-control"  id="freg">
+                        <option> Selecione </option>
                     </select>
 
                 </div>
+
 
             </div>
 

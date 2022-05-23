@@ -17,7 +17,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       
             if($login){
 
-              echo "<p> LOGIN COM SUCESS</p>";
+              echo "<p> LOGIN COM SUCESSO</p>";
               header( "Location: index.php?page=home" );
               die();
 
@@ -92,42 +92,42 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="carousel-inner">
 
                 <div class="carousel-item active">
-                    <img  class="d-block w-100" src="img/food-donate.jpg" class="rounded img-fluid " alt="First slide"height="350px">
+                    <img  class="d-block w-100" src="img/food-donate.jpg" class="rounded img-fluid " alt="First slide"width="30vw">
                     <div class="carousel-caption d-none d-md-block">
                         <h5 class=" w-100  bg-dark">Refood, o Nosos lema é ajudar o próximo</h5>
 
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img  class="d-block w-100" src="img/volunteer.jpg" class="rounded img-fluid" alt="Second slide"height="350px">
+                    <img  class="d-block w-100" src="img/volunteer.jpg" class="rounded img-fluid" alt="Second slide"width="30vw">
                     <div class="carousel-caption d-none d-md-block">
 
                         <h5 class=" w-100  bg-dark">Junta te a nós nesta missão</h5>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img  class="d-block w-100" src="img/volunterGivingFood.jpeg" class="rounded img-fluid" alt="Second slide"height="350px">
+                    <img  class="d-block w-100" src="img/volunterGivingFood.jpeg" class="rounded img-fluid" alt="Second slide"width="30vw">
                     <div class="carousel-caption d-none d-md-block">
                         <h5 class=" w-100  bg-dark">Refood, o Nosos lema é ajudar o próximo</h5>
 
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img  class="d-block w-100" src="img/volunterFoodBox.jpeg" class="rounded img-fluid" alt="Second slide"height="350px">
+                    <img  class="d-block w-100" src="img/volunterFoodBox.jpeg" class="rounded img-fluid" alt="Second slide"width="30vw">
                     <div class="carousel-caption d-none d-md-block">
 
                         <h5 class=" w-100  bg-dark">Junta te a nós nesta missão</h5>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img  class="d-block w-100" src="img/help.jpeg" class="rounded img-fluid" alt="Second slide"height="350px">
+                    <img  class="d-block w-100" src="img/help.jpeg" class="rounded img-fluid" alt="Second slide"width="30vw">
                     <div class="carousel-caption d-none d-md-block">
                         <h5 class=" w-100  bg-dark">Refood, o Nosos lema é ajudar o próximo</h5>
 
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img  class="d-block w-100" src="img/food-donate.jpg" class="rounded img-fluid" alt="Second slide"height="350px">
+                    <img  class="d-block w-100" src="img/food-donate.jpg" class="rounded img-fluid" alt="Second slide"width="30vw">
                     <div class="carousel-caption d-none d-md-block">
 
                         <h5 class=" w-100  bg-dark">Junta te a nós nesta missão</h5>

@@ -72,8 +72,8 @@ if($_SERVER["REQUEST_METHOD"] == FORM_METHOD){
 
 }
 
-echo '<script type="text/javascript">',
-'getDistritos();',
+echo '<script type="text/javascript">'.
+'getDistritos();'.
 '</script>';
 
 
@@ -191,6 +191,7 @@ echo '<script type="text/javascript">',
                     <th>Concelho</th>
                     <th>Freguesia</th>
                     <th>Perfil</th>
+                    <th>chat</th>
                 </tr>
                  <?php foreach($result as $user ): ?>
                      <?php if(count($user) > 0): ?>
@@ -202,6 +203,7 @@ echo '<script type="text/javascript">',
                              <td><?= $user['nome_concelho'] ?></td>
                              <td><?= $user['nome_freguesia'] ?></td>
                              <td><a href="index.php?page=perfil_instituto&id=<?= $user['id'] ?>"> perfil</a></td>
+                             <td><a href="index.php?page=mensagem&chatId=<?= $user['id'] ?>"> enviar msg</a></td>
 
 
                          </tr>

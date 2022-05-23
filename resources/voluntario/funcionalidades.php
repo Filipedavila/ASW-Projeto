@@ -21,6 +21,27 @@ function getDisponibilidades($id)
 }
 
 /**
+ * @param $id
+ * @return void
+ */
+function getAlimentos($id){
+    $query = "SELECT * FROM Alimento WHERE Alimento.inst_id = $id";
+
+
+}
+
+function commitToDonation($idAlimento,$idVolunter){
+
+}
+
+function updateAlimentoQuantity($idAlimento,$quantityTaken){
+
+
+}
+
+
+
+/**
  * @param $id_U
  * @param $hora_inicio
  * @param $hora_fim
