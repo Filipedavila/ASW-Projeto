@@ -29,7 +29,14 @@ function InfoInstDoacoes($id)
 		return "Sem dados";
 	} else {
 		
+		$response = preg_replace("/(</?)(\w+):([^>]*>)/", "$1$2$3", $result);
+		$xml = new SimpleXMLElement($response);
+		$body = $xml->xpath('//SBody')[0];
+		$array = json_decode(json_encode((array)$body), TRUE); 
+		print_r($array);
+		return $array;
 
+		/*
 		while($row=mysqli_fetch_array($result,MYSQLI_NUM))
 
 			{
@@ -39,7 +46,7 @@ function InfoInstDoacoes($id)
 			// echo $html;
 			mysqli_close($conn);
 			return $html;
-
+		*/
 	}
 
 }
