@@ -29,17 +29,16 @@ function InfoInstDoacoes($id)
 		return "Sem dados";
 	} else {
 		
-		$data = array();
 
 		while($row=mysqli_fetch_array($result,MYSQLI_NUM))
-				$data .= $row;
+
 			{
 				$html[]="<tr><td>".implode("</td><td>",$row)."</td></tr>";
 			}
 			$html="<table>".implode("\n",$html)."</table>";	
 			// echo $html;
 			mysqli_close($conn);
-			return $data;
+			return $html;
 
 	}
 
