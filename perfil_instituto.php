@@ -6,13 +6,53 @@ if(!isLoggedIn() ){
 }
 $data = array();
 
+if(isset($_SESSION['id'])){
+    $idVol = ($_SESSION['id']);
+    }
 
 if(isset($_GET['id'])){
     $id =$_GET['id'];
     $data = getInstitutionById( $id );
     $dataDisp = getDisponibilidades($id);
-    $dataDonation = getAlimentos($id);
+    $dataDoacao = getDonationByInstitute($id);
 }
+
+/*
+//Caso tenha sido feito um pedido Post
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+    // e caso a variavel submit esteja assignada
+    if(array_key_exists('submit',$_POST)){
+    echo 'submit';
+
+    //atualizar a doacao, mas preciso de obter o id da doacao quando clico no botao de recolher
+     //$idDonation = submit.value;
+
+      $updateDoacao =  updateDonation($idVol, $id, $idDonation); 
+      
+      
+    }
+
+    //se for true
+    if($updateDoacao == true ){
+        echo 'true';
+        header("Location: index.php?page=perfil_instituto&id=".$id);
+        
+        if(isset($_GET['id'])){
+            $id =$_GET['id'];
+            $data = getInstitutionById( $id );
+            $dataDisp = getDisponibilidades($id);
+            $dataDoacao = getDonationByInstitute($id);
+        }
+
+
+      }else{
+      echo "Erro";
+    }
+}
+*/
+
+
 
 ?>
 
@@ -124,26 +164,41 @@ if(isset($_GET['id'])){
                             </table>
                         <?php endif;?>
                     </div>
-                    <div class="card-body">
-                        <h3>Itens Para Doação</h3>
-                        <?php if(isset($dataDisp)) :?>
-                            <table class="table table-striped  table-hover">
-                                <tr class="thead-dark">
-                                    <th>Item</th>
-                                    <th>Quantidade</th>
-                                    <th>Hora Fim</th>
-                                </tr>
-                                <?php foreach($dataDisp as $user ): ?>
-                                    <tr>
-                                        <td><?= $user[0] ?></td>
-                                        <td><?= $user[1] ?></td>
-                                        <td><?= $user[2] ?></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </table>
-                        <?php endif;?>
-                    </div>
                 </div>
+                <form action="" method="POST" id="registro">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                        
+                            <h3>Doações disponíveis para recolher</h3>
+                            <?php if(isset($dataDoacao)) :?>
+                                <table class="table table-striped  table-hover">
+                                    <tr class="thead-dark">
+                                        <th>Dia</th>
+                                        <th>Hora Inicio</th>
+                                        <th>Hora Fim</th>
+                                        <th>Id</th>
+                                        <th>Doacao</th>
+                                        <th>Quant.</th>
+                                        <th>Recolher doação</th>
+                                    </tr>
+                                    <?php foreach($dataDoacao as $user ): ?>
+                                        <tr>
+                                            <td><?= $user['dia'] ?></td>
+                                            <td><?= $user['hora_inicio'] ?></td>
+                                            <td><?= $user['hora_fim'] ?></td>
+                                            <td><?= $user['id'] ?></td>
+                                            <td><?= $user['tipo_doacao'] ?></td>
+                                            <td><?= $user['quantidade'] ?></td>
+                                            <!-- o value do botao é o id de cada id da doacao -->
+                                            <td><button type="submit" form="registro" name="submit" value=<?= $user['id'] ?>">Recolher</button></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                    
+                                </table>
+                            <?php endif;?>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

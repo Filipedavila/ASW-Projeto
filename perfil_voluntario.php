@@ -8,6 +8,7 @@ $data = array();
 if(isset($_SESSION['id'])){
     $id = $_SESSION['id'];
     $data = getVoluntario( $id );
+    $dataDoacao = getDonationByVol($id);
 }
 ?>
 
@@ -89,6 +90,33 @@ if(isset($_SESSION['id'])){
                         </div>
                     </div>
                 </div>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3>Recolhas</h3>
+                        <?php if(isset($dataDoacao)) :?>
+                            <table class="table table-striped  table-hover">
+                                <tr class="thead-dark">
+                                    <th>Dia</th>
+                                    <th>Hora Inicio</th>
+                                    <th>Hora Fim</th>
+                                    <th>Id</th>
+                                    <th>Doacao</th>
+                                    <th>Quant</th>
+                                </tr>
+                                <?php foreach($dataDoacao as $user ): ?>
+                                    <tr>
+                                        <td><?= $user['dia'] ?></td>
+                                        <td><?= $user['hora_inicio'] ?></td>
+                                        <td><?= $user['hora_fim'] ?></td>
+                                        <td><?= $user['id'] ?></td>
+                                        <td><?= $user['tipo_doacao'] ?></td>
+                                        <td><?= $user['quantidade'] ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                
+                            </table>
+                        <?php endif;?>
+                    </div>
             </div>
         </div>
     </div>

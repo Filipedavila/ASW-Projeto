@@ -1,6 +1,7 @@
 <?php
 require_once "../lib/nusoap.php";
-include SITE_ROOT . '/config/db_settings.php';
+include  '../../init.php';
+//include SITE_ROOT . '/config/db_settings.php';
 
 error_reporting(E_ALL & ~E_NOTICE);
 ini_set("display_errors", 1);
@@ -19,13 +20,13 @@ function VolRecolhaDoacao($IDVol, $utilizador, $password, $IDInst, $IDDoacao)
 	$result_utilizador=mysqli_query($conn,$utilizador);
 	$user = mysqli_fetch_assoc($result_utilizador);
 	echo $result_utilizador;
-
+	$pass = password_hash($password, PASSWORD_BCRYPT);
 	//a parte do password nao ta a funcionar nao sei porque
-	$pass = password_verify($password, $user['pass']);
+	//$pass = password_verify($password, $user['pass']);
 	if ($pass == true){
-		//echo 'password true';
+		echo 'password true';
 	} else {
-		//echo 'password false';
+		echo 'password false';
 		//return 'Nao aceite';
 	}
 		
