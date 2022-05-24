@@ -1,18 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ID</title>
+    <title>Web Service: Voluntario recolha doação</title>
+    <link rel="stylesheet" href="web-service.css">
 </head>
-
 <body>
-   <h1>Web Service: Informação de Voluntario por Doação</h1>
+    <h1>Voluntario recolha doação</h1>
     <form action="db_cli.php" method="POST">
-        <label for="nome">ID:</label><br>
-        <input type="text" id="nome" name="nome" value="">
+        <label for="nome">ID Voluntario:</label><br>
+        <input type="text" id="IDVol" name="IDVol" value="">
         <br>
+
+        <label for="nome">Utilizador email:</label><br>
+        <input type="text" id="utilizador" name="utilizador" value="">
+        <br>
+
+        <label for="nome">Password:</label><br>
+        <input type="text" id="password" name="password" value="">
+        <br>
+
+        <label for="nome">Id Instituicao:</label><br>
+        <input type="text" id="IDInst" name="IDInst" value="">
+        <br>
+
+        <label for="nome">Id Doacao:</label><br>
+        <input type="text" id="IDDoacao" name="IDDoacao" value="">
+        <br>
+
         <input type="submit" value="Submit">
     </form>
 </body>
