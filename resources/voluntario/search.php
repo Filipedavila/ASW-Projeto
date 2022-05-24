@@ -292,11 +292,50 @@ function getFreguesiaById($idConcelho,$idFreguesia)
  * @param $id
  * @return array
  */
-function getDonationByInstitute($id)
+function getDonationByInstitute($idInst)
 {
-    $query = "SELECT * FROM Alimento WHERE inst_id = '{$id}'";
+    $query = "SELECT * FROM Alimento WHERE inst_id = '{$idInst}' AND vol_id IS NULL";
     $result = getQuery($query);
     return $result;
 }
+
+function getIDDonationByInstitute($idInst)
+{
+    $query = "SELECT id FROM Alimento WHERE inst_id = '{$idInst}' AND vol_id IS NULL";
+    $result = getQuery($query);
+    return $result;
+}
+
+function getDonationByVol($idVol)
+{
+    $query = "SELECT * FROM Alimento WHERE vol_id = {$idVol}";
+    $result = getQuery($query);
+    return $result;
+}
+
+function updateDonation($idVol, $idInst, $idDonation){
+
+    $conn = getConnection();
+    $query = "UPDATE Alimento SET vol_id = '{$idVol}' WHERE id = '{$idDonation}' AND inst_id = '{$idInst}' AND vol_id is NULL";
+    if(mysqli_query($conn, $query))
+        return true;
+    else {
+        return false;
+    }
+}
+
+
+function updateAndGetDonation($idVol, $idInst, $idDonation){
+
+    $conn = getConnection();
+    $query = "UPDATE Alimento SET vol_id = '{$idVol}' WHERE id = '{$idDonation}' AND inst_id = '{$idInst}' AND vol_id is NULL";
+    if(mysqli_query($conn, $query))
+        echo "updated";
+    else {
+        echo "Error". mysqli_error($conn);
+    }
+    return getDonationByInstitute($idInst);
+}
+
 
 ?>
