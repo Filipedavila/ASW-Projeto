@@ -1,14 +1,12 @@
 <?php
 /**
- * @param $id
- * @return bool
- */
+ *
 function isValidId($id){
     $query = "SELECT id FROM Utilizador WHERE Utilizador.id = {$id} LIMIT 1";
     $result = existsQuery($query);
     return $result;
 }
-
+/**/
 function getUserInfo($id){
     $query = "SELECT id, nome,tipo FROM Utilizador WHERE Utilizador.id ={$id}";
     $result = getData($query);

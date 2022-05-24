@@ -64,6 +64,7 @@ function initChatSystem(idUser,name,chatContact){
         timeout:1000,
         data: {"id":idUser,"request":"GET_FRIENDS"},
         success:function (data){
+            data = data || [];
             data.forEach((id)=>{
                friendList.push(id);
             });

@@ -1,5 +1,33 @@
 <?php
 
+/**
+ * @param $id
+ * @return bool
+ */
+function isValidId($id){
+    $query = "SELECT id FROM Utilizador WHERE Utilizador.id = {$id} LIMIT 1";
+    $result = existsQuery($query);
+    return $result;
+}
+
+/**
+ * @param $id
+ * @return bool
+ */
+function isValidDonation($id){
+    $query = "SELECT id FROM Alimento WHERE Alimento.id = {$id} LIMIT 1";
+    $result = existsQuery($query);
+    return $result;
+}
+
+
+function getDonationById($id){
+    $query = "SELECT * FROM Alimento WHERE Alimento.id = {$id} ";
+    $result = getQuery($query);
+    return $result;
+
+}
+
 function searchInstitutionsByConditions($valuesUtilizador,$valuesInstituto)
 {
     $query = "SELECT * FROM Utilizador,Instituicao,Concelho, Freguesia, Distrito WHERE Utilizador.id = Instituicao.id_U 
@@ -298,6 +326,14 @@ function getDonationByInstitute($idInst)
     $result = getQuery($query);
     return $result;
 }
+
+function getIdFromDonatedItems($idInst)
+{
+    $query = "SELECT id FROM Alimento WHERE inst_id = '{$idInst}' AND vol_id IS NULL";
+    $result = getJoinedData($query);
+    return $result;
+}
+
 
 function getIDDonationByInstitute($idInst)
 {
