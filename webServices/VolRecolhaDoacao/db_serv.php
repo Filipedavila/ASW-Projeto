@@ -20,7 +20,7 @@ function getRowSoap($query){
 
 }
 function VolRecolhaDoacao($IDVol, $utilizador, $password, $IDInst, $IDDoacao){
-
+    $conn = getConnection();
     $voluntario = getVoluntario($IDVol);
 
     // se existir volutnario
@@ -34,11 +34,13 @@ function VolRecolhaDoacao($IDVol, $utilizador, $password, $IDInst, $IDDoacao){
 
             // verificar se existem donations disponiveis do instituto escolhido
             $query_donation = "SELECT * FROM Alimento WHERE inst_id = {$IDInst} AND id = {$IDDoacao} AND vol_id IS NULL";
-            $result_inst = getQuery($query_donation);
+            //$result_inst = getQuery($query_donation);
+            $result_inst = mysqli_query($conn,$query_donation);
             if($result_inst){
 
                 $query = "UPDATE Alimento SET vol_id = {$IDVol} WHERE inst_id = {$IDInst} AND id = {$IDDoacao}";
-                $result=setQuery($query);
+                //$result=setQuery($query);
+                $result=mysqli_query($conn,$query);
 
                 //echo 'aceite';
                 /*
