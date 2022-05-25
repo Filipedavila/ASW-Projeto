@@ -1,7 +1,8 @@
 <?php ?>
     
-    <article class="row mt-5">
-    <div class="col ml-5">
+    <article class=" container  mt-5 justify-content-center ">
+        <div class="row">
+    <div class="col ">
         <div class="row d-flex justify-content-center">
 
             <h1>REFOOD</h1>
@@ -11,7 +12,7 @@
         </div>
     </div>
     <div class="col mr-4">
-        <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade carousel-dark w-25" data-ride="carousel">
+        <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade carousel-dark " data-ride="carousel">
 
             <div class="carousel-inner">
 
@@ -59,7 +60,7 @@
                 </div>
 
             </div>
-
+        </div>
 
     </div>
 

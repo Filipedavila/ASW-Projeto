@@ -250,7 +250,19 @@ function getVoluntario($id)
     $result = getQuery($query);
     return $result;
 }
+/**
+ * @param $id
+ * @return array
+ */
+function getVoluntarioForSoap($id)
+{
 
+    $query = "SELECT DISTINCT * FROM Utilizador,Voluntario
+    WHERE Utilizador.id = {$id} LIMIT 1;";
+
+    $result = getData($query);
+    return $result;
+}
 /**
  * @param $id
  * @return array
