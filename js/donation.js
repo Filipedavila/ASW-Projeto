@@ -25,7 +25,7 @@ var path = window.location.pathname;
 var currentDirectory = path.substring(0, path.lastIndexOf('/'));
 
 var donationApp;
-const IntervalUpdate = 3000;
+const IntervalUpdate = 1000;
 var intervalUpdateNewMsg ;
 
 function update(){

@@ -47,11 +47,11 @@ function initChatSystem(idUser,name,chatContact){
     let friendList =[];
     console.log(chatContact);
 
-    let isNotChatRequest = (chatContact === 'NO_CHAT_INITIATED');
+    let NoChatRequest = (chatContact === 'NO_CHAT_INITIATED');
 
 
     console.log(friendList);
-    if(!isNotChatRequest){
+    if(!NoChatRequest){
 
         friendList.push(chatContact[0]);
     }
@@ -77,7 +77,7 @@ function initChatSystem(idUser,name,chatContact){
     });
 
     console.log(friendList);
-    if(!isNotChatRequest){
+    if(!NoChatRequest){
         $("#"+chatContact[1]).click();
     }
 
@@ -88,7 +88,7 @@ function initChatSystem(idUser,name,chatContact){
 
 
 //1 descobrir o meu id, dois , ir buscar todos os usuarios de quem tenho mensagens e por um event listener em cada
-//um deles.... criar ent
+
 
 
 class Window{
@@ -133,16 +133,20 @@ class Window{
 
     init(){
         //adicionar os utilizadores com mensagem a grupo de pessoas e adiciona os eventos de click aos mesmos com o id
-        this.listOfContacts.forEach((contact)=>{
-            this.addUserToPage(contact[1],contact[0]);
+        if(this.listOfContacts == 0){
+
+        }else {
 
 
-
-        })
-        console.log( this.listOfContacts[0][1]);
-        $("#"+ this.listOfContacts[0][0]).click();
+            this.listOfContacts.forEach((contact) => {
+                this.addUserToPage(contact[1], contact[0]);
 
 
+            })
+
+            $("#" + this.listOfContacts[0][0]).click();
+
+        }
     }
 
     addUserToPage(name, id){

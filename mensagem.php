@@ -11,6 +11,9 @@ if(isset($_SESSION['id'])) {
     $name = $_SESSION['user'];
     // ver se este utilizador tem mensagens
 
+
+
+
     if(isset($_GET["chatId"])){
         $chatId= $_GET["chatId"];
         if(isValidId($chatId)){
