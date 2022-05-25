@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     $client = new nusoap_client(
-        'http://appserver-01.alunos.di.fc.ul.pt/~asw09/ASW-Projeto/webServices/VolRecolhaDoacao/db_serv.php'
+        'http://appserver-01.alunos.di.fc.ul.pt/~asw09/ASW-Projeto/webServices/VolRecolhaDoacao/db_serv.php?wsdl',true
     );
     $error = $client->getError();
     $result = $client->call('VolRecolhaDoacao', array('IDVol' => $IDVol, 'utilizador' => $utilizador, 'password' => $password , 'IDInst' => $IDInst, 'IDDoacao' => $IDDoacao));	//handle errors
