@@ -11,16 +11,16 @@ if(isset($_SESSION['id'])) {
     $name = $_SESSION['user'];
     // ver se este utilizador tem mensagens
 
+    $nMessages = numberOfMessages($_SESSION['id']);
+
+    if (isset($_GET["chatId"])) {
+
+        $chatId = $_GET["chatId"];
+        if (isValidId($chatId)) {
+            $userInfo = json_encode(getUserInfo($chatId));
 
 
-
-    if(isset($_GET["chatId"])){
-        $chatId= $_GET["chatId"];
-        if(isValidId($chatId)){
-            $userInfo =json_encode(getUserInfo($chatId));
-
-
-        echo "<script>
+            echo "<script>
                 let contactChat = '$userInfo' ;
 
                 contactChat = JSON.parse(contactChat);
@@ -28,13 +28,33 @@ if(isset($_SESSION['id'])) {
                 initChatSystem( {$id}, \"{$name}\",contactChat);
               </script>";
 
-    }
-    }else {
+
+        }
+    } elseif ($nMessages == 0 && !isset($_GET["chatId"])) {
+
+        echo "<script>
+                let id = {$id};
+                let name = '{$name}';
+                 verifyIfHasMessages = setInterval(callAjax, 2000); 
+                 
+                 function callAjax(){
+                         console.log('teste');
+                     checkIfHasMessages();
+                 }
+                 
+    
+          
+            
+              </script>";
+
+
+    } else {
 
         echo "<script>
                 initChatSystem({$id},\"{$name}\",'NO_CHAT_INITIATED');
             </script>";
     }
+
 
 }
 ?>

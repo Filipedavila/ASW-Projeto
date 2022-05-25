@@ -131,7 +131,7 @@ echo '<script type="text/javascript">',
 
 ?>
 
-<article  class="form-group  justify-content-center">
+<article  class=" container form-group  justify-content-center">
     <br>
 <!--  verificar se existem erros ou dados em falta -->
 <?php if (count($erros) >0  || count($missing) >0){ echo "

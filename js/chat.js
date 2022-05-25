@@ -2,14 +2,7 @@
  * Filipe Dávila Fernandes aluno nº55981
  */
 "use strict";
-const REQUEST_ID_FIELD ="id";
-const FRIEND_ID_FIELD="IDChat";
-const REQUEST_FIELD = "request";
-const REQUEST_GET_FRIENDS ="GET_FRIENDS";
-const REQUEST_SEND_MESSAGE ="SEND_MESSAGE";
-const REQUEST_GET_MESSAGES ="GET_MESSAGES";
-const REQUEST_SET_SEEN ="SET_SEEN";
-const REQUEST_UPDATE_MESSAGE="UPDATE";
+
 
 const URL_CHAT_PHP_APP = "/resources/chat/chat.php";
 //construir os objetos, depois ir buscar a lista de usuarios que estou a falar e depois por o evento em cada uma desses nomes em que faz o pedido
@@ -21,9 +14,28 @@ var currentDirectory = path.substring(0, path.lastIndexOf('/'));
 
 var chatApp;
 var intervalUpdateNewMsg;
+var verifyIfHasMessages;
 
+
+
+    function checkIfHasMessages(){
+
+        $.ajax({
+            type:'POST',
+            url: currentDirectory + URL_CHAT_PHP_APP,
+            dataType: 'json',
+            data: {'id': id, 'request': 'NUMBER_OF_MESSAGES'},
+            success: function (data) {
+                if(data > 0){
+                    clearInterval(verifyIfHasMessages);
+                    initChatSystem(id,name,'NO_CHAT_INITIATED');
+
+                }
+            }});
+}
 
 function updateCurrentChat(){
+
     if(chatApp != null) {
         chatApp.updateMessages();
     }
@@ -33,24 +45,15 @@ function checkForAlerts(){
     if(chatApp != null) {
         chatApp.checkForNewAlerts();
     }
-}
-/*
-function  startChat(id, name, idFriend){
-    initChatSystem(id,name);
-    addUserToPage()
-
 
 }
-*/
+
 
 function initChatSystem(idUser,name,chatContact){
     let friendList =[];
-    console.log(chatContact);
-
     let NoChatRequest = (chatContact === 'NO_CHAT_INITIATED');
 
 
-    console.log(friendList);
     if(!NoChatRequest){
 
         friendList.push(chatContact[0]);
@@ -76,7 +79,7 @@ function initChatSystem(idUser,name,chatContact){
       }
     });
 
-    console.log(friendList);
+
     if(!NoChatRequest){
         $("#"+chatContact[1]).click();
     }
@@ -228,7 +231,7 @@ class Window{
             success:function (data){
                 let messages = JSON.parse(data);
                 messages.forEach((message)=>{
-                    console.log(message);
+
                     chatApp.addMessageToWindow(message["id_Sender"],message["message"]);
                     if(message["seen"]==0){
                         chatApp.setMessageSeen(message["messageId"]);
@@ -314,7 +317,7 @@ class Window{
                 });
 
             },
-        })
+        });
     }
 
 

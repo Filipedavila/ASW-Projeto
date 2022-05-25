@@ -15,6 +15,20 @@ function getUserInfo($id){
 
 }
 
+
+
+/**
+ *
+/**/
+function numberOfMessages($id){
+    $query = "SELECT COUNT(messageId) FROM Message WHERE Message.id_Sender = {$id} OR Message.id_Receiver = {$id}";
+    $result = getJoinedData($query);
+
+    return $result[0];
+
+}
+
+
 /**
  * @param $idUser
  * @param $idChatBuddy

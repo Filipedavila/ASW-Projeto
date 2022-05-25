@@ -82,6 +82,17 @@ if(isset($_REQUEST[REQUEST_ID_FIELD])) {
 
 
             }
+            elseif ($_REQUEST[REQUEST_FIELD]==="NUMBER_OF_MESSAGES") {
+
+
+                //obter numero de mensagems existentes
+                $messages = numberOfMessages($idUser);
+
+                header("Content-Type: application/json");
+                echo json_encode($messages);
+
+
+            }
 
         }
     } else {

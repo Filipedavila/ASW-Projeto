@@ -184,7 +184,7 @@ echo '<script type="text/javascript">'.
                  <div class="row">
         <div class="col">
             <table class="d-flex justify-content-center table table-striped  table-hover" id="tabela">
-                <tr class="thead-dark">
+                <tr class="thead-dark text-center">
                     <th>Nome Instituição</th>
                     <th>Tipo Instituição</th>
                     <th>Distrito</th>
@@ -196,15 +196,14 @@ echo '<script type="text/javascript">'.
                  <?php foreach($result as $user ): ?>
                      <?php if(count($user) > 0): ?>
 
-                         <tr>
+                         <tr class="text-center">
                              <td><?= $user['nome'] ?></td>
                              <td><?= $user['tipo_inst'] ?></td>
                              <td><?= $user['nome_distrito'] ?></td>
                              <td><?= $user['nome_concelho'] ?></td>
                              <td><?= $user['nome_freguesia'] ?></td>
-                             <td><a href="index.php?page=perfil_instituto&id=<?= $user['id'] ?>"> perfil</a></td>
-                             <td><a href="index.php?page=mensagem&chatId=<?= $user['id'] ?>"> enviar msg</a></td>
-
+                             <td><button onclick="window.location.href='index.php?page=perfil_instituto&id=<?= $user['id'] ?>'"> perfil</button></td>
+                             <td><button onclick="window.location.href='index.php?page=mensagem&chatId=<?= $user['id'] ?>'"> chat </button></td>
 
                          </tr>
                      <?php endif;?>
