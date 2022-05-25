@@ -3,7 +3,7 @@ require_once "../lib/nusoap.php";
 include  '../../init.php';
 
 echo "print get usuario";
-$voluntario = getVoluntarioForSoap(1);
+$voluntario = getVoluntario(1);
 print_r($voluntario);
 if($voluntario > 0){
     echo "identificou que existe o voluntarionasdkhaskshddas";
