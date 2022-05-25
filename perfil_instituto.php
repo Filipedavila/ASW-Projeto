@@ -127,8 +127,11 @@ if(isset($_GET['id'])){
                     </div>
                 </div>
 
+    
+
                 <div class="col card mb-4" id="donationDiv">
 
+                <h3>Recolher doação</h3>
 
                 </div>
             </div>
