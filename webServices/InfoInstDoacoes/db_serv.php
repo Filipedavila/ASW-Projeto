@@ -1,16 +1,15 @@
 <?php
 require_once "../lib/nusoap.php";
-include SITE_ROOT . '/config/db_settings.php';
-
+include  '../../init.php';
 
 function InfoInstDoacoes($id)
-{   //$conn = getConnection();
-	$dbhost="appserver-01.alunos.di.fc.ul.pt";
-	$dbuser="asw09";	$dbpass="aswgrupo09";	$dbname="asw09";
+{   $conn = getConnection();
+	//$dbhost="appserver-01.alunos.di.fc.ul.pt";
+	//$dbuser="asw09";	$dbpass="aswgrupo09";	$dbname="asw09";
 	//Cria a ligação à BD
-	$conn=mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
+	//$conn=mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
 	//Verifica a ligação à BD
-	if(mysqli_connect_error()){die("Database connection failed:".mysqli_connect_error());}
+	//if(mysqli_connect_error()){die("Database connection failed:".mysqli_connect_error());}
 
 	$sql="SELECT Instituicao.tipo_inst, Utilizador.telefone, Distrito.nome_Distrito, Concelho.nome_Concelho ,Freguesia.nome_Freguesia, Alimento.tipo_doacao, Alimento.quantidade, Disponibilidade.hora_inicio, Disponibilidade.hora_fim, Disponibilidade.dia
 	FROM Utilizador, Instituicao, Distrito, Concelho, Freguesia, Disponibilidade, Alimento WHERE Utilizador.id = {$id} 
