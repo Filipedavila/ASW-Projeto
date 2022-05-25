@@ -41,23 +41,27 @@ function VolRecolhaDoacao($IDVol, $utilizador, $password, $IDInst, $IDDoacao){
                 $result=setQuery($query);
 
                 //echo 'aceite';
+                /*
                 $query = "SELECT * From Alimento WHERE inst_id = {$IDInst} AND id = {$IDDoacao} AND vol_id = {$IDVol}";
                 $html=getRowSoap($query);
-
-                return $html;
+                */
+                return 'Aceite';
 
             }else{
                 throw new SoapFault( '-1' , 'Donation is not available !' );
+                return 'Não aceite';
               // return "DONATION_NOT_AVAILABLE";
             }
 
 
         }else{
-            throw new SoapFault( '-2' , 'Donation is not available !' );
+            throw new SoapFault( '-2' , 'Password errada !' );
+            return 'Não aceite';
             //return "WRONG_PASSWORD";
         }
     }else{
-        throw new SoapFault( '-3' , 'Donation is not available !' );
+        throw new SoapFault( '-3' , 'Não existe voluntario!' );
+        return 'Não aceite';
          //return "INVALID_USER";
     }
 }
