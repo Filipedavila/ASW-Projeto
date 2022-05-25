@@ -3,23 +3,16 @@ require_once "../lib/nusoap.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // The request is using the POST method
-    if(isset($_POST['IDVol']) && isset($_POST['utilizador']) && isset(trim($_POST['password'])) && isset($_POST['IDInst']) && isset($_POST['IDDoacao']) ){
-
-        
-        $IDVol = htmlspecialchars($_POST['IDVol']);
-        $IDVol = strip_tags($IDVol);
+    if(isset($_POST['IDVol']) && isset($_POST['utilizador']) && isset($_POST['password']) && isset($_POST['IDInst']) && isset($_POST['IDDoacao']) ){
+        $IDVol = $_POST['IDVol'];
         $utilizador = $_POST['utilizador'];
-        $utilizador = strip_tags($utilizador);
         $password = $_POST['password'];
-        $password = strip_tags($password);
         $IDInst = $_POST['IDInst'];
-        $IDInst = strip_tags($IDInst);
         $IDDoacao = $_POST['IDDoacao'];
-        $IDDoacao = strip_tags($IDDoacao);
 
 
     $client = new nusoap_client(
-        'http://appserver-01.alunos.di.fc.ul.pt/~asw09/ASW-Projeto/webServices/VolRecolhaDoacao/db_serv.php?wsdl',true
+        'http://appserver-01.alunos.di.fc.ul.pt/~asw09/ASW-Projeto/webServices/VolRecolhaDoacao/db_serv.php'
     );
     $error = $client->getError();
     $result = $client->call('VolRecolhaDoacao', array('IDVol' => $IDVol, 'utilizador' => $utilizador, 'password' => $password , 'IDInst' => $IDInst, 'IDDoacao' => $IDDoacao));	//handle errors
