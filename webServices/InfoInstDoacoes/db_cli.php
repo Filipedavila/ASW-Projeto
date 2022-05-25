@@ -4,18 +4,13 @@ require_once "../lib/nusoap.php";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // The request is using the POST method
     if(isset($_POST['id'])){
-        $id = $_POST['id'];
-
+        $id = htmlspecialchars($_POST['id']);
+        $id = strip_tags($id);
 
     $client = new nusoap_client(
         'http://appserver-01.alunos.di.fc.ul.pt/~asw09/ASW-Projeto/webServices/InfoInstDoacoes/db_serv.php?wsdl',true
     );
      
-   /* 
-    $client = new nusoap_client(
-        'http://localhost/ASW-Projeto/webServices/InfoInstDoacoes/db_serv.php'
-    );
-   */
     $error = $client->getError();
     $result = $client->call('InfoInstDoacoes', array('id' => $id));	//handle errors
 
@@ -35,9 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         else { echo "<h2>$result</h2>"; } //result ok
         }
-    
-
-
  }
 }
 ?>
